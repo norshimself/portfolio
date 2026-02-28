@@ -1738,148 +1738,229 @@ p { color: var(--text-soft); line-height: 1.65; }
   .section-card { padding: 36px 36px; }
 }
 
-/* === TABLET (1024px) — Sidebar collapses to top card === */
+/* ============================================================
+   === TABLET + MOBILE (≤1024px) — Sidebar → Sticky Top Nav ===
+   ============================================================ */
 @media (max-width: 1024px) {
   :root { --sidebar-w: 0px; --right-w: 0px; }
 
-  /* Wrapper: stack vertically */
+  /* Stack wrapper vertically */
   #wrapper { flex-direction: column; }
 
-  /* Left sidebar: becomes a horizontal top strip */
+  /* ── Sidebar → Sticky Top Navbar ── */
   .left-sidebar {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 200;
     width: 100%;
     height: auto;
-    padding: 12px 12px 0;
+    padding: 10px 12px;
     overflow: visible;
+    background: transparent;
   }
 
   .sidebar-card {
     flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
+    flex-wrap: nowrap;
+    padding: 12px 18px;
     gap: 12px;
     border-radius: 16px;
+    /* Sticky glassmorphism */
+    background: rgba(20, 20, 20, 0.92) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-color: rgba(255,255,255,0.1) !important;
   }
 
-  /* Show avatar in a smaller circle on tablet */
+  /* Avatar: small circle */
   .sidebar-avatar {
-    width: 56px;
-    height: 56px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.1);
     flex-shrink: 0;
   }
 
+  /* Name */
   .sidebar-signature {
-    font-size: 18px !important;
+    font-size: 16px !important;
     margin: 0 !important;
     flex: 1;
-    opacity: 0.8;
+    opacity: 0.9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
+  /* Hide meta, divider */
   .sidebar-meta { display: none; }
   .sidebar-divider { display: none; }
 
+  /* Status badge */
+  .status-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    display: none; /* Too wide on mobile outside */
+  }
+
+  /* Social icons: compact */
   .sidebar-social {
     gap: 6px;
     flex-wrap: nowrap;
+    flex-shrink: 0;
   }
-  .sidebar-social a { width: 32px; height: 32px; }
+  .sidebar-social li:nth-child(n+4) { display: none; } /* Max 3 icons */
+  .sidebar-social a {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
 
+  /* "Get Started" CTA: smaller */
   .sidebar-cta {
-    padding: 10px 14px;
-    font-size: 14px;
+    padding: 8px 14px;
+    font-size: 13px;
     margin-top: 0;
     white-space: nowrap;
     width: auto;
     flex-shrink: 0;
+    border-radius: 30px;
   }
-  .cta-arrow { width: 28px; height: 28px; }
+  .cta-arrow { display: none; } /* Hide arrow on mobile */
 
-  /* Status badge: compact */
-  .status-badge { font-size: 12px; padding: 5px 10px; }
-
-  /* Main content: no left/right margins */
+  /* Main content */
   .main-content {
     margin-left: 0;
     margin-right: 0;
-    padding: 8px 12px 12px;
+    padding: 8px 10px 16px;
+    gap: 8px;
   }
 
-  /* Right nav: hidden on tablet/mobile */
+  /* Right nav: hidden */
   .right-nav-wrapper { display: none; }
 
-  /* Hamburger: reposition */
-  .tf-btn-menu {
-    display: none; /* Hidden since sidebar is always visible */
-  }
+  /* Hamburger: hidden (sidebar is always visible) */
+  .tf-btn-menu { display: none; }
 }
 
-/* === MOBILE (768px) === */
+/* ============================================================
+   === MOBILE (≤768px)
+   ============================================================ */
 @media (max-width: 768px) {
-  .sidebar-card { flex-wrap: wrap; row-gap: 10px; }
+  /* Sidebar: even more compact */
+  .sidebar-card { padding: 10px 14px; gap: 10px; }
+  .sidebar-social { display: none; } /* Too crowded */
 
-  .sidebar-social { display: none; }
+  .section-card {
+    padding: 28px 20px;
+    border-radius: 14px;
+  }
 
-  .sidebar-signature { font-size: 16px !important; }
-
-  .section-card { padding: 28px 24px; border-radius: 16px; }
-
-  .hero-title { font-size: clamp(36px, 10vw, 60px); }
-  .hero-location { margin-bottom: 28px; }
+  /* ── Hero ── */
+  .section-hero { padding: 40px 20px 36px; }
+  .hero-title { font-size: clamp(34px, 9vw, 56px) !important; }
+  .hero-location { margin-bottom: 20px; font-size: 12px; }
+  .hero-desc { font-size: 15px; }
+  .hero-tags { gap: 8px; }
+  .hero-tags li a { font-size: 13px; padding: 6px 14px; }
   .hero-counters { flex-direction: column; gap: 12px; }
   .hero-counter + .hero-counter { margin-left: 0; }
 
-  .exp-section-top,
-  .about-header,
-  .testimonial-section-top,
-  .partners-section-top {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
+  /* ── Experience ── */
+  .exp-section-top { grid-template-columns: 1fr; gap: 16px; }
+  .exp-title { font-size: clamp(40px, 9vw, 72px); }
 
+  /* ── Works ── */
+  .works-list { gap: 16px; }
+  .works-item-img { border-radius: 12px; }
+  .works-header-title { font-size: clamp(40px, 9vw, 72px); }
+  .works-item-stack { flex-wrap: wrap; }
+
+  /* ── Services ── */
+  .accordion-title { font-size: clamp(32px, 8vw, 56px); }
+  .accordion-item-header { padding: 16px 0; }
+  .accordion-body { font-size: 14px; }
+
+  /* ── Tech Stack ── */
+  .tech-section-title { font-size: clamp(36px, 9vw, 64px); }
+  .tech-card { width: 200px; padding: 14px 18px; }
+  .tech-card-name { font-size: 15px; }
+  .tech-card-desc { font-size: 11px; }
+  .tech-marquee-container { gap: 14px; }
+
+  /* ── Process ── */
   .process-cards-row { grid-template-columns: 1fr; }
 
+  /* ── FAQ ── */
+  .faq-section-title { font-size: clamp(36px, 9vw, 64px); }
+
+  /* ── Contact ── */
+  .contact-title { font-size: clamp(38px, 9vw, 64px); }
   .form-row { grid-template-columns: 1fr; gap: 0; }
+  .submit-btn { width: 100%; justify-content: center; }
 
-  /* Tech stack: reduce card width on mobile */
-  .tech-card { width: 220px; }
+  /* ── Footer ── */
+  .footer-cta-wrap { padding: 32px 20px; flex-direction: column; gap: 16px; }
+  .footer-bar { flex-direction: column; gap: 12px; }
 
-  /* Works */
-  .works-item-img { border-radius: 12px; }
-
-  /* Services */
-  .accordion-title { font-size: 36px; }
-
-  /* Footer */
-  .footer-cta-wrap { padding: 32px 24px; }
-
-  /* Contact */
-  .contact-title { font-size: clamp(40px, 10vw, 64px); }
+  /* ── About ── */
+  .about-header { grid-template-columns: 1fr; gap: 16px; }
+  .about-images-wrap { display: none; } /* too complex on small screens */
 }
 
-/* === SMALL MOBILE (480px) === */
+/* ============================================================
+   === SMALL MOBILE (≤480px)
+   ============================================================ */
 @media (max-width: 480px) {
-  .left-sidebar { padding: 8px 8px 0; }
-  .sidebar-card { padding: 12px 14px; border-radius: 12px; }
-  .sidebar-avatar { width: 44px; height: 44px; }
-  .sidebar-cta { display: none; } /* Save space, user can use nav */
-  .sidebar-status-wrap { order: 1; }
+  /* Sidebar header: extremely compact */
+  .left-sidebar { padding: 6px 8px; }
+  .sidebar-card { padding: 8px 12px; border-radius: 12px; gap: 8px; }
+  .sidebar-avatar { width: 34px; height: 34px; }
+  .sidebar-signature { font-size: 14px !important; }
+  .sidebar-cta { display: none; } /* CTA hidden — content too wide */
 
-  .section-card { padding: 20px 16px; border-radius: 12px; }
-  .main-content { padding: 6px 8px 8px; gap: 6px; }
+  /* Main content */
+  .main-content { padding: 6px 8px 12px; gap: 6px; }
 
-  .accordion-title { font-size: 28px; }
-  .contact-title { font-size: 32px; }
-  .tech-section-title { font-size: 40px; }
+  /* Section cards */
+  .section-card { padding: 20px 14px; border-radius: 12px; }
 
-  /* Process, FAQ, Works: tighter */
-  .section-hero { padding: 48px 16px 40px; }
+  /* ── Hero ── */
+  .section-hero { padding: 32px 14px 28px; }
+  .hero-title { font-size: clamp(28px, 9vw, 44px) !important; }
+  .hero-intro-label { font-size: 12px; }
+  .hero-desc { font-size: 14px; }
+  .hero-tags { flex-wrap: wrap; gap: 6px; }
+  .hero-tags li a { font-size: 12px; padding: 5px 12px; }
+  .scroll-discovery { display: none; }
 
-  /* Marquee cards narrower */
-  .tech-card { width: 180px; padding: 14px 16px; }
-  .tech-card-logo { width: 36px; height: 36px; }
-  .tech-card-name { font-size: 15px; }
+  /* ── Services ── */
+  .accordion-title { font-size: clamp(26px, 8vw, 40px); }
+  .service-item-tags { flex-wrap: wrap; }
+
+  /* ── Tech Stack ── */
+  .tech-section-title { font-size: clamp(28px, 9vw, 40px); }
+  .tech-card { width: 170px; padding: 12px 14px; gap: 10px; }
+  .tech-card-logo { width: 32px; height: 32px; }
+  .tech-card-name { font-size: 14px; }
+  .tech-card-desc { display: none; }
+  .tech-marquee-container { gap: 10px; }
+
+  /* ── Contact ── */
+  .contact-title { font-size: clamp(28px, 9vw, 40px); }
+  .custom-phone-input .react-international-phone-country-selector-dropdown {
+    min-width: 260px !important;
+  }
+
+  /* ── Works ── */
+  .works-header-title { font-size: clamp(26px, 9vw, 40px); }
+  .works-item-title { font-size: 20px; }
+
+  /* ── FAQ ── */
+  .faq-section-title { font-size: clamp(26px, 9vw, 40px); }
+
+  /* ── Experience ── */
+  .exp-title { font-size: clamp(26px, 9vw, 40px); }
 }
