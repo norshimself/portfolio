@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
@@ -12,36 +14,22 @@ type FormData = { email: string; phone: string; message: string };
 export default function ContactSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [submitted, setSubmitted] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const { register, handleSubmit, control, formState: { errors } } = useForm<FormData>({
+    defaultValues: { email: '', phone: '', message: '' }
+  });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.contact-title', {
-        opacity: 0,
-        y: 40,
-        duration: 1,
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: '.contact-title',
-          start: 'top 95%',
-        }
+        opacity: 0, y: 40, duration: 1, immediateRender: false,
+        scrollTrigger: { trigger: '.contact-title', start: 'top 95%' }
       });
-
       gsap.from('.form-group, .submit-row', {
-        opacity: 0,
-        y: 30,
-        stagger: 0.1,
-        duration: 0.8,
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: 'form',
-          start: 'top 95%',
-        }
+        opacity: 0, y: 30, stagger: 0.1, duration: 0.8, immediateRender: false,
+        scrollTrigger: { trigger: 'form', start: 'top 95%' }
       });
-
       ScrollTrigger.refresh();
     }, containerRef);
-
     return () => ctx.revert();
   }, []);
 
@@ -62,23 +50,31 @@ export default function ContactSection() {
           <div className="form-group">
             <label className="form-label" htmlFor="email">Your Email</label>
             <input
-              id="email"
-              type="email"
-              placeholder="Enter your email"
+              id="email" type="email" placeholder="Enter your email"
               className="form-input"
-              {...register('email', { required: 'Email required', pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' } })}
+              {...register('email', {
+                required: 'Email required',
+                pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' }
+              })}
             />
             {errors.email && <span className="form-error">{errors.email.message}</span>}
           </div>
 
-          <div className="form-group">
-            <label className="form-label" htmlFor="phone">Phone (with country code)</label>
-            <input
-              id="phone"
-              type="tel"
-              placeholder="+1 234 567 890"
-              className="form-input"
-              {...register('phone')}
+          <div className="form-group phone-group">
+            <label className="form-label">Phone Number</label>
+            <Controller
+              name="phone"
+              control={control}
+              render={({ field }) => (
+                <PhoneInput
+                  defaultCountry="ma"
+                  value={field.value}
+                  onChange={field.onChange}
+                  forceDialCode={true}
+                  className="custom-phone-input"
+                  inputClassName="form-input"
+                />
+              )}
             />
           </div>
         </div>
@@ -86,8 +82,7 @@ export default function ContactSection() {
         <div className="form-group form-group-full" style={{ marginTop: 8 }}>
           <label className="form-label" htmlFor="message">Message</label>
           <textarea
-            id="message"
-            placeholder="Tell me about your project..."
+            id="message" placeholder="Tell me about your project..."
             className="form-textarea"
             {...register('message')}
           />

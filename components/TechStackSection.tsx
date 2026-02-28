@@ -1,8 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import type Swiper from 'swiper';
-import 'swiper/css';
+import { useEffect, useRef } from 'react';
 import { techStack } from '@/data/portfolio';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -11,71 +9,72 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function TechStackSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const swiperRef = useRef<HTMLDivElement>(null);
-  const swRef = useRef<Swiper | null>(null);
-  const [, forceUpdate] = useState(0);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from('.tech-card', {
+      gsap.from('.tech-section-title', {
         opacity: 0,
         y: 30,
-        stagger: 0.1,
-        duration: 0.8,
-        immediateRender: false,
+        duration: 1,
         scrollTrigger: {
-          trigger: swiperRef.current,
+          trigger: '.tech-section-title',
           start: 'top 95%',
         }
       });
-      ScrollTrigger.refresh();
+
+      gsap.from('.tech-marquee-row', {
+        opacity: 0,
+        y: 40,
+        stagger: 0.2,
+        duration: 1,
+        scrollTrigger: {
+          trigger: '.tech-marquee-container',
+          start: 'top 90%',
+        }
+      });
     }, containerRef);
 
-    let sw: Swiper | null = null;
-    (async () => {
-      const { default: SwiperLib } = await import('swiper');
-      const { Autoplay } = await import('swiper/modules');
-      if (!swiperRef.current) return;
-      sw = new SwiperLib(swiperRef.current, {
-        modules: [Autoplay],
-        slidesPerView: 2,
-        spaceBetween: 8,
-        loop: true,
-        autoplay: { delay: 0, disableOnInteraction: false },
-        speed: 3000,
-        breakpoints: { 640: { slidesPerView: 3 }, 900: { slidesPerView: 4 } },
-      });
-      swRef.current = sw;
-      forceUpdate(n => n + 1);
-    })();
-
-    return () => {
-      sw?.destroy(true, true);
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
-  return (
-    <section id="tech" className="section-card" ref={containerRef}>
-      <div className="tech-section-title">Tech Stack</div>
+  // Split tech stack into two rows for the marquee
+  const midPoint = Math.ceil(techStack.length / 2);
+  const row1 = techStack.slice(0, midPoint);
+  const row2 = techStack.slice(midPoint);
 
-      <div className="swiper" ref={swiperRef}>
-        <div className="swiper-wrapper">
-          {[...techStack, ...techStack].map((tech, i) => (
-            <div key={i} className="swiper-slide">
-              <div className="tech-card">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={tech.image}
-                  alt={tech.name}
-                  className="tech-card-logo"
-                  onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                />
-                <div className="tech-card-name">{tech.name}</div>
-                <div className="tech-card-desc">{tech.description}</div>
+  return (
+    <section id="tech" className="section-card tech-stack-section" ref={containerRef}>
+      <div className="tech-section-title">Technical Arsenal</div>
+
+      <div className="tech-marquee-container">
+        {/* Row 1: Left to Right */}
+        <div className="tech-marquee-row marquee-ltr">
+          <div className="marquee-content">
+            {[...row1, ...row1, ...row1].map((tech, i) => (
+              <div key={i} className="tech-card glass-card">
+                <img src={tech.image} alt={tech.name} className="tech-card-logo" />
+                <div className="tech-card-info">
+                  <div className="tech-card-name">{tech.name}</div>
+                  <div className="tech-card-desc">{tech.description}</div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Row 2: Right to Left */}
+        <div className="tech-marquee-row marquee-rtl">
+          <div className="marquee-content">
+            {[...row2, ...row2, ...row2].map((tech, i) => (
+              <div key={i} className="tech-card glass-card">
+                <img src={tech.image} alt={tech.name} className="tech-card-logo" />
+                <div className="tech-card-info">
+                  <div className="tech-card-name">{tech.name}</div>
+                  <div className="tech-card-desc">{tech.description}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

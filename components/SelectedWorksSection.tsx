@@ -61,7 +61,7 @@ export default function SelectedWorksSection() {
       {/* "Selected Work" banner card */}
       <div className="works-header-card" id="works">
         <span className="works-header-dot" aria-hidden="true" />
-        <h2 className="works-header-title">Selected Work</h2>
+        <h2 className="works-header-title">Projects I Worked On</h2>
         <span className="works-header-dot" aria-hidden="true" />
       </div>
 

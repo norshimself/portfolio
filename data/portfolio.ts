@@ -16,7 +16,7 @@ const BASE = 'https://wpriverthemes.com/jayden/wp-content/themes/jayden';
 export const navLinks: NavLink[] = [
   { href: '#home', label: 'Home', icon: 'icon-home-solid' },
   { href: '#experience', label: 'Experience', icon: 'icon-toolbox-solid' },
-  { href: '#works', label: 'Selected Works', icon: 'icon-tasks-solid' },
+  { href: '#works', label: 'Projects I worked on', icon: 'icon-tasks-solid' },
   { href: '#services', label: 'Services', icon: 'icon-stream-solid' },
   { href: '#faqs', label: 'FAQs', icon: 'icon-comment-alt-solid' },
   { href: '#contact', label: 'Contact', icon: 'icon-envelope-solid' },
@@ -24,7 +24,7 @@ export const navLinks: NavLink[] = [
 
 export const rightNavLinks: NavLink[] = [
   { href: '#home', label: 'Home', icon: 'icon-home-solid' },
-  { href: '#works', label: 'Works', icon: 'icon-tasks-solid' },
+  { href: '#works', label: 'Projects I worked on', icon: 'icon-tasks-solid' },
   { href: '#services', label: 'Services', icon: 'icon-stream-solid' },
   { href: '#faqs', label: 'FAQs', icon: 'icon-comment-alt-solid' },
   { href: '#contact', label: 'Contact', icon: 'icon-envelope-solid' },
@@ -114,7 +114,7 @@ export const services: ServiceItem[] = [
       'React & Next.js Ecosystem',
       'NestJS / Express / Node.js',
       'TypeScript & Modern JS (ES6+)',
-      'State Management (Redux/Query)',
+      'State Management (Zustand/Query)',
       'TailwindCSS & Framer Motion',
       'PWA & Responsive Design',
       'Authentication (NextAuth/JWT)',
@@ -124,13 +124,29 @@ export const services: ServiceItem[] = [
     id: 2,
     icon: 'icon-pen-nib-solid',
     title: 'Backend Architecture',
-    items: ['Scalable RESTful APIs', 'Real-time WebSockets', 'Database Design (SQL/NoSQL)'],
+    items: [
+      'Scalable REST & GraphQL APIs',
+      'Microservices Architecture',
+      'PostgreSQL, MySQL & MongoDB',
+      'Redis & ScyllaDB Caching',
+      'Real-time WebSockets/gRPC',
+      'RabbitMQ & Message Queues',
+      'OAuth2 & OpenID Connect',
+    ],
   },
   {
     id: 3,
     icon: 'icon-ribbon-solid',
     title: 'Data Engineering',
-    items: ['Data Processing Pipelines', 'API Reverse Engineering', 'Bot-detection Bypass'],
+    items: [
+      'High-scale Web Scraping',
+      'Captcha & Bot-detection Bypass',
+      'Automated Data Pipelines',
+      'ETL Processes (Extract/Transform/Load)',
+      'API Reverse Engineering',
+      'Data Normalization/Validation',
+      'Proxy Management & Rotation',
+    ],
   },
   {
     id: 4,
