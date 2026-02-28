@@ -382,7 +382,8 @@ p { color: var(--text-soft); line-height: 1.65; }
     linear-gradient(rgba(0,184,255,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,184,255,0.03) 1px, transparent 1px);
   background-size: 40px 40px;
-  mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+  mask-image: radial-gradient(ellipse 80% 80% at center, black 10%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at center, black 10%, transparent 80%);
   pointer-events: none;
   z-index: 0;
 }
@@ -1739,12 +1740,10 @@ p { color: var(--text-soft); line-height: 1.65; }
 }
 
 /* ============================================================
-   === TABLET + MOBILE (≤1024px) — Sidebar → Sticky Top Nav ===
+   === TABLET + MOBILE (≤1024px) — Sticky Top Nav Premium ===
    ============================================================ */
 @media (max-width: 1024px) {
   :root { --sidebar-w: 0px; --right-w: 0px; }
-
-  /* Stack wrapper vertically */
   #wrapper { flex-direction: column; }
 
   /* ── Sidebar → Sticky Top Navbar ── */
@@ -1754,9 +1753,10 @@ p { color: var(--text-soft); line-height: 1.65; }
     z-index: 200;
     width: 100%;
     height: auto;
-    padding: 10px 12px;
+    padding: 12px 16px 0;
     overflow: visible;
     background: transparent;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .sidebar-card {
@@ -1764,203 +1764,181 @@ p { color: var(--text-soft); line-height: 1.65; }
     align-items: center;
     justify-content: space-between;
     flex-wrap: nowrap;
-    padding: 12px 18px;
+    padding: 10px 16px;
     gap: 12px;
-    border-radius: 16px;
-    /* Sticky glassmorphism */
-    background: rgba(20, 20, 20, 0.92) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    border-color: rgba(255,255,255,0.1) !important;
+    border-radius: 20px;
+    /* Premium frosted glass for mobile header */
+    background: rgba(14, 14, 14, 0.85) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8);
   }
 
-  /* Avatar: small circle */
   .sidebar-avatar {
-    width: 40px;
-    height: 40px;
+    width: 44px; height: 44px;
     border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.15);
     flex-shrink: 0;
   }
 
-  /* Name */
   .sidebar-signature {
-    font-size: 16px !important;
+    font-size: 17px !important;
     margin: 0 !important;
     flex: 1;
-    opacity: 0.9;
+    opacity: 0.95;
+    font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  /* Hide meta, divider */
-  .sidebar-meta { display: none; }
-  .sidebar-divider { display: none; }
+  .sidebar-meta, .sidebar-divider, .status-badge { display: none; }
 
-  /* Status badge */
-  .status-badge {
-    font-size: 11px;
-    padding: 4px 10px;
-    display: none; /* Too wide on mobile outside */
-  }
-
-  /* Social icons: compact */
-  .sidebar-social {
-    gap: 6px;
-    flex-wrap: nowrap;
-    flex-shrink: 0;
-  }
-  .sidebar-social li:nth-child(n+4) { display: none; } /* Max 3 icons */
+  .sidebar-social { gap: 8px; flex-wrap: nowrap; flex-shrink: 0; }
+  .sidebar-social li:nth-child(n+4) { display: none; }
   .sidebar-social a {
-    width: 32px;
-    height: 32px;
+    width: 36px; height: 36px;
     flex-shrink: 0;
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.05);
   }
 
-  /* "Get Started" CTA: smaller */
   .sidebar-cta {
-    padding: 8px 14px;
-    font-size: 13px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
     margin-top: 0;
     white-space: nowrap;
     width: auto;
     flex-shrink: 0;
     border-radius: 30px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(243, 79, 17, 0.25);
   }
-  .cta-arrow { display: none; } /* Hide arrow on mobile */
+  .cta-arrow { display: none; }
 
-  /* Main content */
   .main-content {
-    margin-left: 0;
-    margin-right: 0;
-    padding: 8px 10px 16px;
-    gap: 8px;
+    margin-left: 0; margin-right: 0;
+    padding: 12px 16px 24px;
+    gap: 12px;
   }
-
-  /* Right nav: hidden */
-  .right-nav-wrapper { display: none; }
-
-  /* Hamburger: hidden (sidebar is always visible) */
-  .tf-btn-menu { display: none; }
+  .right-nav-wrapper, .tf-btn-menu { display: none; }
 }
 
 /* ============================================================
    === MOBILE (≤768px)
    ============================================================ */
 @media (max-width: 768px) {
-  /* Sidebar: even more compact */
-  .sidebar-card { padding: 10px 14px; gap: 10px; }
-  .sidebar-social { display: none; } /* Too crowded */
+  .left-sidebar { padding: 12px 14px 0; }
+  .sidebar-card { padding: 12px 16px; border-radius: 18px; gap: 10px; }
+  .sidebar-social { display: none; } /* Hide icons to give profile & CTA room */
 
+  /* Premium Mobile Section Cards */
   .section-card {
-    padding: 28px 20px;
-    border-radius: 14px;
+    padding: 32px 24px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.04);
+    background: linear-gradient(180deg, rgba(20,20,20,0.8) 0%, rgba(14,14,14,0.95) 100%);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   }
 
   /* ── Hero ── */
-  .section-hero { padding: 40px 20px 36px; }
-  .hero-title { font-size: clamp(34px, 9vw, 56px) !important; }
-  .hero-location { margin-bottom: 20px; font-size: 12px; }
-  .hero-desc { font-size: 15px; }
-  .hero-tags { gap: 8px; }
-  .hero-tags li a { font-size: 13px; padding: 6px 14px; }
-  .hero-counters { flex-direction: column; gap: 12px; }
-  .hero-counter + .hero-counter { margin-left: 0; }
+  .section-hero { padding: 48px 24px 40px; }
+  .hero-title { font-size: clamp(38px, 10vw, 56px) !important; line-height: 1.1; margin-bottom: 20px; }
+  .hero-location { margin-bottom: 24px; font-size: 13px; opacity: 0.7; }
+  .hero-desc { font-size: 16px; line-height: 1.6; opacity: 0.85; margin-bottom: 28px; }
+  .hero-tags { gap: 10px; flex-wrap: wrap; }
+  .hero-tags li a { font-size: 13px; padding: 8px 16px; background: rgba(255,255,255,0.04); border-radius: 20px; }
+  .hero-counters { flex-direction: column; gap: 16px; }
 
   /* ── Experience ── */
-  .exp-section-top { grid-template-columns: 1fr; gap: 16px; }
-  .exp-title { font-size: clamp(40px, 9vw, 72px); }
+  .exp-section-top { grid-template-columns: 1fr; gap: 16px; margin-bottom: 32px; }
+  .exp-title { font-size: clamp(40px, 9vw, 64px); line-height: 1.1; }
 
   /* ── Works ── */
-  .works-list { gap: 16px; }
-  .works-item-img { border-radius: 12px; }
-  .works-header-title { font-size: clamp(40px, 9vw, 72px); }
-  .works-item-stack { flex-wrap: wrap; }
+  .works-list { gap: 20px; }
+  .works-item-img { border-radius: 16px; margin-bottom: 16px; }
+  .works-header-title { font-size: clamp(40px, 9vw, 64px); line-height: 1.1; }
+  .works-item-title { font-size: 24px; margin-bottom: 8px; }
 
   /* ── Services ── */
-  .accordion-title { font-size: clamp(32px, 8vw, 56px); }
-  .accordion-item-header { padding: 16px 0; }
-  .accordion-body { font-size: 14px; }
+  .accordion-title { font-size: clamp(36px, 8vw, 56px); line-height: 1.1; }
+  .accordion-item-header { padding: 20px 0; }
+  .accordion-header-left span { font-size: 20px; }
+  .accordion-body { font-size: 15px; line-height: 1.6; padding-bottom: 20px; }
 
   /* ── Tech Stack ── */
-  .tech-section-title { font-size: clamp(36px, 9vw, 64px); }
-  .tech-card { width: 200px; padding: 14px 18px; }
-  .tech-card-name { font-size: 15px; }
-  .tech-card-desc { font-size: 11px; }
-  .tech-marquee-container { gap: 14px; }
+  .tech-section-title { font-size: clamp(36px, 9vw, 56px); margin-bottom: 32px; }
+  .tech-card { width: 220px; padding: 16px 20px; border-radius: 16px; }
+  .tech-marquee-container { gap: 16px; }
 
-  /* ── Process ── */
-  .process-cards-row { grid-template-columns: 1fr; }
-
-  /* ── FAQ ── */
-  .faq-section-title { font-size: clamp(36px, 9vw, 64px); }
+  /* ── Process & FAQ ── */
+  .process-cards-row { grid-template-columns: 1fr; gap: 16px; }
+  .faq-section-title { font-size: clamp(36px, 9vw, 56px); line-height: 1.1; }
 
   /* ── Contact ── */
-  .contact-title { font-size: clamp(38px, 9vw, 64px); }
-  .form-row { grid-template-columns: 1fr; gap: 0; }
-  .submit-btn { width: 100%; justify-content: center; }
+  .contact-title { font-size: clamp(40px, 10vw, 60px); line-height: 1.1; margin-bottom: 32px; }
+  .form-row { grid-template-columns: 1fr; gap: 20px; }
+  .form-input, .form-textarea { font-size: 16px; padding: 14px 16px; border-radius: 12px; }
+  .submit-btn { width: 100%; justify-content: center; padding: 16px; border-radius: 12px; }
 
   /* ── Footer ── */
-  .footer-cta-wrap { padding: 32px 20px; flex-direction: column; gap: 16px; }
-  .footer-bar { flex-direction: column; gap: 12px; }
-
-  /* ── About ── */
-  .about-header { grid-template-columns: 1fr; gap: 16px; }
-  .about-images-wrap { display: none; } /* too complex on small screens */
+  .footer-cta-wrap { padding: 40px 24px; border-radius: 20px; flex-direction: column; gap: 20px; text-align: center; }
+  .footer-cta-title { font-size: 32px; }
+  .footer-bar { flex-direction: column; gap: 16px; text-align: center; margin-top: 32px; }
+  .footer-links { justify-content: center; width: 100%; flex-wrap: wrap; }
 }
 
 /* ============================================================
-   === SMALL MOBILE (≤480px)
+   === SMALL MOBILE (≤480px) — Ultra Refined Focus ===
    ============================================================ */
 @media (max-width: 480px) {
-  /* Sidebar header: extremely compact */
-  .left-sidebar { padding: 6px 8px; }
-  .sidebar-card { padding: 8px 12px; border-radius: 12px; gap: 8px; }
-  .sidebar-avatar { width: 34px; height: 34px; }
-  .sidebar-signature { font-size: 14px !important; }
-  .sidebar-cta { display: none; } /* CTA hidden — content too wide */
+  .left-sidebar { padding: 8px 10px 0; }
+  .sidebar-card { padding: 10px 14px; border-radius: 16px; gap: 10px; }
+  .sidebar-avatar { width: 36px; height: 36px; }
+  .sidebar-signature { font-size: 15px !important; }
+  
+  /* Replace text CTA with icon CTA on narrow screens */
+  .sidebar-cta {
+    padding: 0; width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sidebar-cta span:first-child { display: none; }
+  .sidebar-cta .cta-arrow { display: flex; width: 100%; height: 100%; background: transparent; }
+  .sidebar-cta .cta-arrow svg { color: #fff; width: 16px; height: 16px; }
 
-  /* Main content */
-  .main-content { padding: 6px 8px 12px; gap: 6px; }
+  .main-content { padding: 8px 10px 16px; gap: 10px; }
 
-  /* Section cards */
-  .section-card { padding: 20px 14px; border-radius: 12px; }
+  /* Tighter Section Cards */
+  .section-card { padding: 28px 18px; border-radius: 18px; }
 
   /* ── Hero ── */
-  .section-hero { padding: 32px 14px 28px; }
-  .hero-title { font-size: clamp(28px, 9vw, 44px) !important; }
-  .hero-intro-label { font-size: 12px; }
-  .hero-desc { font-size: 14px; }
-  .hero-tags { flex-wrap: wrap; gap: 6px; }
-  .hero-tags li a { font-size: 12px; padding: 5px 12px; }
-  .scroll-discovery { display: none; }
+  .section-hero { padding: 40px 18px 32px; }
+  .hero-title { font-size: clamp(32px, 10vw, 44px) !important; }
+  .hero-desc { font-size: 15px; margin-bottom: 24px; }
+  .hero-tags li a { font-size: 12px; padding: 6px 14px; }
 
-  /* ── Services ── */
-  .accordion-title { font-size: clamp(26px, 8vw, 40px); }
-  .service-item-tags { flex-wrap: wrap; }
-
-  /* ── Tech Stack ── */
-  .tech-section-title { font-size: clamp(28px, 9vw, 40px); }
-  .tech-card { width: 170px; padding: 12px 14px; gap: 10px; }
-  .tech-card-logo { width: 32px; height: 32px; }
-  .tech-card-name { font-size: 14px; }
-  .tech-card-desc { display: none; }
-  .tech-marquee-container { gap: 10px; }
-
-  /* ── Contact ── */
-  .contact-title { font-size: clamp(28px, 9vw, 40px); }
-  .custom-phone-input .react-international-phone-country-selector-dropdown {
-    min-width: 260px !important;
+  /* ── Typography & Spacing ── */
+  .exp-title, .works-header-title, .accordion-title, .tech-section-title, .faq-section-title, .contact-title {
+    font-size: clamp(30px, 9vw, 42px) !important;
   }
+  
+  .section-label { margin-bottom: 20px; font-size: 13px; }
 
-  /* ── Works ── */
-  .works-header-title { font-size: clamp(26px, 9vw, 40px); }
-  .works-item-title { font-size: 20px; }
-
-  /* ── FAQ ── */
-  .faq-section-title { font-size: clamp(26px, 9vw, 40px); }
-
-  /* ── Experience ── */
-  .exp-title { font-size: clamp(26px, 9vw, 40px); }
+  /* Marquee Compact */
+  .tech-card { width: 180px; padding: 14px 16px; border-radius: 14px; gap: 12px; }
+  .tech-card-logo { width: 36px; height: 36px; }
+  .tech-card-desc { display: none; } /* Clear visual noise */
+  .tech-marquee-container { gap: 12px; }
+  
+  /* Forms */
+  .form-input, .form-textarea { font-size: 15px; }
+  .custom-phone-input .react-international-phone-country-selector-dropdown {
+    min-width: 280px !important;
+    left: 0 !important;
+  }
 }
