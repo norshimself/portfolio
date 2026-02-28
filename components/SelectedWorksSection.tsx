@@ -91,10 +91,10 @@ export default function SelectedWorksSection() {
                 <Image
                   src={work.image}
                   alt={work.title}
-                  width={1200}
-                  height={800}
+                  fill
                   className="work-item-img"
                   unoptimized
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             </div>
