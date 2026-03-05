@@ -10,8 +10,8 @@
 :root {
   --primary: #F34F11;
   --bg: #000000;
-  --card: #141414;
-  --card-2: #1c1c1c;
+  --card: rgba(20, 20, 20, 0.5); /* Was #141414 */
+  --card-2: rgba(28, 28, 28, 0.5); /* Was #1c1c1c */
   --border: rgba(255,255,255,0.08);
   --border-2: rgba(255,255,255,0.12);
   --text: #ffffff;
@@ -27,7 +27,7 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--font);
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
   overflow-x: hidden;
   min-height: 100vh;

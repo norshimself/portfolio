@@ -1,10 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { navLinks } from '@/data/portfolio';
-
-const BASE = 'https://wpriverthemes.com/jayden/wp-content/themes/jayden';
 
 // Derive id from href e.g. '#home' → 'home'
 const links = navLinks.map(n => ({ ...n, id: n.href.replace('#', '') }));

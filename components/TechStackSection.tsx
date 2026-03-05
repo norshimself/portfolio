@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { techStack } from '@/data/portfolio';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -52,7 +53,7 @@ export default function TechStackSection() {
           <div className="marquee-content">
             {[...row1, ...row1, ...row1].map((tech, i) => (
               <div key={i} className="tech-card glass-card">
-                <img src={tech.image} alt={tech.name} className="tech-card-logo" />
+                <Image src={tech.image} alt={tech.name} width={48} height={48} className="tech-card-logo" />
                 <div className="tech-card-info">
                   <div className="tech-card-name">{tech.name}</div>
                   <div className="tech-card-desc">{tech.description}</div>
@@ -67,7 +68,7 @@ export default function TechStackSection() {
           <div className="marquee-content">
             {[...row2, ...row2, ...row2].map((tech, i) => (
               <div key={i} className="tech-card glass-card">
-                <img src={tech.image} alt={tech.name} className="tech-card-logo" />
+                <Image src={tech.image} alt={tech.name} width={48} height={48} className="tech-card-logo" />
                 <div className="tech-card-info">
                   <div className="tech-card-name">{tech.name}</div>
                   <div className="tech-card-desc">{tech.description}</div>

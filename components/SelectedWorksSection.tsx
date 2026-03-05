@@ -1,9 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import Lightbox from 'yet-another-react-lightbox';
-import 'yet-another-react-lightbox/styles.css';
 import { works } from '@/data/portfolio';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -18,9 +16,6 @@ const ArrowIcon = () => (
 
 export default function SelectedWorksSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [open, setOpen] = useState(false);
-  const [idx, setIdx] = useState(0);
-  const slides = works.map(w => ({ src: w.image }));
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -68,14 +63,13 @@ export default function SelectedWorksSection() {
       {/* Grid container for work items */}
       <div className="works-grid">
         {works.map((work, i) => (
-          <article
+          <a
             key={i}
+            href={work.href}
+            target="_blank"
+            rel="noopener noreferrer"
             className="work-item-card"
-            onClick={() => { setIdx(i); setOpen(true); }}
-            role="button"
-            tabIndex={0}
-            aria-label={`View ${work.title}`}
-            onKeyDown={e => e.key === 'Enter' && (setIdx(i), setOpen(true))}
+            aria-label={`Open ${work.title}`}
           >
             {/* Browser Mockup Frame */}
             <div className="browser-mockup">
@@ -106,22 +100,13 @@ export default function SelectedWorksSection() {
                 <div className="work-meta-title">{work.title}</div>
                 <div className="work-meta-date">{work.date}</div>
               </div>
-              <a
-                href={work.href}
-                className="work-link-btn"
-                aria-label={`Open ${work.title}`}
-                onClick={e => e.stopPropagation()}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <div className="work-link-btn">
                 <ArrowIcon />
-              </a>
+              </div>
             </div>
-          </article>
+          </a>
         ))}
       </div>
-
-      <Lightbox open={open} close={() => setOpen(false)} index={idx} slides={slides} />
     </div>
   );
 }

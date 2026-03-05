@@ -29,8 +29,8 @@ export default function ProcessSection() {
       });
 
       // Animate step activation
-      const steps = gsap.utils.toArray('.process-step-item');
-      steps.forEach((step: any) => {
+      const steps = gsap.utils.toArray('.process-step-item') as HTMLElement[];
+      steps.forEach((step: HTMLElement) => {
         ScrollTrigger.create({
           trigger: step,
           start: 'top 80%',

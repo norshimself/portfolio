@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Rajdhani } from 'next/font/google';
 import './globals.css';
+import EtherealBackground from '@/components/EtherealBackground';
 
 const rajdhani = Rajdhani({
   weight: ['400', '500', '600', '700'],
@@ -10,6 +11,7 @@ const rajdhani = Rajdhani({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://nasroallah.tech'),
   title: 'Nasroallah Elidrissi – Software Engineer',
   description:
     'Personal portfolio of Nasroallah Elidrissi, a Software Engineer. Specialized in Backend Architecture, Data Engineering, and Full-Stack Development.',
@@ -45,7 +47,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-US" className={rajdhani.variable} suppressHydrationWarning>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <EtherealBackground />
+        {children}
+      </body>
     </html>
   );
 }
