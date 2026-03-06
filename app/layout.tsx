@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Rajdhani } from 'next/font/google';
 import './globals.css';
 import EtherealBackground from '@/components/EtherealBackground';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const rajdhani = Rajdhani({
   weight: ['400', '500', '600', '700'],
@@ -50,6 +51,7 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <EtherealBackground />
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
