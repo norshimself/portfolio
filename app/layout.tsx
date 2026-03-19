@@ -3,6 +3,7 @@ import { Rajdhani } from 'next/font/google';
 import './globals.css';
 import EtherealBackground from '@/components/EtherealBackground';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const rajdhani = Rajdhani({
   weight: ['400', '500', '600', '700'],
@@ -52,6 +53,7 @@ export default function RootLayout({
         <EtherealBackground />
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
