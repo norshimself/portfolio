@@ -32,6 +32,7 @@ export interface TechItem {
   name: string;
   image: string;
   description: string;
+  category: string;
 }
 
 export interface TestimonialItem {

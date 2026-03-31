@@ -165,36 +165,76 @@ export const playgroundImages = [
 
 export const techStack: TechItem[] = [
   // Languages
-  { name: 'TypeScript', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg', description: 'Strongly typed programming' },
-  { name: 'JavaScript', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg', description: 'Web & Core Logic' },
-  { name: 'Python', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg', description: 'Scripting & AI/ML' },
-  { name: 'Go', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg', description: 'Cloud-native Backend' },
-  { name: 'Node.js', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg', description: 'High-perf Runtime' },
-  { name: 'C++', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg', description: 'System Programming' },
-  { name: 'Shell', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg', description: 'Automation & Scripting' },
+  { name: 'TypeScript', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg', description: 'Strongly typed programming', category: 'Languages' },
+  { name: 'JavaScript', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg', description: 'Web & Core Logic', category: 'Languages' },
+  { name: 'Python', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg', description: 'Scripting & AI/ML', category: 'Languages' },
+  { name: 'Go', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg', description: 'Cloud-native Backend', category: 'Languages' },
+  { name: 'Node.js', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg', description: 'High-perf Runtime', category: 'Languages' },
+  { name: 'C++', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg', description: 'System Programming', category: 'Languages' },
+  { name: 'C', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg', description: 'Low-level Execution', category: 'Languages' },
+  { name: 'Shell', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg', description: 'Automation & Scripting', category: 'Languages' },
+  { name: 'Assembly', image: 'https://www.google.com/s2/favicons?domain=nasm.us&sz=128', description: 'Hardware Instructions', category: 'Languages' },
   
   // Frameworks & Tools
-  { name: 'NestJS', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg', description: 'Enterprise Backend' },
-  { name: 'Next.js', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg', description: 'Production React' },
-  { name: 'FastAPI', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg', description: 'High-perf Python APIs' },
-  { name: 'Django', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg', description: 'Rapid Backend Web' },
-  { name: 'ArgoCD', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/argocd/argocd-original.svg', description: 'GitOps Continuous' },
-  { name: 'Prometheus', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg', description: 'Monitoring & Alerts' },
-  { name: 'Grafana', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg', description: 'Analytics Dashboards' },
-  { name: 'Playwright', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/playwright/playwright-original.svg', description: 'Modern E2E Testing' },
-
-  // DevOps & Infra
-  { name: 'Docker', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg', description: 'Containerization' },
-  { name: 'AWS', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg', description: 'Cloud Infra' },
-  { name: 'Github Actions', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg', description: 'CI/CD Pipelines' },
-  { name: 'Nginx', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg', description: 'Reverse Proxy & Load' },
-
+  { name: 'NestJS', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg', description: 'Enterprise Backend', category: 'Frameworks' },
+  { name: 'Next.js', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg', description: 'Production React', category: 'Frameworks' },
+  { name: 'React', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg', description: 'UI Library', category: 'Frameworks' },
+  { name: 'Express.js', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg', description: 'Node.js Web Framework', category: 'Frameworks' },
+  { name: 'FastAPI', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg', description: 'High-perf Python APIs', category: 'Frameworks' },
+  { name: 'Django', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg', description: 'Rapid Backend Web', category: 'Frameworks' },
+  { name: 'Flask', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg', description: 'Python Microframework', category: 'Frameworks' },
+  { name: 'Gin', image: 'https://www.google.com/s2/favicons?domain=gin-gonic.com&sz=128', description: 'Go Web Framework', category: 'Frameworks' },
+  { name: 'Vite', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg', description: 'Next-gen Frontend Tooling', category: 'Frameworks' },
+  { name: 'TailwindCSS', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg', description: 'Utility-first CSS', category: 'Frameworks' },
+  { name: 'PostCSS', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postcss/postcss-original.svg', description: 'CSS Tooling', category: 'Frameworks' },
+  { name: 'Nx', image: 'https://www.google.com/s2/favicons?domain=nx.dev&sz=128', description: 'Smart Monorepos', category: 'Frameworks' },
+  
   // Databases & Storage
-  { name: 'PostgreSQL', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg', description: 'Relational Source' },
-  { name: 'MariaDB', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg', description: 'Open-source SQL' },
-  { name: 'MongoDB', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg', description: 'NoSQL Document Store' },
-  { name: 'Supabase', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg', description: 'BAAS Postgres' },
-  { name: 'Firebase', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg', description: 'Google Cloud BAAS' },
+  { name: 'PostgreSQL', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg', description: 'Relational Source', category: 'Databases & Storage' },
+  { name: 'MySQL', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg', description: 'Relational Database', category: 'Databases & Storage' },
+  { name: 'MariaDB', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg', description: 'Open-source SQL', category: 'Databases & Storage' },
+  { name: 'MongoDB', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg', description: 'NoSQL Document Store', category: 'Databases & Storage' },
+  { name: 'ScyllaDB', image: 'https://www.google.com/s2/favicons?domain=scylladb.com&sz=128', description: 'Wide-column Store', category: 'Databases & Storage' },
+  { name: 'Supabase', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg', description: 'BAAS Postgres', category: 'Databases & Storage' },
+  { name: 'Firebase', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg', description: 'Google Cloud BAAS', category: 'Databases & Storage' },
+
+  // DevOps & Cloud
+  { name: 'Linux', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg', description: 'Operating System', category: 'DevOps & Cloud' },
+  { name: 'Docker', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg', description: 'Containerization', category: 'DevOps & Cloud' },
+  { name: 'Kubernetes', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-original.svg', description: 'Container Orchestration', category: 'DevOps & Cloud' },
+  { name: 'ArgoCD', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/argocd/argocd-original.svg', description: 'GitOps Continuous', category: 'DevOps & Cloud' },
+  { name: 'AWS', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg', description: 'Cloud Data & Compute', category: 'DevOps & Cloud' },
+  { name: 'Microsoft Azure', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg', description: 'Cloud computing platform', category: 'DevOps & Cloud' },
+  { name: 'DigitalOcean', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/digitalocean/digitalocean-original.svg', description: 'Developer Cloud', category: 'DevOps & Cloud' },
+  { name: 'Heroku', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/heroku/heroku-original.svg', description: 'Cloud PaaS', category: 'DevOps & Cloud' },
+  { name: 'Jenkins', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg', description: 'Automation Server', category: 'DevOps & Cloud' },
+  { name: 'Terraform', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg', description: 'Infrastructure as Code', category: 'DevOps & Cloud' },
+  { name: 'Github Actions', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg', description: 'CI/CD Pipelines', category: 'DevOps & Cloud' },
+  { name: 'Prometheus', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg', description: 'Monitoring & Alerts', category: 'DevOps & Cloud' },
+  { name: 'Grafana', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg', description: 'Analytics Dashboards', category: 'DevOps & Cloud' },
+  { name: 'Nginx', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg', description: 'Reverse Proxy & Load', category: 'DevOps & Cloud' },
+  { name: 'Apache', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apache/apache-original.svg', description: 'Web Server', category: 'DevOps & Cloud' },
+
+  // Architects & APIs
+  { name: 'RESTful API', image: 'https://www.google.com/s2/favicons?domain=restfulapi.net&sz=128', description: 'App Communication', category: 'APIs & Arch' },
+  { name: 'GraphQL', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg', description: 'API Query Language', category: 'APIs & Arch' },
+  { name: 'Kafka', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachekafka/apachekafka-original.svg', description: 'Event Streaming', category: 'APIs & Arch' },
+
+  // Testing & Security
+  { name: 'Playwright', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/playwright/playwright-original.svg', description: 'Modern E2E Testing', category: 'Testing & Security' },
+  { name: 'GDB', image: 'https://www.google.com/s2/favicons?domain=gnu.org&sz=128', description: 'GNU Debugger', category: 'Testing & Security' },
+  { name: 'Wireshark', image: 'https://www.google.com/s2/favicons?domain=wireshark.org&sz=128', description: 'Network Protocol Analyzer', category: 'Testing & Security' },
+  { name: 'Burp Suite', image: 'https://www.google.com/s2/favicons?domain=portswigger.net&sz=128', description: 'Web Security Testing', category: 'Testing & Security' },
+  { name: 'HTTP Toolkit', image: 'https://www.google.com/s2/favicons?domain=httptoolkit.com&sz=128', description: 'HTTP Debugging', category: 'Testing & Security' },
+  { name: 'ADB', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg', description: 'Android Debug Bridge', category: 'Testing & Security' },
+
+  // Tools & Workflows
+  { name: 'Git', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg', description: 'Version Control', category: 'Tools & Workflows' },
+  { name: 'Postman', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg', description: 'API Platform', category: 'Tools & Workflows' },
+  { name: 'Deno', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/denojs/denojs-original.svg', description: 'JS/TS Runtime', category: 'Tools & Workflows' },
+  { name: 'Jira', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jira/jira-original.svg', description: 'Project Tracking', category: 'Tools & Workflows' },
+  { name: 'Notion', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/notion/notion-original.svg', description: 'Workspace & Docs', category: 'Tools & Workflows' },
+  { name: 'Slack', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/slack/slack-original.svg', description: 'Team Communication', category: 'Tools & Workflows' },
 ];
 
 export const processSteps: ProcessStep[] = [
