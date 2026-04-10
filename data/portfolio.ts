@@ -16,16 +16,16 @@ const BASE = 'https://wpriverthemes.com/jayden/wp-content/themes/jayden';
 export const navLinks: NavLink[] = [
   { href: '#home', label: 'Home', icon: 'icon-home-solid' },
   { href: '#experience', label: 'Experience', icon: 'icon-toolbox-solid' },
-  { href: '#works', label: 'Projects I worked on', icon: 'icon-tasks-solid' },
   { href: '#services', label: 'Services', icon: 'icon-stream-solid' },
+  { href: '#works', label: 'Freelances I worked on', icon: 'icon-tasks-solid' },
   { href: '#faqs', label: 'FAQs', icon: 'icon-comment-alt-solid' },
   { href: '#contact', label: 'Contact', icon: 'icon-envelope-solid' },
 ];
 
 export const rightNavLinks: NavLink[] = [
   { href: '#home', label: 'Home', icon: 'icon-home-solid' },
-  { href: '#works', label: 'Projects I worked on', icon: 'icon-tasks-solid' },
   { href: '#services', label: 'Services', icon: 'icon-stream-solid' },
+  { href: '#works', label: 'Freelances I worked on', icon: 'icon-tasks-solid' },
   { href: '#faqs', label: 'FAQs', icon: 'icon-comment-alt-solid' },
   { href: '#contact', label: 'Contact', icon: 'icon-envelope-solid' },
 ];

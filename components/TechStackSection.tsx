@@ -16,42 +16,24 @@ export default function TechStackSection() {
   const filteredTech = activeCategory === 'All' ? techStack : techStack.filter(t => t.category === activeCategory);
 
   useEffect(() => {
-    // Initial scroll animation for the top section (Title & Tabs)
+    // Initial entrance animation
     const ctx = gsap.context(() => {
+      // Title and Tabs entrance
       gsap.from('.tech-section-top', {
         opacity: 0,
         y: 30,
-        duration: 1,
+        duration: 0.8,
         scrollTrigger: {
           trigger: '.tech-section-top',
-          start: 'top 95%',
+          start: 'top 90%',
+          once: true,
         }
       });
     }, containerRef);
     return () => ctx.revert();
   }, []);
 
-  useEffect(() => {
-    // Re-animate cards when category changes (using fromTo to prevent opacity bugs)
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.tech-card', 
-        { opacity: 0, y: 20 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          stagger: 0.05, 
-          duration: 0.5,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: '.tech-grid',
-            start: 'top 95%',
-          }
-        }
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [activeCategory]);
+  // Removed fade-in animation for cards as requested to make them appear instantly
 
   return (
     <section id="tech" className="section-card tech-stack-section" ref={containerRef}>

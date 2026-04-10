@@ -22,10 +22,10 @@ export default function Home() {
       <main className="main-content">
         <HeroSection />
         <ExperienceSection />
-        <SelectedWorksSection />
         <ServicesSection />
         <TechStackSection />
         <ProcessSection />
+        <SelectedWorksSection />
         <FAQSection />
         <ContactSection />
         <Footer />
