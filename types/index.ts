@@ -19,6 +19,9 @@ export interface WorkItem {
   title: string;
   date: string;
   href: string;
+  role?: string;
+  description?: string;
+  stack?: string[];
 }
 
 export interface ServiceItem {
@@ -28,11 +31,14 @@ export interface ServiceItem {
   items: string[];
 }
 
+export type TechLevel = 'core' | 'proficient' | 'familiar';
+
 export interface TechItem {
   name: string;
   image: string;
   description: string;
   category: string;
+  level: TechLevel;
 }
 
 export interface TestimonialItem {
@@ -60,25 +66,8 @@ export interface AwardItem {
   date: string;
 }
 
-export interface PricingFeature {
-  text: string;
-}
-
-export interface PricingPlan {
-  name: string;
-  price: string;
-  period: string;
-  description: string;
-  features: string[];
-}
-
 export interface FAQItem {
   id: string;
   question: string;
   answer: string;
-}
-
-export interface BudgetRange {
-  label: string;
-  value: string;
 }

@@ -34,7 +34,7 @@ export default function FAQSection() {
     <section id="faq" className="section-card" ref={containerRef}>
       <div className="section-label">FAQ</div>
       <h2 className="faq-main-title">
-        Frequently Asked Questions
+        The stuff recruiters usually ask
       </h2>
 
       <div>
@@ -56,8 +56,8 @@ export default function FAQSection() {
       </div>
 
       <div className="faq-bottom">
-        Still have questions?{' '}
-        <a href="#contact" className="faq-contact-link">Contact me</a>
+        Didn&apos;t cover it?{' '}
+        <a href="#contact" className="faq-contact-link">Just ask me directly</a>
       </div>
     </section>
   );

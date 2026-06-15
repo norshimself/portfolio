@@ -47,9 +47,10 @@ export default function ExperienceSection() {
     <section id="experience" className="section-card" ref={containerRef}>
       {/* Header: label on left, big quote on right */}
       <div className="exp-section-top">
-        <div className="section-label" style={{ marginBottom: 0 }}>Experiences</div>
+        <div className="section-label" style={{ marginBottom: 0 }}>Where I&apos;ve worked</div>
         <h2 className="exp-section-quote">
-          Engineering scalable solutions and <span>architecting robust backends</span> for high-performance systems.
+          A few years spent turning vague requirements and messy data into
+          <span> backends teams can actually build on.</span>
         </h2>
       </div>
 

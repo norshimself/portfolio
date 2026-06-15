@@ -56,7 +56,7 @@ export default function ContactSection() {
   return (
     <section id="contact" className="section-card" ref={containerRef}>
       <h2 className="contact-title">
-        Contact For<br /><span>Work</span>
+        Let&apos;s<br /><span>talk.</span>
       </h2>
 
       {status === 'success' ? (
@@ -70,9 +70,9 @@ export default function ContactSection() {
               <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <h3 style={{ fontSize: '24px', fontWeight: '600', marginBottom: '12px', color: 'var(--text-primary, #fff)', opacity: 0, animation: 'fadeIn 0.5s ease-out 0.2s forwards' }}>Message Sent Successfully!</h3>
+          <h3 style={{ fontSize: '24px', fontWeight: '600', marginBottom: '12px', color: 'var(--text-primary, #fff)', opacity: 0, animation: 'fadeIn 0.5s ease-out 0.2s forwards' }}>Got it — message sent!</h3>
           <p style={{ color: 'var(--text-secondary, #9ca3af)', fontSize: '16px', lineHeight: '1.5', maxWidth: '400px', margin: '0 auto', opacity: 0, animation: 'fadeIn 0.5s ease-out 0.3s forwards' }}>
-            Thank you for reaching out. I&apos;ll get back to you as soon as possible.
+            Thanks for reaching out — I read everything myself and I&apos;ll get back to you within a day or two.
           </p>
           <button 
             onClick={() => setStatus('idle')}
@@ -128,7 +128,7 @@ export default function ContactSection() {
           <div className="form-group form-group-full" style={{ marginTop: 8 }}>
             <label className="form-label" htmlFor="message">Message</label>
             <textarea
-              id="message" placeholder="Tell me about your project..."
+              id="message" placeholder="What's the role, and what would I be working on? A few lines is plenty."
               className="form-textarea"
               {...register('message', { required: 'Message required' })}
             />

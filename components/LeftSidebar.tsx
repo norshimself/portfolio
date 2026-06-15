@@ -26,14 +26,14 @@ export default function LeftSidebar() {
           </button>
           <div className="status-badge">
             <span className="status-dot" />
-            Available for <strong>Work</strong>
+            Open to <strong>full-time roles</strong>
           </div>
         </div>
 
         {/* Avatar */}
         <div className="sidebar-avatar">
           <Image
-            src="/assets/images/about/profile.png"
+            src="/assets/images/about/profile.webp"
             alt="Nasroallah Elidrissi avatar"
             width={160}
             height={200}
@@ -52,7 +52,7 @@ export default function LeftSidebar() {
         {/* Contact */}
         <div className="sidebar-meta">
           <div className="sidebar-email">nasroallah.elidrissi@gmail.com</div>
-          <div className="sidebar-location">Remote / Worldwide</div>
+          <div className="sidebar-location">Casablanca · Remote-friendly (GMT+1)</div>
         </div>
 
         <div className="sidebar-divider" />
@@ -70,7 +70,7 @@ export default function LeftSidebar() {
 
         {/* CTA button */}
         <a href="#contact" className="sidebar-cta">
-          <span>Get Started</span>
+          <span>Get in Touch</span>
           <span className="cta-arrow">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>

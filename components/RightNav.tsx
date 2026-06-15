@@ -14,6 +14,16 @@ const NavIcons: Record<string, React.ReactElement> = {
   faqs: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>,
 };
 
+// Short labels for the compact mobile bottom dock
+const dockLabels: Record<string, string> = {
+  home: 'Home',
+  experience: 'Career',
+  services: 'Services',
+  works: 'Work',
+  faqs: 'FAQs',
+  contact: 'Contact',
+};
+
 export default function RightNav() {
   const [active, setActive] = useState('home');
 
@@ -43,6 +53,7 @@ export default function RightNav() {
             >
               {NavIcons[link.id] ?? NavIcons.home}
               <span className="nav-tooltip">{link.label}</span>
+              <span className="nav-dock-label">{dockLabels[link.id] ?? link.label}</span>
             </a>
           </li>
         ))}

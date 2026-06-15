@@ -56,7 +56,7 @@ export default function SelectedWorksSection() {
       {/* "Selected Work" banner card */}
       <div className="works-header-card" id="works">
         <span className="works-header-dot" aria-hidden="true" />
-        <h2 className="works-header-title">Freelances I Worked On</h2>
+        <h2 className="works-header-title">Selected Work</h2>
         <span className="works-header-dot" aria-hidden="true" />
       </div>
 
@@ -87,7 +87,7 @@ export default function SelectedWorksSection() {
                   alt={work.title}
                   fill
                   className="work-item-img"
-                  unoptimized
+                  loading="lazy"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
@@ -96,8 +96,16 @@ export default function SelectedWorksSection() {
             {/* Bottom overlay with metadata */}
             <div className="work-item-overlay">
               <div>
-                <div className="work-meta-cat">{work.category}</div>
+                <div className="work-meta-cat">{work.category}{work.role ? ` · ${work.role}` : ''}</div>
                 <div className="work-meta-title">{work.title}</div>
+                {work.description && <p className="work-meta-desc">{work.description}</p>}
+                {work.stack && work.stack.length > 0 && (
+                  <ul className="work-meta-stack" aria-label="Tech stack">
+                    {work.stack.map((tech) => (
+                      <li key={tech}>{tech}</li>
+                    ))}
+                  </ul>
+                )}
                 <div className="work-meta-date">{work.date}</div>
               </div>
               <div className="work-link-btn">

@@ -48,20 +48,21 @@ export default function HeroSection() {
       <div className="hero-content-wrap">
         <div className="hero-location">Casablanca, Morocco · {time}</div>
 
-        <div className="section-label hero-intro-label">Introduction</div>
+        <div className="section-label hero-intro-label">Hi, I&apos;m Nasroallah — Backend &amp; Data Engineer</div>
 
         <h1 className="hero-title">
-          <span>Building Scalable</span><br/>
-          <span className="text-gradient">Secure Systems</span>
+          <span>I build backends that</span><br/>
+          <span className="text-gradient">hold up under pressure.</span>
         </h1>
 
         <p className="hero-desc">
-          High-performance Software Engineer specializing in <strong>Backend Architecture</strong>, 
-          distributed systems, and complex data orchestration.
+          I like the unglamorous parts — turning messy, third-party data into
+          <strong> clean APIs and pipelines</strong> that keep working when the
+          traffic, rate limits, and edge cases all show up at once.
         </p>
 
         <ul className="hero-tags" aria-label="Specializations">
-          {['Cloud Infrastructure', 'Data Pipelines', 'API Design', 'System Security'].map(tag => (
+          {['Backend APIs', 'Data Pipelines', 'Integrations', 'Cloud & Deploys'].map(tag => (
             <li key={tag}><a href="#services">{tag}</a></li>
           ))}
         </ul>
@@ -72,7 +73,7 @@ export default function HeroSection() {
         <div className="scroll-mouse">
           <div className="scroll-wheel" />
         </div>
-        <span>Explore Experience</span>
+        <span>Start with where I&apos;ve worked</span>
       </a>
     </section>
   );

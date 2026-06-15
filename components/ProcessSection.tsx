@@ -46,7 +46,7 @@ export default function ProcessSection() {
 
   return (
     <section id="process" className="section-card" ref={containerRef}>
-      <div className="section-label">My Process</div>
+      <div className="section-label">How I work</div>
       <div className="process-timeline">
         <div className="process-line-draw" ref={lineRef} />
         {processSteps.map((step, i) => {

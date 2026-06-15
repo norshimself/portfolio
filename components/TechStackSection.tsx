@@ -13,7 +13,11 @@ export default function TechStackSection() {
   const [activeCategory, setActiveCategory] = useState('All');
 
   const categories = ['All', ...new Set(techStack.map((tech) => tech.category))];
-  const filteredTech = activeCategory === 'All' ? techStack : techStack.filter(t => t.category === activeCategory);
+  const levelRank = { core: 0, proficient: 1, familiar: 2 } as const;
+  const levelLabel = { core: 'Core', proficient: 'Proficient', familiar: 'Familiar' } as const;
+  const filteredTech = (activeCategory === 'All' ? techStack : techStack.filter(t => t.category === activeCategory))
+    .slice()
+    .sort((a, b) => levelRank[a.level] - levelRank[b.level]);
 
   useEffect(() => {
     // Initial entrance animation
@@ -38,7 +42,12 @@ export default function TechStackSection() {
   return (
     <section id="tech" className="section-card tech-stack-section" ref={containerRef}>
       <div className="tech-section-top">
-        <div className="tech-section-title">Technical Arsenal</div>
+        <div className="tech-section-title">What I build with</div>
+        <div className="tech-legend" aria-hidden="true">
+          <span className="tech-legend-item"><span className="tech-dot level-core" /> Core</span>
+          <span className="tech-legend-item"><span className="tech-dot level-proficient" /> Proficient</span>
+          <span className="tech-legend-item"><span className="tech-dot level-familiar" /> Familiar</span>
+        </div>
         <div className="tech-tabs">
           {categories.map(cat => (
             <button
@@ -53,8 +62,12 @@ export default function TechStackSection() {
       </div>
 
       <div className="tech-grid">
-        {filteredTech.map((tech, i) => (
-          <div key={`${activeCategory}-${tech.name}`} className="tech-card glass-card">
+        {filteredTech.map((tech) => (
+          <div key={`${activeCategory}-${tech.name}`} className={`tech-card glass-card level-${tech.level}`}>
+            <span className={`tech-card-level level-${tech.level}`} title={levelLabel[tech.level]}>
+              <span className={`tech-dot level-${tech.level}`} aria-hidden="true" />
+              {levelLabel[tech.level]}
+            </span>
             <Image src={tech.image} alt={tech.name} width={48} height={48} className="tech-card-logo" />
             <div className="tech-card-info">
               <div className="tech-card-name">{tech.name}</div>

@@ -76,7 +76,7 @@ export default function ServicesSection() {
 
   return (
     <section id="services" className="section-card" ref={containerRef}>
-      <div className="section-label">My Services</div>
+      <div className="section-label">What I bring to a team</div>
 
       <div>
         {services.map((svc, i) => (
@@ -113,10 +113,10 @@ export default function ServicesSection() {
 
       <div className="services-footer">
         <div className="worldwide-tag">
-          Available to <strong>Worldwide</strong>
+          Open to teams <strong>anywhere</strong>
         </div>
         <a href="#contact" className="contact-link">
-          Contact me
+          Let&apos;s talk
           <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
             <path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>

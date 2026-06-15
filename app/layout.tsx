@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import { Rajdhani } from 'next/font/google';
 import './globals.css';
 import EtherealBackground from '@/components/EtherealBackground';
+import StructuredData from '@/components/StructuredData';
+import { siteConfig } from '@/data/site';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
@@ -13,26 +15,44 @@ const rajdhani = Rajdhani({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nasroallah.tech'),
-  title: 'Nasroallah Elidrissi – Software Engineer',
-  description:
-    'Personal portfolio of Nasroallah Elidrissi, a Software Engineer. Specialized in Backend Architecture, Data Engineering, and Full-Stack Development.',
-  keywords: ['portfolio', 'software engineer', 'backend', 'data integration', 'nestjs', 'react'],
-  authors: [{ name: 'Nasroallah Elidrissi' }],
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [...siteConfig.keywords],
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  category: 'technology',
+  applicationName: siteConfig.title,
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: 'Nasroallah Elidrissi – Software Engineer',
-    description: 'Results-driven Software Engineer with expertise in full-stack development, backend architecture, and data integration.',
+    title: siteConfig.title,
+    description: siteConfig.shortDescription,
+    url: siteConfig.url,
+    siteName: siteConfig.title,
     type: 'website',
-    locale: 'en_US',
+    locale: siteConfig.locale,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nasroallah Elidrissi – Software Engineer',
-    description: 'Results-driven Software Engineer with expertise in full-stack development, backend architecture, and data integration.',
+    title: siteConfig.title,
+    description: siteConfig.shortDescription,
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
 };
 
@@ -40,6 +60,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
+  themeColor: '#0a0a0a',
 };
 
 export default function RootLayout({
@@ -50,6 +71,7 @@ export default function RootLayout({
   return (
     <html lang="en-US" className={rajdhani.variable} suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <StructuredData />
         <EtherealBackground />
         {children}
         <Analytics />
