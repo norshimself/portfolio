@@ -6,12 +6,14 @@ import type {
   TechItem,
   ProcessStep,
   AwardItem,
+  EducationItem,
   FAQItem,
 } from '@/types';
 
 export const navLinks: NavLink[] = [
   { href: '#home', label: 'Home', icon: 'icon-home-solid' },
   { href: '#experience', label: 'Experience', icon: 'icon-toolbox-solid' },
+  { href: '#education', label: 'Education', icon: 'icon-graduation-cap-solid' },
   { href: '#services', label: 'Services', icon: 'icon-stream-solid' },
   { href: '#works', label: 'Selected Work', icon: 'icon-tasks-solid' },
   { href: '#faqs', label: 'FAQs', icon: 'icon-comment-alt-solid' },
@@ -70,6 +72,22 @@ export const experiences: ExperienceItem[] = [
   },
 ];
 
+export const education: EducationItem[] = [
+  {
+    school: '1337 Coding School (42 Network)',
+    program: 'Digital Technology Architect Program',
+    // TODO: set your real start year if different.
+    period: '2023 – Present',
+    location: 'Ben Guerir, Morocco · UM6P Campus',
+    website: '1337.ma',
+    details: [
+      'Peer-to-peer, project-based curriculum with no lectures or teachers — learning driven entirely by building real projects in C, C++, and beyond.',
+      'Hands-on mastery of systems programming, algorithms, Unix, and networking through progressively harder graded projects.',
+      'Developed strong autonomy, problem-solving, and collaboration skills within the global 42 Network community.',
+    ],
+  },
+];
+
 // Ordered most-recent first. Date ranges other than Integrivo are estimates —
 // replace them with your real start/end months.
 export const works: WorkItem[] = [
@@ -77,7 +95,7 @@ export const works: WorkItem[] = [
     image: '/assets/images/works/integrivo.webp',
     category: 'Data Engineering',
     title: 'Integrivo',
-    date: 'Jan 2026 – Present',
+    date: 'Jan 2026 – Jun 2026',
     href: 'https://www.integrivo.com/',
     // TODO: replace with your real role, what you built, and a measurable result.
     role: 'Backend / Data Engineer',
@@ -179,8 +197,8 @@ export const techStack: TechItem[] = [
   { name: 'Node.js', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg', description: 'High-perf Runtime', category: 'Languages', level: 'core' },
   { name: 'Shell', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg', description: 'Automation & Scripting', category: 'Languages', level: 'proficient' },
   { name: 'Go', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg', description: 'Cloud-native Backend', category: 'Languages', level: 'familiar' },
-  { name: 'C++', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg', description: 'System Programming', category: 'Languages', level: 'familiar' },
-  { name: 'C', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg', description: 'Low-level Execution', category: 'Languages', level: 'familiar' },
+  { name: 'C++', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg', description: 'System Programming', category: 'Languages', level: 'proficient' },
+  { name: 'C', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg', description: 'Low-level Execution', category: 'Languages', level: 'proficient' },
   { name: 'Assembly', image: 'https://www.google.com/s2/favicons?domain=nasm.us&sz=128', description: 'Hardware Instructions', category: 'Languages', level: 'familiar' },
 
   // Frameworks & Tools
@@ -204,7 +222,7 @@ export const techStack: TechItem[] = [
   { name: 'Supabase', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg', description: 'BAAS Postgres', category: 'Databases & Storage', level: 'proficient' },
   { name: 'MariaDB', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg', description: 'Open-source SQL', category: 'Databases & Storage', level: 'familiar' },
   { name: 'ScyllaDB', image: 'https://www.google.com/s2/favicons?domain=scylladb.com&sz=128', description: 'Wide-column Store', category: 'Databases & Storage', level: 'familiar' },
-  { name: 'Firebase', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg', description: 'Google Cloud BAAS', category: 'Databases & Storage', level: 'familiar' },
+  { name: 'Firebase', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg', description: 'Google Cloud BAAS', category: 'Databases & Storage', level: 'proficient' },
 
   // DevOps & Cloud
   { name: 'Docker', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg', description: 'Containerization', category: 'DevOps & Cloud', level: 'core' },
@@ -217,11 +235,11 @@ export const techStack: TechItem[] = [
   { name: 'ArgoCD', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/argocd/argocd-original.svg', description: 'GitOps Continuous', category: 'DevOps & Cloud', level: 'familiar' },
   { name: 'Terraform', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg', description: 'Infrastructure as Code', category: 'DevOps & Cloud', level: 'familiar' },
   { name: 'Microsoft Azure', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg', description: 'Cloud computing platform', category: 'DevOps & Cloud', level: 'familiar' },
-  { name: 'DigitalOcean', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/digitalocean/digitalocean-original.svg', description: 'Developer Cloud', category: 'DevOps & Cloud', level: 'familiar' },
+  { name: 'DigitalOcean', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/digitalocean/digitalocean-original.svg', description: 'Developer Cloud', category: 'DevOps & Cloud', level: 'proficient' },
   { name: 'Heroku', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/heroku/heroku-original.svg', description: 'Cloud PaaS', category: 'DevOps & Cloud', level: 'familiar' },
   { name: 'Jenkins', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg', description: 'Automation Server', category: 'DevOps & Cloud', level: 'familiar' },
-  { name: 'Prometheus', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg', description: 'Monitoring & Alerts', category: 'DevOps & Cloud', level: 'familiar' },
-  { name: 'Grafana', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg', description: 'Analytics Dashboards', category: 'DevOps & Cloud', level: 'familiar' },
+  { name: 'Prometheus', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg', description: 'Monitoring & Alerts', category: 'DevOps & Cloud', level: 'proficient' },
+  { name: 'Grafana', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg', description: 'Analytics Dashboards', category: 'DevOps & Cloud', level: 'proficient' },
   { name: 'Apache', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apache/apache-original.svg', description: 'Web Server', category: 'DevOps & Cloud', level: 'familiar' },
 
   // Architecture & APIs
@@ -234,8 +252,8 @@ export const techStack: TechItem[] = [
   { name: 'Postman', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg', description: 'API Platform', category: 'Testing & Security', level: 'proficient' },
   { name: 'GDB', image: 'https://www.google.com/s2/favicons?domain=gnu.org&sz=128', description: 'GNU Debugger', category: 'Testing & Security', level: 'familiar' },
   { name: 'Wireshark', image: 'https://www.google.com/s2/favicons?domain=wireshark.org&sz=128', description: 'Network Protocol Analyzer', category: 'Testing & Security', level: 'familiar' },
-  { name: 'Burp Suite', image: 'https://www.google.com/s2/favicons?domain=portswigger.net&sz=128', description: 'Web Security Testing', category: 'Testing & Security', level: 'familiar' },
-  { name: 'HTTP Toolkit', image: 'https://www.google.com/s2/favicons?domain=httptoolkit.com&sz=128', description: 'HTTP Debugging', category: 'Testing & Security', level: 'familiar' },
+  { name: 'Burp Suite', image: 'https://www.google.com/s2/favicons?domain=portswigger.net&sz=128', description: 'Web Security Testing', category: 'Testing & Security', level: 'proficient' },
+  { name: 'HTTP Toolkit', image: 'https://www.google.com/s2/favicons?domain=httptoolkit.com&sz=128', description: 'HTTP Debugging', category: 'Testing & Security', level: 'proficient' },
   { name: 'ADB', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg', description: 'Android Debug Bridge', category: 'Testing & Security', level: 'familiar' },
 
   // Tools & Workflows

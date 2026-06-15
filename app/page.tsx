@@ -4,6 +4,7 @@ import RightNav from '@/components/RightNav';
 import VideoBackground from '@/components/VideoBackground';
 import HeroSection from '@/components/HeroSection';
 import ExperienceSection from '@/components/ExperienceSection';
+import EducationSection from '@/components/EducationSection';
 import SelectedWorksSection from '@/components/SelectedWorksSection';
 import ServicesSection from '@/components/ServicesSection';
 import TechStackSection from '@/components/TechStackSection';
@@ -22,6 +23,7 @@ export default function Home() {
       <main className="main-content">
         <HeroSection />
         <ExperienceSection />
+        <EducationSection />
         <ServicesSection />
         <TechStackSection />
         <ProcessSection />

@@ -24,6 +24,15 @@ export interface WorkItem {
   stack?: string[];
 }
 
+export interface EducationItem {
+  school: string;
+  program: string;
+  period: string;
+  location?: string;
+  website?: string;
+  details?: string[];
+}
+
 export interface ServiceItem {
   id: number;
   icon: string;

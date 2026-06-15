@@ -1,12 +1,46 @@
 import { siteConfig } from '@/data/site';
-import { faqs } from '@/data/portfolio';
+import { faqs, education, experiences, works, techStack } from '@/data/portfolio';
 
 /**
- * JSON-LD structured data for rich results in search engines.
- * Emits a Person + WebSite graph and an FAQPage built from the site FAQ data.
+ * JSON-LD structured data for rich results in search engines and clean parsing
+ * by AI crawlers. Emits a Person (with occupation, employment history, and
+ * skills), WebSite, ProfilePage, the portfolio projects as CreativeWork nodes,
+ * and an FAQPage — all built from the site data so they never drift.
  */
 export default function StructuredData() {
   const personId = `${siteConfig.url}/#person`;
+
+  // Skills the person is interview-ready or comfortable with, surfaced so search
+  // engines can connect the profile to specific technology queries.
+  const skills = techStack
+    .filter((tech) => tech.level === 'core' || tech.level === 'proficient')
+    .map((tech) => tech.name);
+
+  const knowsAbout = [
+    'Backend Architecture',
+    'Data Engineering',
+    'Full-Stack Development',
+    'API Integration',
+    'ETL Pipelines',
+    'Microservices',
+    ...skills,
+  ];
+
+  // Every company worked for, de-duplicated, so the employment history is
+  // machine-readable rather than buried in prose. schema.org `worksFor` accepts
+  // an array of Organizations.
+  const organizations = Array.from(
+    new Map(
+      experiences.map((exp) => [
+        exp.company,
+        {
+          '@type': 'Organization',
+          name: exp.company,
+          ...(exp.website ? { url: `https://${exp.website}` } : {}),
+        },
+      ]),
+    ).values(),
+  );
 
   const graph = {
     '@context': 'https://schema.org',
@@ -25,17 +59,27 @@ export default function StructuredData() {
           addressLocality: siteConfig.location.city,
           addressCountry: siteConfig.location.countryCode,
         },
+        homeLocation: {
+          '@type': 'Place',
+          name: `${siteConfig.location.city}, ${siteConfig.location.country}`,
+        },
         sameAs: [siteConfig.social.linkedin, siteConfig.social.github],
-        knowsAbout: [
-          'Backend Architecture',
-          'Data Engineering',
-          'Full-Stack Development',
-          'NestJS',
-          'Next.js',
-          'TypeScript',
-          'PostgreSQL',
-          'API Integration',
-        ],
+        ...(organizations.length ? { worksFor: organizations } : {}),
+        hasOccupation: {
+          '@type': 'Occupation',
+          name: siteConfig.jobTitle,
+          skills: skills.join(', '),
+          occupationLocation: {
+            '@type': 'Country',
+            name: siteConfig.location.country,
+          },
+        },
+        alumniOf: education.map((edu) => ({
+          '@type': 'EducationalOrganization',
+          name: edu.school,
+          ...(edu.website ? { url: `https://${edu.website}` } : {}),
+        })),
+        knowsAbout,
       },
       {
         '@type': 'WebSite',
@@ -54,6 +98,21 @@ export default function StructuredData() {
         about: { '@id': personId },
         inLanguage: 'en-US',
       },
+      // Portfolio projects, each linked back to the person as author so crawlers
+      // attribute the work and can surface it for technology-specific queries.
+      ...works.map((work) => ({
+        '@type': 'CreativeWork',
+        name: work.title,
+        url: work.href,
+        ...(work.description ? { description: work.description } : {}),
+        ...(work.category ? { genre: work.category } : {}),
+        ...(work.image
+          ? { image: `${siteConfig.url}${work.image}` }
+          : {}),
+        ...(work.stack?.length ? { keywords: work.stack.join(', ') } : {}),
+        author: { '@id': personId },
+        creator: { '@id': personId },
+      })),
       {
         '@type': 'FAQPage',
         '@id': `${siteConfig.url}/#faq`,
