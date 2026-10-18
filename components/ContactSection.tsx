@@ -7,13 +7,13 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-type FormData = { email: string; phone: string; message: string };
+type FormData = { email: string; phone: string; message: string; website: string };
 
 export default function ContactSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
-    defaultValues: { email: '', phone: '', message: '' }
+    defaultValues: { email: '', phone: '', message: '', website: '' }
   });
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export default function ContactSection() {
       </h2>
 
       {status === 'success' ? (
-        <div className="success-message" style={{ textAlign: 'center', padding: '60px 20px', minHeight: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', animation: 'fadeIn 0.5s ease-out forwards' }}>
+        <div role="status" className="success-message" style={{ textAlign: 'center', padding: '60px 20px', minHeight: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', animation: 'fadeIn 0.5s ease-out forwards' }}>
           <style dangerouslySetInnerHTML={{__html: `
             @keyframes scaleIn { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
             @keyframes fadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
@@ -99,18 +99,19 @@ export default function ContactSection() {
         </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <div className="form-honeypot" aria-hidden="true"><input aria-label="Website (leave empty)" tabIndex={-1} autoComplete="off" {...register('website')} /></div>
           <div className="form-row">
             <div className="form-group">
               <label className="form-label" htmlFor="email">Your Email</label>
               <input
-                id="email" type="email" placeholder="Enter your email"
+                id="email" type="email" placeholder="Enter your email" aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined}
                 className="form-input"
                 {...register('email', {
                   required: 'Email required',
                   pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' }
                 })}
               />
-              {errors.email && <span className="form-error">{errors.email.message}</span>}
+              {errors.email && <span id="email-error" className="form-error">{errors.email.message}</span>}
             </div>
 
             <div className="form-group phone-group">
@@ -128,13 +129,14 @@ export default function ContactSection() {
           <div className="form-group form-group-full" style={{ marginTop: 8 }}>
             <label className="form-label" htmlFor="message">Message</label>
             <textarea
-              id="message" placeholder="What's the role, and what would I be working on? A few lines is plenty."
+              id="message" aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined} placeholder="What's the role, and what would I be working on? A few lines is plenty."
               className="form-textarea"
               {...register('message', { required: 'Message required' })}
             />
-            {errors.message && <span className="form-error">{errors.message.message}</span>}
+            {errors.message && <span id="message-error" className="form-error">{errors.message.message}</span>}
           </div>
 
+          {status === 'error' && <p role="alert">Could not send. Please email me directly at <a href="mailto:nasroallah.elidrissi@gmail.com">nasroallah.elidrissi@gmail.com</a>.</p>}
           <div className="submit-row" style={{ marginTop: '32px' }}>
             <button type="submit" className="submit-btn" id="contact-submit" disabled={status === 'loading'}>
               <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

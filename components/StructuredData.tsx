@@ -103,7 +103,7 @@ export default function StructuredData() {
       ...works.map((work) => ({
         '@type': 'CreativeWork',
         name: work.title,
-        url: work.href,
+        ...(work.href ? { url: work.href } : {}),
         ...(work.description ? { description: work.description } : {}),
         ...(work.category ? { genre: work.category } : {}),
         ...(work.image

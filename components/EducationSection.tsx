@@ -44,10 +44,15 @@ export default function EducationSection() {
   }, []);
 
   return (
-    <section id="education" className="section-card" ref={containerRef}>
+    <section id="about" className="section-card" ref={containerRef}>
+      <div className="about-intro">
+        <div className="section-label">About me</div>
+        <h2 className="about-intro-title">I like building reliable systems.</h2>
+        <p>My interests sit where backend engineering, data pipelines and practical problem-solving meet. This is a draft paragraph ready for more of my story.</p>
+      </div>
       {/* Header: label on left, big quote on right */}
       <div className="exp-section-top edu-section-top">
-        <div className="section-label" style={{ marginBottom: 0 }}>Where I&apos;ve studied</div>
+        <div className="section-label" style={{ marginBottom: 0 }}>Education &amp; background</div>
         <h2 className="exp-section-quote">
           Trained the hard way — peer-to-peer, project-driven, and
           <span> built on shipping real code, not sitting in lectures.</span>

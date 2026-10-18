@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     const hits = (recent.get(ip) || []).filter(t => now - t < 60000);
     if (hits.length >= 3) return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     recent.set(ip, [...hits, now]);
-    if (typeof email !== 'string' || email.length > 254 || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) ||
+    if (typeof email !== 'string' || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
         typeof phone !== 'string' || phone.length > 40 || typeof message !== 'string' ||
         message.trim().length < 5 || message.length > 5000) {
       return NextResponse.json({ error: 'Invalid email or message' }, { status: 400 });
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     if (!resend) return NextResponse.json({ error: 'Contact is not configured' }, { status: 503 });
     const cleanEmail = escapeHtml(email);
     const cleanPhone = escapeHtml(phone);
-    const cleanMessage = escapeHtml(message).replace(/\\n/g, '<br/>');
+    const cleanMessage = escapeHtml(message).replace(/\n/g, '<br/>');
 
     if (!email || !message) {
       return NextResponse.json({ error: 'Email and message are required' }, { status: 400 });
