@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+<title id="title">HorseWellBeing — Mobile UI Prototype — conceptual cover</title>
+<desc id="desc">Custom abstract illustration for a portfolio project. This is not a screenshot of the software.</desc>
+<defs>
+<radialGradient id="shade" cx=".68" cy=".5" r=".8"><stop stop-color="#40302f"/><stop offset="1" stop-color="#16171c"/></radialGradient>
+<linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1a679"/><stop offset="1" stop-color="#bd6548"/></linearGradient>
+<pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" stroke="#f9cead" stroke-opacity=".045" fill="none"/></pattern>
+</defs>
+<rect width="960" height="540" fill="url(#shade)"/><rect width="960" height="540" fill="url(#grid)"/>
+<path d="M610 0h350v540H610z" fill="#0f1118" fill-opacity=".57"/><path d="M611 36v467" stroke="#f2a276" stroke-opacity=".15"/>
+<circle cx="865" cy="107" r="92" stroke="#f1a479" stroke-opacity=".13" fill="none"/><circle cx="865" cy="107" r="66" stroke="#f1a479" stroke-opacity=".10" fill="none"/>
+<g transform="translate(0 -8)"><rect x="228" y="210" width="161" height="230" rx="24" fill="#24252a" stroke="#dc956e" stroke-width="4"/><rect x="250" y="247" width="118" height="156" rx="10" fill="#443332"/><rect x="265" y="279" width="90" height="29" rx="9" fill="#a55d44"/><rect x="265" y="321" width="90" height="29" rx="9" fill="#695454"/><path d="M291 224H326" stroke="#a18e88" stroke-width="6" stroke-linecap="round"/><circle cx="308" cy="424" r="6" fill="#8f7974"/></g>
+<rect x="66" y="50" width="5" height="34" rx="2" fill="url(#accent)"/>
+<text x="88" y="70" fill="#edc8b9" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="3">MOBILE</text>
+<text x="685" y="301" fill="#ffba94" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="78" opacity=".38">12</text>
+<rect x="665" y="357" width="196" height="2" fill="#a27566" opacity=".3"/>
+<text x="665" y="389" fill="#efddd3" font-family="Arial, Helvetica, sans-serif" font-size="14" letter-spacing="1.2">PROJECT OVERVIEW</text>
+<text x="665" y="418" fill="#bda6a3" font-family="Arial, Helvetica, sans-serif" font-size="13">ILLUSTRATIVE COVER</text>
+</svg>
