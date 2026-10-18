@@ -6,6 +6,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const problems = [];
 let total = 0;
 let published = 0;
+const projectOrders = new Map();
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const IMAGE = /!\[[^\]]+\]\((\/assets\/[a-zA-Z0-9_./-]+)\)/g;
@@ -58,6 +59,20 @@ for (const collection of ['blog', 'projects']) {
         problems.push(reference + ': draft placeholders found in published content');
       }
     }
+    if (collection === 'projects' && fields.order !== undefined) {
+      const order = Number(fields.order);
+      if (!Number.isSafeInteger(order) || order <= 0) {
+        problems.push(reference + ': order must be a positive integer');
+      } else if (projectOrders.has(order)) {
+        problems.push(reference + ': repeated project order ' + order + ' (also ' + projectOrders.get(order) + ')');
+      } else projectOrders.set(order, reference);
+    }
+    for (const field of ['repository', 'demo']) {
+      if (fields[field] !== undefined &&
+          (typeof fields[field] !== 'string' || !/^https:\/\/[^\s]+$/.test(fields[field]))) {
+        problems.push(reference + ': ' + field + ' must be an absolute https:// URL');
+      }
+    }
     for (const list of ['tags', 'stack']) {
       if (fields[list] !== undefined &&
           (!Array.isArray(fields[list]) || !fields[list].every(value => typeof value === 'string'))) {
@@ -78,6 +93,14 @@ for (const collection of ['blog', 'projects']) {
     if (match[2].split('\n').filter(line => line.startsWith(fence)).length % 2 !== 0) {
       problems.push(reference + ': unclosed code fence');
     }
+  }
+}
+
+// Guard the expected imported archive against accidental card duplication.
+const expectedProjects = ["rayonnage-plus","retail-os","yuugen","elevathub","booking-system","pos-system","integrivo-staysync","integrivo-platform","24sevenmarket-shop","rihla-travel-marketplace","atlas-desert-adventures","horsewellbeing","titrit-luxury"];
+for (const slug of expectedProjects) {
+  if (!existsSync(join(root, 'content', 'projects', slug + '.md'))) {
+    problems.push('Expected imported project missing: ' + slug);
   }
 }
 

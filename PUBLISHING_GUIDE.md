@@ -1,6 +1,6 @@
 # Projects & Engineering Notes — Publishing Guide
 
-These pages share your portfolio's dark/orange layout and navigation. Both collections are currently unpublished drafts; no unverified claims are published as projects or articles.
+The pages share your portfolio's dark/orange layout and navigation. The Projects index now contains **13 published, repository-grounded overviews**; Writing still contains an unpublished starter draft. Project descriptions reflect inspected READMEs, source structure, and dependencies, not fabricated usage metrics or individual contributions.
 
 ## Where the content lives
 
@@ -15,12 +15,17 @@ These pages share your portfolio's dark/orange layout and navigation. Both colle
 
 ## Create a case study
 
-1. Copy `content/projects/backend-integration-case-study.md` to `content/projects/my-project.md` (use a lowercase kebab-case filename).
+1. Copy `content/templates/project.md` to `content/projects/my-project.md` (use a lowercase kebab-case filename).
 2. Replace the title, summary, real role, dates, tags, technologies, architecture, results and complete body. Do not invent outcomes or disclose private client data.
 3. Add an original image or diagram under `public/assets/` and reference it with an absolute `/assets/...` path.
 4. Add real, public `repository` and `demo` URLs if applicable; both are optional.
 5. Keep `published: false` while writing. Set a real date and switch to `published: true` only when ready.
 6. Set `featured: true` to have the published project automatically appear under Featured Work on the homepage.
+7. Use `order: 14` (or any unused positive number) to define the order on `/projects`. The first tag in `tags` is the directory filter category.
+
+**Private code policy:** Twelve of the thirteen listed source repositories are private. Their public case studies deliberately omit the `repository` field to avoid sending visitors to a GitHub 404. Yuugen is public and has a working repository link. URLs in the `demo` field are those listed in GitHub's repository homepage metadata; check them before using the site as a final production portfolio.
+
+**Authorship and outcomes:** The Rayonnage Plus repository belongs to a collaborator's GitHub account. All descriptions are about repository scope, not a claim of sole authorship. Add verified personal roles and measured results separately as you review each project.
 
 Example project frontmatter (replace every sample field before publishing):
 
@@ -37,6 +42,7 @@ cover: "/assets/images/works/my-project.webp"
 repository: "https://github.com/example/public-repository"
 published: false
 featured: false
+order: 14
 ---
 ```
 
@@ -51,10 +57,10 @@ New published posts appear on `/blog`, in `/rss.xml`, in `/sitemap.xml`, and in 
 
 ## What draft mode does
 
-- `npm run dev` shows local drafts in the two listing pages. Cards are visibly marked LOCAL DRAFT and detail pages can be opened.
+- `npm run dev` shows unpublished drafts alongside the 13 published projects. Unpublished cards are labeled LOCAL DRAFT and their detail pages can be opened.
 - `npm run build` and deployed production builds hide draft cards and return 404 for unpublished detail URLs.
 - Drafts do not appear in the homepage, sitemap, or RSS feed.
-- The existing fictional Featured Work and Experience cards in `data/portfolio.ts` are unchanged until replaced.
+- The fictional `data/portfolio.ts` entries still exist as fallbacks. The homepage now displays the three marked published projects (Retail OS, POS System, Integrivo Platform) instead; the Experience entries remain draft placeholders.
 
 ## Supported Markdown
 
@@ -79,6 +85,6 @@ npm run build
 npm run dev
 ```
 
-Open `/projects` and `/blog` in development, then open the sample cards. Test code copying, image sizing, table-of-contents anchors, mobile navigation, menu dismissal, and return links.
+Open `/projects` and `/blog` in development. Verify that all 13 projects appear once, category filters and technology search work, each project detail opens, the 13 SVG covers display, and home Featured Work links internally. For Writing, open the local starter draft and test code copying, images, and table-of-contents anchors.
 
 The project/experience content is still in a draft branch; don't merge it into `main` until those entries are factually complete.

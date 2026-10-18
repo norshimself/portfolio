@@ -1,11 +1,11 @@
 # Portfolio content & asset refresh
 
-This branch is a **draft**. Experience and Featured Work contain Lorem Ipsum examples. Replace every placeholder before production.
+This branch remains a **draft** because Professional Experience in `data/portfolio.ts` still contains Lorem Ipsum. The published Projects collection and homepage Featured Work now use actual repository-grounded summaries. Verify individual contributions before merging.
 
 ## Content to edit
 
 - `data/portfolio.ts` — `experiences`: replace company names, roles, dates, descriptions and verified achievements.
-- `data/portfolio.ts` — `works`: replace project titles, summaries, roles, dates, stacks and image paths. Add an `href` only when there is a real destination.
+- `data/portfolio.ts` — `works`: older placeholders remain as a fallback. The homepage now renders the three published case studies marked `featured: true`; edit `content/projects/*.md` for live entries.
 - `data/portfolio.ts` — `services` and `techStack`: keep relevant, defensible skills.
 - `components/EducationSection.tsx` — personalize the About paragraph.
 - `components/HeroSection.tsx` — adjust your positioning and calls to action.
@@ -51,8 +51,17 @@ The contact form needs `RESEND_API_KEY` and preferably a verified `RESEND_FROM_E
 ## Projects and Writing
 
 - New `/projects`, `/projects/[slug]`, `/blog`, and `/blog/[slug]` pages use the same profile sidebar, mobile dock, drawer, footer, and dark/orange styles.
-- New content lives in `content/projects/` and `content/blog/`, with `published: false` starter templates.
+- Thirteen reviewed project overviews are published under `content/projects/`; a reusable unpublished template lives at `content/templates/project.md`. The starter blog article remains unpublished.
 - Drafts are visible locally with `npm run dev`, but hidden from production listings, detail pages, sitemap and RSS.
-- Published projects marked `featured: true` replace homepage Featured Work draft cards. Published blog posts activate the Latest Writing section.
+- Retail OS, POS System and Integrivo Platform have `featured: true` and replace homepage Featured Work placeholders. Published blog posts will activate Latest Writing when available.
 - See `PUBLISHING_GUIDE.md` for the supported Markdown subset, metadata schema, and examples.
 - Validate with `npm run check:content`, `npm run lint`, `npx tsc --noEmit`, and `npm run build`.
+
+### Imported GitHub projects
+
+- The 14 provided URLs contained 13 unique repositories; `retail-os` was repeated and is included once.
+- Project pages have concise descriptions based on inspected code/READMEs and matching hand-made SVG illustration covers under `public/assets/images/projects/`. Covers are not screenshots.
+- `/projects` supports searchable tags/technology names and accessible type filters (`Platforms`, `Websites`, `Commerce`, `Community`, `Mobile`).
+- `order: 1` through `order: 13` controls the curated listing order; `featured: true` controls homepage picks.
+- Only the public Yuugen repository has a source-code CTA. Private GitHub source URLs are deliberately omitted; eight repositories list a website in GitHub's homepage metadata.
+- Personal roles, contribution boundaries, and results are not inferred from code. Review them before publishing a polished final portfolio.

@@ -91,3 +91,11 @@ Unpublished content (`published: false`) is previewable with `npm run dev`, but 
 The lightweight Markdown reader supports article outlines, local images, code snippets, and copy controls without additional npm packages. The blog's RSS feed is at `/rss.xml` and the sitemap includes only published content.
 
 See [`PUBLISHING_GUIDE.md`](PUBLISHING_GUIDE.md) for editing, publishing and validation. Run `npm run check:content` before publishing.
+
+### GitHub project archive
+
+The Projects route currently contains **13 published repository-grounded case-study overviews** and original abstract SVG covers. The provided list included a duplicate of `retail-os`, which was deduplicated. The archive supports category filters and technology search, with curated `order:` frontmatter determining card order.
+
+`content/templates/project.md` is the template for new case studies. Private source-code URLs are not displayed as public links. Only the public Yuugen repository has a source link. Eight entries reference websites supplied by their repository's homepage metadata; verify availability before production.
+
+The three featured projects are Retail OS, POS System, and Integrivo Platform. Personal contribution summaries and measured outcomes should be added after verification.

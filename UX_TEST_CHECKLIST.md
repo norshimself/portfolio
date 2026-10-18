@@ -1,6 +1,6 @@
 # Portfolio UX review — local testing
 
-This branch still contains **draft** project and experience content. UX changes must be tested before merging into `main`.
+This branch still contains **draft experience** content. The 13 repository-grounded Projects overviews are published on the feature branch; verify personal contributions and actual outcomes before merging into `main`.
 
 ## Quick start
 
@@ -58,7 +58,7 @@ Report any failed checks with a screenshot, viewport size, browser, and console 
 ### Projects and Writing
 
 - [ ] `/projects` and `/blog` show the shared header, sidebar, dock and footer at 320–1440px.
-- [ ] In `npm run dev`, each starter draft appears with a LOCAL DRAFT label and can be opened.
+- [ ] In `npm run dev`, the unpublished blog starter appears with a LOCAL DRAFT label; the Projects index contains 13 published entries and no placeholder case-study card.
 - [ ] In `npm run build && npm start`, unfinished draft cards are hidden and unfinished detail URLs return 404.
 - [ ] Table-of-contents links scroll to correct headings and images remain within the content column.
 - [ ] Code blocks scroll horizontally and their Copy buttons work.
@@ -67,3 +67,15 @@ Report any failed checks with a screenshot, viewport size, browser, and console 
 - [ ] Published items appear in `/sitemap.xml`; only published blog posts appear in `/rss.xml`.
 - [ ] After publishing a featured case study, homepage Featured Work pulls the real entry without showing sample cards.
 - [ ] After publishing a blog post, Latest Writing appears on the homepage.
+
+### Imported project archive
+
+- [ ] Exactly 13 project cards appear (retail-os is not duplicated).
+- [ ] The Projects filters show Platforms, Websites, Commerce, Community, Mobile, and All, with correct counts.
+- [ ] Searching `PostgreSQL`, `Next.js`, `Expo`, `Discord`, and an unmatched string updates the results and empty state without changing the page URL.
+- [ ] Every project card links to its `/projects/[slug]` page; 13 conceptual SVG covers render on mobile/desktop without cropping important elements.
+- [ ] Homepage Featured Work shows Retail OS, POS System, and Integrivo Platform, with internal case-study links.
+- [ ] Private repositories do not expose inaccessible source URLs. Yuugen links to its public GitHub repository.
+- [ ] Project website links are checked manually and open safely in new tabs.
+- [ ] Each case study clearly distinguishes implemented features, concepts/prototypes, and still-in-progress integrations.
+- [ ] Project descriptions match real contributions; do not merge without reviewing attribution and outcomes.
