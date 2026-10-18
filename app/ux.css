@@ -407,3 +407,6 @@
 @media (prefers-reduced-motion: reduce) {
   .submit-spinner { animation-duration: 1.5s; }
 }
+
+/* The main landmark can receive skip-link focus without a large visual ring. */
+.main-content:focus { outline: none; }

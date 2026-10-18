@@ -27,6 +27,17 @@ export default function Navbar({ open, onClose, active }: Props) {
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+
+    // Keep the rest of the page out of the accessibility tree while the
+    // navigation dialog is open. Restore the original state on close.
+    const background = [
+      document.querySelector<HTMLElement>('.left-sidebar'),
+      document.getElementById('main-content'),
+      document.querySelector<HTMLElement>('.right-nav-wrapper'),
+    ].filter((item): item is HTMLElement => item !== null);
+    const priorInert = background.map((item) => item.inert);
+    background.forEach((item) => { item.inert = true; });
+
     closeRef.current?.focus();
 
     const handleKey = (event: KeyboardEvent) => {
@@ -57,6 +68,7 @@ export default function Navbar({ open, onClose, active }: Props) {
     return () => {
       document.removeEventListener('keydown', handleKey);
       document.body.style.overflow = previousOverflow;
+      background.forEach((item, index) => { item.inert = priorInert[index]; });
       if (!navigatedRef.current) returnFocusRef.current?.focus();
     };
   }, [open, onClose]);

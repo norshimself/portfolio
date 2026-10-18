@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <PortfolioShell>
       <VideoBackground />
-      <main id="main-content" className="main-content">
+      <main id="main-content" tabIndex={-1} className="main-content">
         <HeroSection />
         <SelectedWorksSection />
         <ExperienceSection />
