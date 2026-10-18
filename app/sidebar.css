@@ -1,0 +1,346 @@
+/* A focused profile-card refinement, without changing the original dark theme.
+   This file loads after globals.css and ux.css so mobile overrides stay intentional. */
+
+.sidebar-card.sidebar-polished {
+  position: relative;
+  isolation: isolate;
+  gap: 0;
+  padding: 20px 20px 22px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background:
+    radial-gradient(ellipse at 50% 12%, rgba(243, 79, 17, .10), transparent 55%),
+    linear-gradient(160deg, rgba(27, 25, 29, .96), rgba(15, 15, 17, .98));
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .20), inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+
+.sidebar-polished .sidebar-top { width: 100%; gap: 10px; }
+.sidebar-polished .tf-btn-menu {
+  position: static;
+  transform: none;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  min-width: 44px;
+  border: 1px solid rgba(255, 255, 255, .17);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, .045);
+  color: #f5f5f5;
+}
+.sidebar-polished .tf-btn-menu:hover {
+  border-color: rgba(255, 153, 96, .60);
+  background: rgba(243, 79, 17, .13);
+  color: #ffc19c;
+}
+.sidebar-polished .status-badge {
+  padding: 8px 10px;
+  min-width: 0;
+  font-size: 11px;
+  line-height: 1.25;
+  background: rgba(255, 255, 255, .025);
+  border-color: rgba(255, 255, 255, .11);
+}
+.sidebar-polished .status-badge strong { color: #ffab80; }
+.sidebar-polished .status-dot { flex: 0 0 7px; }
+
+.sidebar-polished .sidebar-portrait-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 228px;
+  flex: 0 0 228px;
+  margin: 13px 0 6px;
+}
+.sidebar-polished .sidebar-portrait-stage::before {
+  content: '';
+  position: absolute;
+  width: 206px;
+  height: 206px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(243, 79, 17, .18), rgba(243, 79, 17, .04) 46%, transparent 72%);
+  pointer-events: none;
+}
+.sidebar-polished .sidebar-portrait-stage::after {
+  content: '';
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  bottom: 4px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(243, 117, 65, .63), transparent);
+  pointer-events: none;
+}
+.sidebar-polished .sidebar-avatar {
+  position: relative;
+  width: 160px;
+  height: 195px;
+  flex: 0 0 160px;
+  border: 2px solid rgba(255, 157, 107, .60);
+  border-radius: 80px 80px 24px 24px;
+  background: #242021;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, .025), 0 13px 33px rgba(0, 0, 0, .25);
+}
+.sidebar-polished .sidebar-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 26%;
+}
+
+.sidebar-polished .sidebar-intro-block {
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
+.sidebar-polished .sidebar-eyebrow {
+  display: block;
+  margin-bottom: 9px;
+  color: #ffac81;
+  font-family: var(--font-body);
+  font-weight: 750;
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+.sidebar-polished .sidebar-signature {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  opacity: 1;
+  color: #fff;
+  font-size: 29px;
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+.sidebar-polished .sidebar-role {
+  margin-top: 7px;
+  color: #d9d9dd;
+  font-size: 13px;
+  font-weight: 500;
+}
+.sidebar-polished .sidebar-meta {
+  width: 100%;
+  display: grid;
+  gap: 6px;
+  margin-top: 19px;
+  text-align: center;
+}
+.sidebar-polished .sidebar-location { margin: 0; color: #c3c3ca; font-size: 12px; }
+.sidebar-polished .sidebar-email {
+  display: block;
+  color: #efefef;
+  font-size: 12px;
+  font-weight: 550;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, .24);
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+.sidebar-polished .sidebar-email:hover {
+  color: #ffba91;
+  text-decoration-color: #ffba91;
+}
+.sidebar-polished .sidebar-one-liner {
+  max-width: 28ch;
+  margin: 18px auto 0;
+  color: #c3c3ca;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.sidebar-polished .sidebar-footer {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 22px;
+}
+.sidebar-polished .sidebar-cta {
+  margin: 0;
+  min-height: 52px;
+  padding: 9px 10px 9px 17px;
+  background: var(--ux-action-bg, #c7420a);
+  color: #fff;
+  border: 1px solid rgba(255, 178, 132, .30);
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 650;
+}
+.sidebar-polished .sidebar-cta:hover {
+  background: var(--ux-action-hover, #a93205);
+  border-color: rgba(255, 178, 132, .50);
+  color: #fff;
+}
+.sidebar-polished .sidebar-cta .cta-arrow {
+  width: 33px;
+  height: 33px;
+  background: rgba(255, 255, 255, .15);
+  color: white;
+}
+.sidebar-polished .sidebar-cta .cta-arrow svg { color: currentColor; }
+.sidebar-polished .sidebar-work-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin-top: 6px;
+  color: #dfdfe3;
+  font-size: 12px;
+  font-weight: 600;
+}
+.sidebar-polished .sidebar-work-link:hover { color: #ffba91; }
+.sidebar-polished .sidebar-divider {
+  width: 100%;
+  margin: 14px 0 12px;
+  background: rgba(255, 255, 255, .12);
+}
+.sidebar-polished .sidebar-social {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin: 0;
+}
+.sidebar-polished .sidebar-social li { min-width: 0; }
+.sidebar-polished .sidebar-social a {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  color: #d3d3d8;
+  background: rgba(255, 255, 255, .045);
+}
+.sidebar-polished .sidebar-social a:hover {
+  color: #fff;
+  background: rgba(176, 59, 20, .60);
+  border-color: rgba(255, 165, 115, .50);
+  transform: translateY(-2px);
+}
+.sidebar-polished :where(a, button):focus-visible {
+  outline: 2px solid #ffc19c;
+  outline-offset: 3px;
+}
+
+/* The fixed sidebar is independently scrollable on short desktop viewports. */
+@media (min-width: 1025px) {
+  .sidebar-polished .sidebar-cta { flex: none; }
+}
+@media (max-height: 760px) and (min-width: 1025px) {
+  .sidebar-card.sidebar-polished { padding-top: 16px; padding-bottom: 14px; }
+  .sidebar-polished .sidebar-portrait-stage { height: 192px; flex-basis: 192px; margin-top: 6px; }
+  .sidebar-polished .sidebar-avatar { height: 164px; }
+  .sidebar-polished .sidebar-meta { margin-top: 12px; }
+  .sidebar-polished .sidebar-one-liner { margin-top: 12px; }
+  .sidebar-polished .sidebar-footer { padding-top: 12px; }
+}
+
+/* Preserve the original compact sticky header rather than shrinking the card. */
+@media (max-width: 1024px) {
+  .sidebar-card.sidebar-polished {
+    display: grid;
+    grid-template-areas: 'portrait identity contact menu';
+    grid-template-columns: 44px minmax(0, 1fr) 44px 44px;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    min-height: 64px;
+    padding: 8px 12px;
+    border-radius: 18px;
+    background: rgba(19, 19, 21, .96) !important;
+  }
+  .sidebar-card.sidebar-polished .sidebar-top { display: contents; }
+  .sidebar-polished .status-badge { display: none !important; }
+  .sidebar-polished .tf-btn-menu {
+    display: flex !important;
+    grid-area: menu;
+    width: 44px;
+    height: 44px;
+    position: static !important;
+    transform: none !important;
+    margin: 0;
+  }
+  .sidebar-polished .sidebar-portrait-stage {
+    grid-area: portrait;
+    width: 44px;
+    height: 44px;
+    min-height: 0;
+    flex: none;
+    margin: 0;
+  }
+  .sidebar-polished .sidebar-portrait-stage::before,
+  .sidebar-polished .sidebar-portrait-stage::after { display: none; }
+  .sidebar-polished .sidebar-avatar {
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border: 1px solid rgba(255, 154, 102, .55);
+    border-radius: 50%;
+  }
+  .sidebar-polished .sidebar-intro-block { grid-area: identity; min-width: 0; text-align: left; }
+  .sidebar-polished .sidebar-eyebrow,
+  .sidebar-polished .sidebar-meta,
+  .sidebar-polished .sidebar-one-liner,
+  .sidebar-polished .sidebar-work-link,
+  .sidebar-polished .sidebar-divider,
+  .sidebar-polished .sidebar-social { display: none !important; }
+  .sidebar-polished .sidebar-signature {
+    text-align: left;
+    width: auto;
+    font-size: 17px !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .sidebar-polished .sidebar-role {
+    display: block;
+    margin-top: 4px;
+    text-align: left;
+    font-size: 11px;
+    line-height: 1.2;
+    color: #c6c6cd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sidebar-polished .sidebar-footer { display: contents; }
+  .sidebar-polished .sidebar-cta {
+    grid-area: contact;
+    display: flex !important;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    margin: 0;
+    border-radius: 13px;
+    justify-content: center;
+  }
+  .sidebar-polished .sidebar-cta > span:first-child { display: none; }
+  .sidebar-polished .sidebar-cta .cta-arrow {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    background: none;
+    color: #fff;
+  }
+}
+@media (max-width: 480px) {
+  .sidebar-card.sidebar-polished {
+    grid-template-columns: 40px minmax(0, 1fr) 44px 44px;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+  .sidebar-polished .sidebar-portrait-stage,
+  .sidebar-polished .sidebar-avatar { width: 40px; height: 40px; }
+  .sidebar-polished .sidebar-signature { font-size: 14px !important; }
+}
+@media (max-width: 360px) {
+  .sidebar-card.sidebar-polished { gap: 7px; }
+  .sidebar-polished .sidebar-role { display: none; }
+  .sidebar-polished .sidebar-cta { display: flex !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-polished .sidebar-social a { transform: none !important; transition: none; }
+  .sidebar-polished .tf-btn-menu { transition: none; }
+}
