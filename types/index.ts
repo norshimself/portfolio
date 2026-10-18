@@ -18,7 +18,7 @@ export interface WorkItem {
   category: string;
   title: string;
   date: string;
-  href: string;
+  href?: string;
   role?: string;
   description?: string;
   stack?: string[];

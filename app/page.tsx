@@ -1,39 +1,28 @@
-import Navbar from '@/components/Navbar';
-import LeftSidebar from '@/components/LeftSidebar';
-import RightNav from '@/components/RightNav';
+import PortfolioShell from '@/components/PortfolioShell';
 import VideoBackground from '@/components/VideoBackground';
 import HeroSection from '@/components/HeroSection';
-import ExperienceSection from '@/components/ExperienceSection';
-import EducationSection from '@/components/EducationSection';
 import SelectedWorksSection from '@/components/SelectedWorksSection';
+import ExperienceSection from '@/components/ExperienceSection';
 import ServicesSection from '@/components/ServicesSection';
 import TechStackSection from '@/components/TechStackSection';
-import ProcessSection from '@/components/ProcessSection';
-import FAQSection from '@/components/FAQSection';
+import EducationSection from '@/components/EducationSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <div id="wrapper">
+    <PortfolioShell>
       <VideoBackground />
-      <LeftSidebar />
-      <Navbar />
-
-      <main className="main-content">
+      <main id="main-content" className="main-content">
         <HeroSection />
+        <SelectedWorksSection />
         <ExperienceSection />
-        <EducationSection />
         <ServicesSection />
         <TechStackSection />
-        <ProcessSection />
-        <SelectedWorksSection />
-        <FAQSection />
+        <EducationSection />
         <ContactSection />
         <Footer />
       </main>
-
-      <RightNav />
-    </div>
+    </PortfolioShell>
   );
 }

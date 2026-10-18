@@ -11,21 +11,21 @@ import type {
 } from '@/types';
 
 export const navLinks: NavLink[] = [
-  { href: '#home', label: 'Home', icon: 'icon-home-solid' },
-  { href: '#experience', label: 'Experience', icon: 'icon-toolbox-solid' },
-  { href: '#education', label: 'Education', icon: 'icon-graduation-cap-solid' },
-  { href: '#services', label: 'Services', icon: 'icon-stream-solid' },
-  { href: '#works', label: 'Selected Work', icon: 'icon-tasks-solid' },
-  { href: '#faqs', label: 'FAQs', icon: 'icon-comment-alt-solid' },
-  { href: '#contact', label: 'Contact', icon: 'icon-envelope-solid' },
+  { href: '#home', label: 'Home', icon: 'home' },
+  { href: '#works', label: 'Featured Work', icon: 'works' },
+  { href: '#experience', label: 'Experience', icon: 'experience' },
+  { href: '#services', label: 'Expertise', icon: 'services' },
+  { href: '#tech', label: 'Tech Stack', icon: 'tech' },
+  { href: '#about', label: 'About & Education', icon: 'about' },
+  { href: '#contact', label: 'Contact', icon: 'contact' },
 ];
-
+// A focused five-destination mobile / desktop dock.
 export const rightNavLinks: NavLink[] = [
-  { href: '#home', label: 'Home', icon: 'icon-home-solid' },
-  { href: '#services', label: 'Services', icon: 'icon-stream-solid' },
-  { href: '#works', label: 'Selected Work', icon: 'icon-tasks-solid' },
-  { href: '#faqs', label: 'FAQs', icon: 'icon-comment-alt-solid' },
-  { href: '#contact', label: 'Contact', icon: 'icon-envelope-solid' },
+  { href: '#home', label: 'Home', icon: 'home' },
+  { href: '#works', label: 'Work', icon: 'works' },
+  { href: '#experience', label: 'Experience', icon: 'experience' },
+  { href: '#services', label: 'Expertise', icon: 'services' },
+  { href: '#contact', label: 'Contact', icon: 'contact' },
 ];
 
 export const socialLinks = [
@@ -34,40 +34,40 @@ export const socialLinks = [
   { icon: 'icon-envelope', href: 'mailto:nasroallah.elidrissi@gmail.com', label: 'Email' },
 ];
 
+// CONTENT DRAFT: replace the fictional roles, employers, dates and achievements below.
+// Do not publish sample content as real professional experience.
 export const experiences: ExperienceItem[] = [
   {
-    company: 'ROLLEE',
-    role: 'Backend Engineer',
-    period: '04/2025 – 10/2025',
-    location: 'Paris, Île-de-France, France (Remote)',
-    website: 'getrollee.com',
+    company: 'Company 01 — Replace Me',
+    role: 'Job Title — Replace Me',
+    period: 'MMM YYYY – MMM YYYY',
+    location: 'City / Remote',
     responsibilities: [
-      'Built resilient ingestion connectors for 10+ third-party data sources (SPA, SSR and REST), expanding the platform’s coverage.',
-      'Engineered fault-tolerant pipelines that stay reliable under rate-limiting, anti-bot protections, and regional access constraints.',
-      'Refactored a legacy codebase to improve performance, readability, and long-term maintainability.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Replace with the engineering problem you solved.',
+      'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Describe your specific contribution.',
+      'Ut enim ad minim veniam, quis nostrud exercitation. Add a verified result or technical trade-off.',
     ],
   },
   {
-    company: 'BLUEDOVE - Mohammed VI Polytechnic University',
-    role: 'Software Engineer',
-    period: '05/2024 – 01/2025',
-    location: 'Ben Guerir, Morocco',
-    website: 'bluedove.ma',
+    company: 'Company 02 — Replace Me',
+    role: 'Job Title — Replace Me',
+    period: 'MMM YYYY – MMM YYYY',
+    location: 'City / Remote',
     responsibilities: [
-      'Developed robust data processing pipelines to validate, transform, and normalize API responses for seamless storage across relational and NoSQL databases.',
-      'Built a real-time communication system utilizing WebSockets and NestJS to ensure efficient data synchronization.',
-      'Deployed and managed cloud-based databases, including PostgreSQL and Supabase, to handle large-scale data securely.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Describe the product context and your responsibility.',
+      'Duis aute irure dolor in reprehenderit in voluptate. Explain the system or workflow you improved.',
+      'Excepteur sint occaecat cupidatat non proident. Replace with measurable impact, if available.',
     ],
   },
   {
-    company: 'BLUEDOVE - Mohammed VI Polytechnic University',
-    role: 'Software Engineer Intern',
-    period: '12/2023 – 05/2024',
-    location: 'Ben Guerir, Morocco',
-    website: 'bluedove.ma',
+    company: 'Company 03 — Replace Me',
+    role: 'Job Title — Replace Me',
+    period: 'MMM YYYY – MMM YYYY',
+    location: 'City / Remote',
     responsibilities: [
-      'Spearheaded full-stack application development using ReactJS, TailwindCSS, NestJS, and RESTful APIs.',
-      'Integrated and processed data from diverse third-party APIs by leveraging reverse engineering and comprehensive testing to overcome limited documentation.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add the team, system or project context.',
+      'Ut enim ad minim veniam, quis nostrud exercitation. Explain the architecture and ownership.',
+      'Duis aute irure dolor in reprehenderit. Add an outcome you can substantiate.',
     ],
   },
 ];
@@ -88,52 +88,36 @@ export const education: EducationItem[] = [
   },
 ];
 
-// Ordered most-recent first. Date ranges other than Integrivo are estimates —
-// replace them with your real start/end months.
+// CONTENT DRAFT: these existing images are TEMPORARY preview assets.
+// Replace image, category, title, date, role, description, stack and add href when ready.
+// Draft cards are not clickable, preventing stale project links.
 export const works: WorkItem[] = [
   {
     image: '/assets/images/works/integrivo.webp',
-    category: 'Data Engineering',
-    title: 'Integrivo',
-    date: 'Jan 2026 – Jun 2026',
-    href: 'https://www.integrivo.com/',
-    // TODO: replace with your real role, what you built, and a measurable result.
-    role: 'Backend / Data Engineer',
-    description: 'Engineered data ingestion and processing pipelines that collect, normalize, and serve data from multiple sources.',
-    stack: ['Python', 'PostgreSQL', 'Docker'],
+    category: 'Category — Replace Me',
+    title: 'Featured Project 01',
+    date: 'Date — Replace Me',
+    role: 'Your role — Replace Me',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Replace with the problem, solution and actual result.',
+    stack: ['Technology 01', 'Technology 02'],
   },
   {
     image: '/assets/images/works/titrit.webp',
-    category: 'Travel & Luxury',
-    title: 'Titrit Luxury Camp',
-    date: 'Nov 2025 – Feb 2026',
-    href: 'https://www.titritluxury.ma/',
-    // TODO: replace with your real role, what you built, and a measurable result.
-    role: 'Full-Stack Developer',
-    description: 'Designed and built the marketing site and booking experience for a luxury desert camp, focused on fast load times and a polished, conversion-oriented UI.',
-    stack: ['Next.js', 'TypeScript', 'TailwindCSS'],
+    category: 'Category — Replace Me',
+    title: 'Featured Project 02',
+    date: 'Date — Replace Me',
+    role: 'Your role — Replace Me',
+    description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Describe architecture decisions and impact.',
+    stack: ['Technology 01', 'Technology 02'],
   },
   {
     image: '/assets/images/works/rayonnage.webp',
-    category: 'E-commerce / Industrial',
-    title: 'Rayonnage Plus',
-    date: 'May 2025 – Aug 2025',
-    href: 'https://www.rayonnageplus.ma/en',
-    // TODO: replace with your real role, what you built, and a measurable result.
-    role: 'Full-Stack Developer',
-    description: 'Delivered an e-commerce catalog for industrial shelving products, with multilingual support and a responsive storefront.',
-    stack: ['Next.js', 'TypeScript'],
-  },
-  {
-    image: '/assets/images/works/seven24.webp',
-    category: 'Web Application',
-    title: 'Seven24',
-    date: 'May 2024 – Aug 2024',
-    href: 'https://www.seven24.ma/',
-    // TODO: replace with your real role, what you built, and a measurable result.
-    role: 'Full-Stack Developer',
-    description: 'Built a web application covering both the user-facing frontend and the backend APIs, with authentication and data persistence.',
-    stack: ['React', 'NestJS', 'PostgreSQL'],
+    category: 'Category — Replace Me',
+    title: 'Featured Project 03',
+    date: 'Date — Replace Me',
+    role: 'Your role — Replace Me',
+    description: 'Ut enim ad minim veniam, quis nostrud exercitation. Add your contribution and measurable outcomes.',
+    stack: ['Technology 01', 'Technology 02'],
   },
 ];
 
