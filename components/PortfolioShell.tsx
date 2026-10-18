@@ -1,17 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import LeftSidebar from '@/components/LeftSidebar';
 import Navbar from '@/components/Navbar';
 import RightNav from '@/components/RightNav';
 
 export default function PortfolioShell({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const openMenu = useCallback(() => setMenuOpen(true), []);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+
   return (
     <div id="wrapper">
       <a href="#main-content" className="skip-link">Skip to content</a>
-      <LeftSidebar menuOpen={menuOpen} onMenuOpen={() => setMenuOpen(true)} />
-      <Navbar open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <LeftSidebar menuOpen={menuOpen} onMenuOpen={openMenu} />
+      <Navbar open={menuOpen} onClose={closeMenu} />
       {children}
       <RightNav />
     </div>

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { rightNavLinks } from '@/data/portfolio';
+import useActiveSection from '@/hooks/useActiveSection';
 
 // SVG icons matching the reference right nav
 const NavIcons: Record<string, React.ReactElement> = {
@@ -27,39 +27,31 @@ const dockLabels: Record<string, string> = {
 };
 
 export default function RightNav() {
-  const [active, setActive] = useState('home');
-
-  // extract 'id' from href like '#home' → 'home'
-  const links = rightNavLinks.map(n => ({ ...n, id: n.href.replace('#', '') }));
-
-  useEffect(() => {
-    const sections = links.map(n => document.getElementById(n.id)).filter(Boolean) as HTMLElement[];
-    const obs = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) setActive((e.target as HTMLElement).id); }),
-      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
-    );
-    sections.forEach(s => obs.observe(s));
-    return () => obs.disconnect();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const active = useActiveSection();
 
   return (
-    <nav className="right-nav-wrapper" aria-label="Section navigation">
+    <nav className="right-nav-wrapper" aria-label="Quick section navigation">
       <ul className="right-nav">
-        {links.map(link => (
-          <li key={link.id}>
-            <a
-              href={link.href}
-              className={active === link.id ? 'active' : ''}
-              onClick={() => setActive(link.id)}
-              aria-label={link.label}
-              aria-current={active === link.id ? 'location' : undefined}
-            >
-              {NavIcons[link.id] ?? NavIcons.home}
-              <span className="nav-tooltip">{link.label}</span>
-              <span className="nav-dock-label">{dockLabels[link.id] ?? link.label}</span>
-            </a>
-          </li>
-        ))}
+        {rightNavLinks.map((link) => {
+          const id = link.href.slice(1);
+          const selected = active === id;
+          return (
+            <li key={id}>
+              <a
+                href={link.href}
+                className={selected ? 'active' : ''}
+                aria-label={link.label}
+                aria-current={selected ? 'location' : undefined}
+              >
+                {NavIcons[id] ?? NavIcons.home}
+                <span className="nav-tooltip" aria-hidden="true">{link.label}</span>
+                <span className="nav-dock-label" aria-hidden="true">
+                  {dockLabels[id] ?? link.label}
+                </span>
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

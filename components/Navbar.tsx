@@ -1,62 +1,134 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { navLinks } from '@/data/portfolio';
+import useActiveSection from '@/hooks/useActiveSection';
 
-// Derive id from href e.g. '#home' → 'home'
-const links = navLinks.map(n => ({ ...n, id: n.href.replace('#', '') }));
+const links = navLinks.map((link) => ({ ...link, id: link.href.slice(1) }));
 
-export default function Navbar({ open, onClose }: { open: boolean; onClose: () => void }) {
+type Props = {
+  open: boolean;
+  onClose: () => void;
+};
 
-  const [active, setActive] = useState('home');
-
-  useEffect(() => {
-    const sections = links.map(n => document.getElementById(n.id)).filter(Boolean) as HTMLElement[];
-    const obs = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) setActive((e.target as HTMLElement).id); }),
-      { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
-    );
-    sections.forEach(s => obs.observe(s));
-    return () => obs.disconnect();
-  }, []);
-
-
+export default function Navbar({ open, onClose }: Props) {
+  const active = useActiveSection();
+  const panelRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+  const navigatedRef = useRef(false);
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
-    const handleEscape = (event: KeyboardEvent) => {
-      if (open && event.key === 'Escape') onClose();
+    if (!open) return;
+
+    navigatedRef.current = false;
+    returnFocusRef.current = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeRef.current?.focus();
+
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        onClose();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+
+      const elements = panelRef.current?.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), a[href]:not([tabindex="-1"])'
+      );
+      if (!elements?.length) return;
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
-    window.addEventListener('keydown', handleEscape);
-    return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', handleEscape); };
+
+    document.addEventListener('keydown', handleKey);
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+      document.body.style.overflow = previousOverflow;
+      if (!navigatedRef.current) returnFocusRef.current?.focus();
+    };
   }, [open, onClose]);
+
+  const goToSection = (id: string) => {
+    navigatedRef.current = true;
+    onClose();
+    const target = document.getElementById(id);
+    if (target) {
+      target.tabIndex = -1;
+      window.requestAnimationFrame(() => target.focus({ preventScroll: true }));
+    }
+  };
 
   return (
     <>
-      {/* Sliding navigation panel */}
-      <nav id="portfolio-menu" inert={!open} aria-hidden={!open} className={`tf-sidebar-menu${open ? ' open' : ''}`} aria-label="Main navigation">
-        <div className="canvas-heading" style={{ justifyContent: 'flex-end' }}>
-          <button className="close-canvas" aria-label="Close menu" onClick={() => onClose()}>✕</button>
-        </div>
-        <ul className="sidebar-nav">
-          {links.map(link => (
-            <li key={link.id}>
-              <a
-                href={link.href}
-                className={active === link.id ? 'active' : ''}
-                onClick={() => { setActive(link.id); onClose(); }}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      {/* Overlay */}
       <div
-        className={`overlay${open ? ' visible' : ''}`}
-        onClick={() => onClose()}
+        id="portfolio-menu"
+        ref={panelRef}
+        className={open ? 'tf-sidebar-menu open' : 'tf-sidebar-menu'}
+        role="dialog"
+        aria-modal={open ? true : undefined}
+        aria-labelledby="portfolio-menu-title"
+        aria-hidden={!open}
+        inert={!open}
+      >
+        <div className="canvas-heading">
+          <div>
+            <p className="menu-eyebrow">EXPLORE</p>
+            <h2 id="portfolio-menu-title" className="menu-title">Navigation</h2>
+          </div>
+          <button
+            ref={closeRef}
+            type="button"
+            className="close-canvas"
+            aria-label="Close navigation menu"
+            onClick={onClose}
+          >
+            <span aria-hidden="true">✕</span>
+          </button>
+        </div>
+
+        <nav aria-label="All portfolio sections">
+          <ul className="sidebar-nav">
+            {links.map((link, index) => (
+              <li key={link.id}>
+                <a
+                  href={link.href}
+                  className={active === link.id ? 'active' : ''}
+                  aria-current={active === link.id ? 'location' : undefined}
+                  onClick={() => goToSection(link.id)}
+                >
+                  <span className="menu-link-index" aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  {link.label}
+                  <span className="menu-link-arrow" aria-hidden="true">↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="menu-contact">
+          <span>Have something in mind?</span>
+          <a href="mailto:nasroallah.elidrissi@gmail.com">Email me directly ↗</a>
+        </div>
+      </div>
+      <div
+        className={open ? 'overlay visible' : 'overlay'}
+        onClick={onClose}
         aria-hidden="true"
       />
     </>

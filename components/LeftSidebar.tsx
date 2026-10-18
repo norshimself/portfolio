@@ -20,8 +20,9 @@ export default function LeftSidebar({ menuOpen, onMenuOpen }: LeftSidebarProps) 
             className="tf-btn-menu" 
             style={{ position: 'static', transform: 'none' }}
             onClick={onMenuOpen}
-            aria-label="Open menu"
+            aria-label="Open navigation menu"
             aria-controls="portfolio-menu"
+            aria-haspopup="dialog"
             aria-expanded={menuOpen}
           >
             <svg width="14" height="14" viewBox="0 0 16 14" fill="none">

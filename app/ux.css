@@ -1,0 +1,139 @@
+/*
+ * UX refinements.
+ * Keep interaction, readability, and responsive behavior separate from the
+ * original visual theme in globals.css for easier iteration.
+ */
+:root { --ux-focus: #ffae86; }
+
+:where(a, button, input, textarea):focus-visible {
+  outline: 2px solid var(--ux-focus);
+  outline-offset: 3px;
+}
+.skip-link { z-index: 500; }
+:where(.tf-btn-menu, .close-canvas, .sidebar-cta, .submit-btn, .tech-show-more) {
+  min-height: 44px;
+}
+.tf-btn-menu, .close-canvas { min-width: 44px; }
+
+.tf-sidebar-menu {
+  width: min(380px, calc(100vw - 30px));
+  padding: 26px 26px 30px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: 30px 0 80px rgba(0,0,0,.4);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform .3s ease, visibility 0s linear .3s;
+}
+.tf-sidebar-menu.open {
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform .3s ease, visibility 0s;
+}
+.canvas-heading { align-items: flex-start; margin-bottom: 28px; }
+.close-canvas { width: 44px; height: 44px; color: var(--text-soft); }
+.menu-eyebrow {
+  color: var(--primary);
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: .14em;
+  font-weight: 700;
+  margin: 0 0 5px;
+}
+.menu-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.sidebar-nav a { min-height: 54px; gap: 14px; font-size: 18px; }
+.menu-link-index { color: var(--text-muted); font-size: 12px; font-weight: 600; }
+.menu-link-arrow { margin-left: auto; color: var(--text-muted); }
+.sidebar-nav a.active .menu-link-arrow, .sidebar-nav a:hover .menu-link-arrow { color: var(--primary); }
+.menu-contact {
+  display: grid;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 30px;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+.menu-contact a { color: #ffad85; font-weight: 600; font-size: 15px; }
+.right-nav li a { min-width: 44px; min-height: 44px; }
+.right-nav li a:focus-visible .nav-tooltip { opacity: 1; }
+.hero-actions a, .hero-tags a, .contact-link { min-height: 44px; display: inline-flex; align-items: center; }
+.hero-actions a { justify-content: center; text-align: center; }
+.hero-primary-link:hover { background: #d9430a; }
+.hero-secondary-link:hover { background: rgba(255,255,255,.11); }
+@media (prefers-reduced-motion: reduce) {
+  .tf-sidebar-menu, .overlay { transition: none !important; }
+}
+
+@media (max-width: 1024px) {
+  html { scroll-padding-top: 88px; }
+  :where(.section-card, #works, #about, #main-content) { scroll-margin-top: 88px; }
+
+  .left-sidebar { padding: 8px 12px 0; }
+  .sidebar-card {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    min-height: 64px;
+    padding: 8px 12px;
+    border-radius: 18px;
+  }
+  .sidebar-card .sidebar-top { display: contents; }
+  .sidebar-avatar {
+    order: 1;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+  }
+  .sidebar-signature {
+    order: 2;
+    min-width: 0;
+    flex: 1 1 auto;
+    font-size: 17px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sidebar-cta {
+    order: 3;
+    flex: 0 0 auto;
+    min-height: 44px;
+    padding: 0 15px;
+    margin: 0;
+  }
+  .tf-btn-menu {
+    order: 4;
+    display: flex !important;
+    position: static !important;
+    transform: none !important;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+  }
+  .status-badge, .sidebar-social, .sidebar-card::after { display: none !important; }
+
+  .right-nav-wrapper { padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); }
+  .right-nav li a { min-height: 56px; padding: 7px 2px; gap: 6px; }
+  .nav-dock-label { font-size: 11px; }
+  .main-content { padding-bottom: calc(94px + env(safe-area-inset-bottom)); }
+}
+
+@media (max-width: 480px) {
+  .sidebar-card { gap: 8px; padding: 8px 10px; }
+  .sidebar-avatar { width: 38px; height: 38px; flex-basis: 38px; }
+  .sidebar-signature { font-size: 14px !important; }
+  .sidebar-cta { width: 44px; height: 44px; padding: 0; flex-basis: 44px; }
+  .tf-btn-menu { flex-basis: 44px; }
+  .hero-actions { gap: 10px; margin-bottom: 54px; }
+  .hero-actions a { flex: 1 1 100%; }
+}
+@media (max-width: 360px) {
+  /* The contact dock destination stays available when the top CTA cannot fit. */
+  .sidebar-cta { display: none; }
+}

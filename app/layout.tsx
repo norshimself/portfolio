@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Geist, Rajdhani } from 'next/font/google';
 import './globals.css';
+import './ux.css';
 import EtherealBackground from '@/components/EtherealBackground';
 import StructuredData from '@/components/StructuredData';
 import { siteConfig } from '@/data/site';
