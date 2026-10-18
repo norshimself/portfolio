@@ -67,3 +67,17 @@ Update the data files rather than the components:
 ## Deployment
 
 Deployed on [Vercel](https://vercel.com). Push to the default branch to trigger a production deployment. Vercel Analytics and Speed Insights are enabled.
+
+
+## Content Refresh (Draft Branch)
+
+The `chore/portfolio-content-refresh-audit-fixes` branch intentionally contains **Lorem Ipsum** project and experience entries. Edit `data/portfolio.ts` before publication. See `CONTENT_UPDATE.md` for a detailed checklist.
+
+### Typography and media
+
+- **Geist** for body text and UI, **Rajdhani** for display headings, both through `next/font/google` (bundled at build, no Google Fonts CSS import).
+- Technology icons are served locally from `public/assets/icons/tech`. Devicon SVGs are licensed under MIT; the license is included with the icons.
+- Featured work uses neutral SVG placeholder artwork until project screenshots are supplied.
+- The decorative background video does not load on mobile, reduced-motion, or data-saving connections.
+
+Run `npm run check:assets` to validate local image and video references, or run `npm run lint`, `npx tsc --noEmit`, and `npm run build` for additional checks.
