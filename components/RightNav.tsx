@@ -19,7 +19,7 @@ const dockLabels: Record<string, string> = {
   home: 'Home',
   experience: 'Career',
   education: 'Studies',
-  services: 'Expertise',
+  services: 'Skills',
   works: 'Work',
   faqs: 'FAQs',
   contact: 'Contact',

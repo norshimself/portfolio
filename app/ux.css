@@ -410,3 +410,26 @@
 
 /* The main landmark can receive skip-link focus without a large visual ring. */
 .main-content:focus { outline: none; }
+
+/* Readable white CTA labels: brand orange was below 4.5:1 contrast. */
+:root {
+  --ux-action-bg: #c7420a;
+  --ux-action-hover: #a93205;
+}
+.hero-primary-link,
+.work-visit-link,
+.sidebar-cta {
+  background-color: var(--ux-action-bg);
+  color: #fff;
+}
+.hero-primary-link:hover,
+.work-visit-link:hover,
+.sidebar-cta:hover {
+  background-color: var(--ux-action-hover);
+  color: #fff;
+}
+.contact-section .submit-btn:hover:not(:disabled) {
+  background-color: var(--ux-action-bg);
+  border-color: var(--ux-action-bg);
+  color: #fff;
+}
