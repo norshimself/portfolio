@@ -44,7 +44,7 @@ export default function Navbar({ open, onClose }: { open: boolean; onClose: () =
               <a
                 href={link.href}
                 className={active === link.id ? 'active' : ''}
-                onClick={() => { setActive(link.id); setOpen(false); }}
+                onClick={() => { setActive(link.id); onClose(); }}
               >
                 {link.label}
               </a>
@@ -56,7 +56,7 @@ export default function Navbar({ open, onClose }: { open: boolean; onClose: () =
       {/* Overlay */}
       <div
         className={`overlay${open ? ' visible' : ''}`}
-        onClick={() => setOpen(false)}
+        onClick={() => onClose()}
         aria-hidden="true"
       />
     </>
