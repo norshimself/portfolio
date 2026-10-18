@@ -355,3 +355,205 @@ body { color: #f7eee9; }
 @media (max-width: 768px) {
   .sunset-hero-art .ambient-embers { display: none; }
 }
+
+
+/* Illuminated professional timeline — highlights follow reading progress. */
+#experience .exp-list {
+  position: relative;
+  padding-left: 36px;
+  margin-left: 6px;
+}
+#experience .exp-list::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 7px;
+  bottom: 24px;
+  width: 1px;
+  background: linear-gradient(180deg,
+    rgba(255, 192, 129, .90),
+    rgba(238, 117, 90, .52) 45%,
+    rgba(176, 95, 145, .18) 100%);
+  box-shadow: 0 0 15px rgba(255, 145, 91, .25);
+}
+#experience .exp-item {
+  position: relative;
+  border-top-color: rgba(255, 193, 141, .14);
+  transition: background .3s ease, border-color .3s ease;
+}
+#experience .exp-item:hover {
+  transform: none;
+  background: linear-gradient(90deg, rgba(252, 131, 86, .055), transparent 75%);
+  border-color: rgba(255, 190, 138, .35);
+}
+#experience .exp-item::before {
+  content: '';
+  position: absolute;
+  top: 35px;
+  left: -34px;
+  height: 11px;
+  width: 11px;
+  border-radius: 50%;
+  border: 2px solid #ffa879;
+  background: #392338;
+  box-shadow: 0 0 0 5px rgba(249, 134, 87, .07);
+  transition: background .45s ease, box-shadow .45s ease, transform .45s ease;
+}
+#experience .exp-item.is-in-view::before,
+#experience .exp-item:hover::before {
+  background: #ffdaa4;
+  box-shadow: 0 0 0 5px rgba(249, 134, 87, .12),
+              0 0 22px rgba(255, 168, 117, .55);
+  transform: scale(1.08);
+}
+#experience .exp-period-badge {
+  color: #ffd5b1;
+  border-color: rgba(255, 184, 133, .24);
+}
+#experience .exp-role-title { color: #ffebde; }
+#experience .exp-company-name { color: #ebc4ae; }
+
+/* Project cards catch a little sunset reflection on hover. */
+.featured-work .works-header-card {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(244,120,86,.17), transparent 70%),
+    linear-gradient(135deg, rgba(35,24,41,.91), rgba(19,20,33,.96));
+  border-color: rgba(255,173,128,.24);
+}
+.featured-work .works-header-dot {
+  background: #ffae7e;
+  box-shadow: 0 0 22px rgba(248,120,79,.55);
+}
+.featured-work .work-item-card {
+  border-color: rgba(255, 178, 136, .17);
+  box-shadow: 0 9px 42px rgba(0,0,0,.20);
+}
+.featured-work .work-item-card::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,187,137,.62), transparent);
+  opacity: .6;
+  pointer-events: none;
+}
+.featured-work .browser-mockup { border-bottom-color: rgba(255, 176, 123, .19); }
+.featured-work .browser-header {
+  background: linear-gradient(90deg, #302337, #1a1b2b);
+}
+.featured-work .browser-content::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(125deg, transparent 42%, rgba(255,154,103,.13) 83%, rgba(225,91,90,.08));
+  opacity: .18;
+  transition: opacity .3s ease;
+}
+.featured-work .work-item-card:hover {
+  border-color: rgba(255, 177, 129, .42);
+  box-shadow: 0 22px 55px rgba(199,78,64,.10), 0 14px 40px rgba(0,0,0,.23);
+}
+.featured-work .work-item-card:hover .browser-content::after { opacity: .84; }
+.featured-work .work-meta-stack li {
+  border-color: rgba(255,185,135,.24);
+  background: rgba(239,113,84,.075);
+  color: #ffe0ce;
+}
+.featured-work .work-meta-cat { color: #ffbf94; }
+
+/* Tech icons already load locally; highlight mastery without noisy motion. */
+.tech-stack-section .tech-card {
+  background: linear-gradient(135deg, rgba(39,27,42,.82), rgba(21,21,35,.94));
+  border-color: rgba(255,180,129,.11);
+  backdrop-filter: none;
+}
+.tech-stack-section .tech-card:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, rgba(58,33,52,.92), rgba(28,24,39,.98));
+  border-color: rgba(255,178,130,.50);
+  box-shadow: 0 12px 36px rgba(226,102,74,.12);
+}
+.tech-stack-section .tech-card:hover .tech-card-logo-frame {
+  box-shadow: 0 0 0 2px rgba(255, 180, 135, .13), 0 0 24px rgba(249,118,79,.19);
+}
+.tech-stack-section .tech-tab.active {
+  background: #a74349;
+  color: #fff;
+  box-shadow: 0 0 24px rgba(239,111,80,.16);
+}
+.tech-stack-section .tech-tab:hover:not(.active) {
+  color: #ffcfaa;
+  background: rgba(247,144,102,.08);
+}
+
+/* Twilight closes the story, with a quieter, star-dusted contact surface. */
+#contact.contact-section {
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 64% 72% at 95% 10%, rgba(113,61,132,.24), transparent 77%),
+    radial-gradient(ellipse 44% 43% at 77% 95%, rgba(210,81,88,.12), transparent 81%),
+    linear-gradient(145deg, rgba(18,19,37,.98), rgba(13,14,28,.99));
+  border-color: rgba(207, 143, 169, .23);
+}
+#contact.contact-section::before {
+  content: '';
+  position: absolute;
+  inset: 10px 12px auto auto;
+  width: min(57%, 450px);
+  height: 290px;
+  pointer-events: none;
+  opacity: .46;
+  background-image:
+    radial-gradient(circle, #ffe6d1 1px, transparent 1.5px),
+    radial-gradient(circle, #dfb2d0 1px, transparent 1.5px),
+    radial-gradient(circle, #ffc5a9 .7px, transparent 1.3px);
+  background-size: 121px 97px, 167px 143px, 73px 117px;
+  background-position: 9px 12px, 56px 48px, 29px 7px;
+  mask-image: linear-gradient(90deg, transparent, black 50%);
+}
+#contact.contact-section > * { position: relative; z-index: 1; }
+#contact .contact-title span {
+  color: #ffd2af;
+  text-shadow: 0 0 36px rgba(255,129,88,.20);
+}
+#contact .contact-direct-link { color: #ffd2b4; }
+#contact .form-input:focus-visible,
+#contact .form-textarea:focus-visible { outline-color: #ffbb96; }
+#contact .contact-success-icon { position: relative; }
+#contact .contact-success-icon::after {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border: 1px solid rgba(255,182,134,.64);
+  border-radius: 50%;
+  animation: afterglow-success-ring .85s ease-out both;
+  pointer-events: none;
+}
+@keyframes afterglow-success-ring {
+  from { opacity: .95; transform: scale(.72); }
+  to { opacity: 0; transform: scale(1.65); }
+}
+
+/* A final horizon at the foot of the page. */
+.footer-section { border-color: rgba(255,183,137,.12); }
+.footer-marquee {
+  background: linear-gradient(90deg, rgba(117,54,93,.18), rgba(242,104,79,.07), rgba(117,54,93,.18));
+}
+.footer-marquee .marquee-star { color: #ffb481; }
+.footer-bottom-bar { border-top-color: rgba(255,180,132,.16); }
+.footer-links a:hover { color: #ffc199; }
+
+@media (max-width: 768px) {
+  #experience .exp-list { padding-left: 23px; margin-left: 1px; }
+  #experience .exp-list::before { left: 5px; }
+  #experience .exp-item::before { left: -23px; height: 9px; width: 9px; }
+  #contact.contact-section::before { opacity: .25; }
+  .featured-work .work-item-card:hover { box-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-success-icon::after { animation: none !important; display: none; }
+  .featured-work .browser-content::after { transition: none; }
+}
