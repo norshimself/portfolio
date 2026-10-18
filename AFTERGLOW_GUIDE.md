@@ -4,16 +4,33 @@ This branch contains a cinematic sunset visual prototype. Professional experienc
 
 ## Theme palette
 
-| Token | Color | Use |
-| --- | --- | --- |
-| `--sunset-midnight` | `#0b0d16` | Deep background |
-| `--sunset-twilight` | `#30203e` | Purple dusk |
-| `--sunset-coral` | `#ef6b4b` | Warm accent |
-| `--sunset-amber` | `#ffad71` | Golden hour |
-| `--sunset-gold` | `#ffd3a4` | Light and highlights |
-| `--sunset-violet` | `#7a4a79` | Cooler counterpart |
+The **single source of truth** is the `:root` block at the top of `app/sunset.css`.
+`app/globals.css` provides fallback values; `app/ux.css` points its UX tokens to the same sunset values.
 
-The variables and visual overrides live in `app/sunset.css`. Darker orange CTA colors in `app/ux.css` preserve text contrast.
+| Token | Value | Purpose |
+| --- | --- | --- |
+| `--sunset-midnight` | `#0B0D16` | Page background |
+| `--sunset-night` | `#131321` | Navigation drawer |
+| `--sunset-surface` | `#1B182A` | Work card background |
+| `--sunset-surface-raised` | `#292037` | Tooltips and elevated content |
+| `--sunset-twilight` | `#30203E` | Dusk illustration and gradients |
+| `--sunset-violet` | `#7A4A79` | Purple accent |
+| `--sunset-coral` | `#EF6B4B` | Brand accent, glows and decorative details |
+| `--sunset-amber` | `#FFAD71` | Links and interactive highlights |
+| `--sunset-gold` | `#FFD3A4` | Headings, fine details and focus rings |
+| `--sunset-ink` | `#F9F0EB` | Primary body text |
+| `--sunset-ink-soft` | `#E3D5D2` | Descriptions and supporting text |
+| `--sunset-ink-muted` | `#C8B6C1` | Labels and metadata |
+| `--sunset-action` | `#BD4939` | Filled buttons with white labels |
+| `--sunset-action-hover` | `#99372F` | Button hover |
+| `--sunset-error` | `#FFB1A9` | Validation and form errors |
+
+**Contrast:** White on `#BD4939` is approximately **5:1** (WCAG AA for normal-sized text). 
+The lighter coral `#EF6B4B` is for decoration and text on dark surfaces, **not** a white-label button background.
+Gold and warm muted text remain readable on the midnight/surface backgrounds.
+
+The compatibility tokens `--primary`, `--bg`, `--text`, `--card`, and `--border` map existing components to the canonical palette.
+Tech brand logos intentionally retain their own original trademark colors.
 
 ## Components
 
@@ -35,6 +52,7 @@ These phases come from the existing active-section hook inside `PortfolioShell.t
 
 ## Change the intensity
 
+- **Change all accent/CTA colors:** edit tokens in the top `:root` block of `app/sunset.css`, particularly `--sunset-coral`, `--sunset-amber`, and `--sunset-action`. Keep the last dark enough for white labels.
 - **More or less sunlight:** edit sun gradients in `SunsetHeroArt.tsx` and `.sunset-hero-art` opacity in `sunset.css`.
 - **Fewer particles:** lower `Math.min(28, ...)` in `AmbientEmbers.tsx`.
 - **Quieter backgrounds:** reduce radial-gradient alpha values in `.atmosphere-golden`, `.atmosphere-afterglow`, and `.atmosphere-twilight`.

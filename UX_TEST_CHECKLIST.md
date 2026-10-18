@@ -68,3 +68,13 @@ Report any failed checks with a screenshot, viewport size, browser, and console 
 - [ ] Setting `prefers-reduced-motion: reduce` disables particle, orbit, and diagram animations without removing the imagery.
 - [ ] SVG favicon and Open Graph social preview render correctly.
 - [ ] Check at 320px, 390px, 768px, 1024px and 1440px before merging.
+
+### Unified color palette
+
+- [ ] All active navigation, buttons, chips, work cards, and form states use coral/amber/plum rather than neon blue or green.
+- [ ] White text on filled CTA buttons stays legible, including hover and disabled states.
+- [ ] Subtitle/body/metadata text remains readable on hero, project cards, and twilight contact surfaces.
+- [ ] Focus rings remain visible against both dark mauve cards and the navigation drawer.
+- [ ] Technology logos remain recognizable on their pale neutral tiles; proficiency indicators use amber, rose, and lavender.
+- [ ] The three temporary project cover SVGs and browser favicon match the palette.
+- [ ] Error feedback remains distinguishable from success without relying on color alone.

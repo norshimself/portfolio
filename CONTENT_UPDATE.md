@@ -59,3 +59,12 @@ The contact form needs `RESEND_API_KEY` and preferably a verified `RESEND_FROM_E
 - See `AFTERGLOW_GUIDE.md` for customization and QA.
 
 **Note:** The experiences and works entries remain fictional draft content; this visual update does not verify those claims.
+
+## Unified sunset palette
+
+- Semantic design tokens for backgrounds, text, links, borders, action buttons, and error states are defined in `app/sunset.css`.
+- The older neon-blue and green UI accents have been replaced with coral/amber/violet treatments; native technology-logo colors and browser-window traffic-light indicators remain intentional exceptions.
+- `app/globals.css` contains safe baseline fallbacks, while `app/ux.css` references the semantic sunset tokens for shared components.
+- Three draft project cover SVGs, `app/icon.svg`, and `app/opengraph-image.tsx` were recolored to match AFTERGLOW.
+- Main buttons use `--sunset-action` (`#BD4939`) so white labels meet normal-text AA contrast. Readable prose uses `--sunset-ink*` colors.
+- For the complete palette and customization details, see `AFTERGLOW_GUIDE.md`.
