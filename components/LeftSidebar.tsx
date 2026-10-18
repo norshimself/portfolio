@@ -1,6 +1,8 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { socialLinks } from '@/data/portfolio';
 import { siteConfig } from '@/data/site';
 
@@ -10,6 +12,9 @@ type LeftSidebarProps = {
 };
 
 export default function LeftSidebar({ menuOpen, onMenuOpen }: LeftSidebarProps) {
+  const pathname = usePathname();
+  const contactHref = pathname === '/' ? '#contact' : '/#contact';
+  const workHref = pathname === '/' ? '#works' : '/#works';
   return (
     <aside className="left-sidebar" aria-label="Profile and contact">
       <div className="sidebar-card sidebar-polished">
@@ -64,17 +69,17 @@ export default function LeftSidebar({ menuOpen, onMenuOpen }: LeftSidebarProps) 
         </p>
 
         <div className="sidebar-footer">
-          <a href="#contact" className="sidebar-cta" aria-label="Get in touch">
+          <Link href={contactHref} className="sidebar-cta" aria-label="Get in touch">
             <span>Get in touch</span>
             <span className="cta-arrow" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
-          </a>
-          <a href="#works" className="sidebar-work-link">
+          </Link>
+          <Link href={workHref} className="sidebar-work-link">
             Explore selected work <span aria-hidden="true">↗</span>
-          </a>
+          </Link>
 
           <div className="sidebar-divider" />
           <ul className="sidebar-social" aria-label="Social and contact links">

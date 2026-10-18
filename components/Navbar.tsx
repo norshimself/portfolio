@@ -1,9 +1,16 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { navLinks } from '@/data/portfolio';
 
-const links = navLinks.map((link) => ({ ...link, id: link.href.slice(1) }));
+const links = navLinks.map(link => ({ ...link, id: link.href.slice(1) }));
+const sitePages = [
+  { href: '/', label: 'Home', number: '01' },
+  { href: '/projects', label: 'Projects', number: '02' },
+  { href: '/blog', label: 'Writing', number: '03' },
+];
 
 type Props = {
   open: boolean;
@@ -12,6 +19,7 @@ type Props = {
 };
 
 export default function Navbar({ open, onClose, active }: Props) {
+  const pathname = usePathname();
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
@@ -73,10 +81,15 @@ export default function Navbar({ open, onClose, active }: Props) {
     };
   }, [open, onClose]);
 
+  const goToPage = () => {
+    navigatedRef.current = true;
+    onClose();
+  };
+
   const goToSection = (id: string) => {
     navigatedRef.current = true;
     onClose();
-    const target = document.getElementById(id);
+    const target = pathname === '/' ? document.getElementById(id) : null;
     if (target) {
       target.tabIndex = -1;
       window.requestAnimationFrame(() => target.focus({ preventScroll: true }));
@@ -111,14 +124,33 @@ export default function Navbar({ open, onClose, active }: Props) {
           </button>
         </div>
 
-        <nav aria-label="All portfolio sections">
+        <nav aria-label="Site navigation">
+          <p className="editorial-menu-label">PAGES</p>
+          <ul className="editorial-menu-pages">
+            {sitePages.map(page => {
+              const selected = page.href === '/'
+                ? pathname === '/'
+                : pathname === page.href || pathname.startsWith(page.href + '/');
+              return (
+                <li key={page.href}>
+                  <Link href={page.href} onClick={goToPage} className={selected ? 'active' : ''}
+                    aria-current={selected ? 'page' : undefined}>
+                    <span aria-hidden="true">{page.number}</span>
+                    {page.label}
+                    <span aria-hidden="true">↗</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="editorial-menu-label">HOMEPAGE SECTIONS</p>
           <ul className="sidebar-nav">
             {links.map((link, index) => (
               <li key={link.id}>
-                <a
-                  href={link.href}
-                  className={active === link.id ? 'active' : ''}
-                  aria-current={active === link.id ? 'location' : undefined}
+                <Link
+                  href={pathname === '/' ? link.href : '/' + link.href}
+                  className={pathname === '/' && active === link.id ? 'active' : ''}
+                  aria-current={pathname === '/' && active === link.id ? 'location' : undefined}
                   onClick={() => goToSection(link.id)}
                 >
                   <span className="menu-link-index" aria-hidden="true">
@@ -126,7 +158,7 @@ export default function Navbar({ open, onClose, active }: Props) {
                   </span>
                   {link.label}
                   <span className="menu-link-arrow" aria-hidden="true">↗</span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

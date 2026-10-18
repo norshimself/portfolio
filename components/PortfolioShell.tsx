@@ -5,10 +5,13 @@ import LeftSidebar from '@/components/LeftSidebar';
 import Navbar from '@/components/Navbar';
 import RightNav from '@/components/RightNav';
 import useActiveSection from '@/hooks/useActiveSection';
+import { usePathname } from 'next/navigation';
 
 export default function PortfolioShell({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const active = useActiveSection();
+  const homeActive = useActiveSection();
+  const pathname = usePathname();
+  const active = pathname === '/' ? homeActive : '';
   const openMenu = useCallback(() => setMenuOpen(true), []);
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
