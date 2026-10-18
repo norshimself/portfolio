@@ -10,7 +10,7 @@ Built with [Next.js](https://nextjs.org) (App Router), React 19, TypeScript, GSA
 - **Animated, single-page experience** — hero, experience, education, services, selected work, process, FAQs, and contact sections (GSAP-driven)
 - **Working contact form** — `app/api/contact/route.ts` sends email via Resend
 - **SEO & discoverability** — dynamic `sitemap`, `robots`, `manifest`, Open Graph / Twitter images, JSON-LD structured data, and an `llms.txt` route
-- **Single source of truth for content** — all copy lives in `data/portfolio.ts` and `data/site.ts`
+- **Content authored in the repository** — homepage data in `data/portfolio.ts` and `data/site.ts`; projects and writing in `content/`
 
 ## Getting Started
 
@@ -81,3 +81,13 @@ The `chore/portfolio-content-refresh-audit-fixes` branch intentionally contains 
 - The decorative background video does not load on mobile, reduced-motion, or data-saving connections.
 
 Run `npm run check:assets` to validate local image and video references, or run `npm run lint`, `npx tsc --noEmit`, and `npm run build` for additional checks.
+
+## Projects and Writing
+
+Routes: `/projects`, `/projects/[slug]`, `/blog`, and `/blog/[slug]`. Case studies and articles are written in `content/projects/*.md` and `content/blog/*.md`.
+
+Unpublished content (`published: false`) is previewable with `npm run dev`, but hidden from production listings and detail URLs. Published case studies with `featured: true` appear automatically under Featured Work; the two latest published articles appear on the homepage.
+
+The lightweight Markdown reader supports article outlines, local images, code snippets, and copy controls without additional npm packages. The blog's RSS feed is at `/rss.xml` and the sitemap includes only published content.
+
+See [`PUBLISHING_GUIDE.md`](PUBLISHING_GUIDE.md) for editing, publishing and validation. Run `npm run check:content` before publishing.

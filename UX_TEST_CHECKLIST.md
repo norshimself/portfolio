@@ -54,3 +54,16 @@ Visit `http://localhost:3000`.
 - [ ] In DevTools Network, tech logos load locally from `/assets/icons/tech`.
 
 Report any failed checks with a screenshot, viewport size, browser, and console messages.
+
+### Projects and Writing
+
+- [ ] `/projects` and `/blog` show the shared header, sidebar, dock and footer at 320–1440px.
+- [ ] In `npm run dev`, each starter draft appears with a LOCAL DRAFT label and can be opened.
+- [ ] In `npm run build && npm start`, unfinished draft cards are hidden and unfinished detail URLs return 404.
+- [ ] Table-of-contents links scroll to correct headings and images remain within the content column.
+- [ ] Code blocks scroll horizontally and their Copy buttons work.
+- [ ] From the new pages, the drawer and dock navigate back to `/#experience`, `/#works` and `/#contact` correctly.
+- [ ] Footer links Home, Projects, Writing, Work, and Contact function from all routes.
+- [ ] Published items appear in `/sitemap.xml`; only published blog posts appear in `/rss.xml`.
+- [ ] After publishing a featured case study, homepage Featured Work pulls the real entry without showing sample cards.
+- [ ] After publishing a blog post, Latest Writing appears on the homepage.

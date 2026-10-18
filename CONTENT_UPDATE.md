@@ -47,3 +47,12 @@ The contact form needs `RESEND_API_KEY` and preferably a verified `RESEND_FROM_E
 - Engineering Expertise uses native button accordions; Backend and Data Engineering appear first.
 - Contact validation, form status, direct email, and error feedback are more accessible.
 - See `UX_TEST_CHECKLIST.md` for keyboard, responsive, and contact testing.
+
+## Projects and Writing
+
+- New `/projects`, `/projects/[slug]`, `/blog`, and `/blog/[slug]` pages use the same profile sidebar, mobile dock, drawer, footer, and dark/orange styles.
+- New content lives in `content/projects/` and `content/blog/`, with `published: false` starter templates.
+- Drafts are visible locally with `npm run dev`, but hidden from production listings, detail pages, sitemap and RSS.
+- Published projects marked `featured: true` replace homepage Featured Work draft cards. Published blog posts activate the Latest Writing section.
+- See `PUBLISHING_GUIDE.md` for the supported Markdown subset, metadata schema, and examples.
+- Validate with `npm run check:content`, `npm run lint`, `npx tsc --noEmit`, and `npm run build`.
