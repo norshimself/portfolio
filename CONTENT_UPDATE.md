@@ -37,3 +37,13 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) and check typography, icons, avatar, project covers and video on desktop and mobile. Test widths 320px, 390px, 768px, 1024px and 1440px. Open Chrome DevTools > Network to confirm tech icons load from `/assets/icons/tech/` rather than external icon hosts.
 
 The contact form needs `RESEND_API_KEY` and preferably a verified `RESEND_FROM_EMAIL` in `.env.local`. The in-memory limiter is only best-effort; configure a shared limiter or WAF for production.
+
+
+## UX changes
+
+- The navigation drawer now supports focus trapping, Escape to close, focus restoration, and a visible hamburger on mobile and tablet.
+- The bottom navigation and drawer share the active-section state.
+- Featured Work displays readable details below every preview, plus an explicit outbound CTA for real links.
+- Engineering Expertise uses native button accordions; Backend and Data Engineering appear first.
+- Contact validation, form status, direct email, and error feedback are more accessible.
+- See `UX_TEST_CHECKLIST.md` for keyboard, responsive, and contact testing.

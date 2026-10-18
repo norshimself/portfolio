@@ -34,7 +34,7 @@ export default function useActiveSection(): string {
       }
     };
 
-    measure();
+    schedule();
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule);
     window.addEventListener('hashchange', schedule);

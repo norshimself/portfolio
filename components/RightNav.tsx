@@ -1,7 +1,6 @@
 'use client';
 
 import { rightNavLinks } from '@/data/portfolio';
-import useActiveSection from '@/hooks/useActiveSection';
 
 // SVG icons matching the reference right nav
 const NavIcons: Record<string, React.ReactElement> = {
@@ -26,8 +25,7 @@ const dockLabels: Record<string, string> = {
   contact: 'Contact',
 };
 
-export default function RightNav() {
-  const active = useActiveSection();
+export default function RightNav({ active }: { active: string }) {
 
   return (
     <nav className="right-nav-wrapper" aria-label="Quick section navigation">

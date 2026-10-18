@@ -2,17 +2,16 @@
 
 import { useEffect, useRef } from 'react';
 import { navLinks } from '@/data/portfolio';
-import useActiveSection from '@/hooks/useActiveSection';
 
 const links = navLinks.map((link) => ({ ...link, id: link.href.slice(1) }));
 
 type Props = {
   open: boolean;
   onClose: () => void;
+  active: string;
 };
 
-export default function Navbar({ open, onClose }: Props) {
-  const active = useActiveSection();
+export default function Navbar({ open, onClose, active }: Props) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
