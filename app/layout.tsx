@@ -1,11 +1,14 @@
 import type { Metadata, Viewport } from 'next';
-import { Rajdhani } from 'next/font/google';
+import { Geist, Rajdhani } from 'next/font/google';
 import './globals.css';
 import EtherealBackground from '@/components/EtherealBackground';
 import StructuredData from '@/components/StructuredData';
 import { siteConfig } from '@/data/site';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+
+// Self-hosted by Next.js at build time; no runtime Google Fonts stylesheet.
+const geist = Geist({ subsets: ['latin'], display: 'swap', variable: '--font-geist' });
 
 const rajdhani = Rajdhani({
   weight: ['400', '500', '600', '700'],
@@ -69,7 +72,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-US" className={rajdhani.variable} suppressHydrationWarning>
+    <html lang="en-US" className={`${geist.variable} ${rajdhani.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <StructuredData />
         <EtherealBackground />
