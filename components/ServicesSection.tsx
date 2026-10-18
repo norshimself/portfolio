@@ -76,7 +76,7 @@ export default function ServicesSection() {
 
   return (
     <section id="services" className="section-card" ref={containerRef}>
-      <div className="section-label">What I bring to a team</div>
+      <div className="section-label">Engineering expertise</div>
 
       <div>
         {services.map((svc, i) => (
@@ -84,6 +84,11 @@ export default function ServicesSection() {
             key={svc.id}
             className={`accordion-item${active === svc.id ? ' active' : ''}`}
             onClick={() => setActive(active === svc.id ? 0 : svc.id)}
+            role="button"
+            tabIndex={0}
+            aria-expanded={active === svc.id}
+            aria-controls={'service-panel-' + svc.id}
+            onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setActive(active === svc.id ? 0 : svc.id); } }}
           >
             <div className="accordion-head">
               <div
@@ -100,7 +105,7 @@ export default function ServicesSection() {
               <sup className="accordion-num">({String(svc.id).padStart(2,'0')})</sup>
               <div className="accordion-toggle">+</div>
             </div>
-            <div className="accordion-body">
+            <div id={'service-panel-' + svc.id} className="accordion-body" hidden={active !== svc.id}>
               <div className="accordion-list">
                 {svc.items.map((item, j) => (
                   <div key={j} className="accordion-list-item">{item}</div>

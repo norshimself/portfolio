@@ -66,6 +66,10 @@ export default function HeroSection() {
             <li key={tag}><a href="#services">{tag}</a></li>
           ))}
         </ul>
+        <div className="hero-actions">
+          <a href="#works" className="hero-primary-link">Explore my work <span aria-hidden="true">↗</span></a>
+          <a href="#contact" className="hero-secondary-link">Get in touch</a>
+        </div>
       </div>
 
       {/* Scroll Discovery */}

@@ -9,6 +9,7 @@ export default function VideoBackground() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const start = () => {
       const idle =
         (window as Window & {

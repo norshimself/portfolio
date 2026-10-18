@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function TechStackSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeCategory, setActiveCategory] = useState('All');
+  const [showAll, setShowAll] = useState(false);
 
   const categories = ['All', ...new Set(techStack.map((tech) => tech.category))];
   const levelRank = { core: 0, proficient: 1, familiar: 2 } as const;
@@ -18,6 +19,8 @@ export default function TechStackSection() {
   const filteredTech = (activeCategory === 'All' ? techStack : techStack.filter(t => t.category === activeCategory))
     .slice()
     .sort((a, b) => levelRank[a.level] - levelRank[b.level]);
+
+  const visibleTech = activeCategory === 'All' && !showAll ? filteredTech.slice(0, 12) : filteredTech;
 
   useEffect(() => {
     // Initial entrance animation
@@ -42,7 +45,7 @@ export default function TechStackSection() {
   return (
     <section id="tech" className="section-card tech-stack-section" ref={containerRef}>
       <div className="tech-section-top">
-        <div className="tech-section-title">What I build with</div>
+        <h2 className="tech-section-title">What I build with</h2>
         <div className="tech-legend" aria-hidden="true">
           <span className="tech-legend-item"><span className="tech-dot level-core" /> Core</span>
           <span className="tech-legend-item"><span className="tech-dot level-proficient" /> Proficient</span>
@@ -53,7 +56,7 @@ export default function TechStackSection() {
             <button
               key={cat}
               className={`tech-tab ${activeCategory === cat ? 'active' : ''}`}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => { setActiveCategory(cat); setShowAll(false); }} aria-pressed={activeCategory === cat}
             >
               {cat}
             </button>
@@ -62,7 +65,7 @@ export default function TechStackSection() {
       </div>
 
       <div className="tech-grid">
-        {filteredTech.map((tech) => (
+        {visibleTech.map((tech) => (
           <div key={`${activeCategory}-${tech.name}`} className={`tech-card glass-card level-${tech.level}`}>
             <span className={`tech-card-level level-${tech.level}`} title={levelLabel[tech.level]}>
               <span className={`tech-dot level-${tech.level}`} aria-hidden="true" />
@@ -76,6 +79,11 @@ export default function TechStackSection() {
           </div>
         ))}
       </div>
+      {activeCategory === 'All' && filteredTech.length > 12 && (
+        <button type="button" className="tech-show-more" onClick={() => setShowAll(!showAll)} aria-expanded={showAll}>
+          {showAll ? 'Show featured technologies' : 'View all ' + filteredTech.length + ' technologies'}
+        </button>
+      )}
     </section>
   );
 }

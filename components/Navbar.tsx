@@ -24,8 +24,12 @@ export default function Navbar({ open, onClose }: { open: boolean; onClose: () =
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [open]);
+    const handleEscape = (event: KeyboardEvent) => {
+      if (open && event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', handleEscape); };
+  }, [open, onClose]);
 
   return (
     <>

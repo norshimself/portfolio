@@ -31,7 +31,7 @@ export default function FAQSection() {
   }, []);
 
   return (
-    <section id="faq" className="section-card" ref={containerRef}>
+    <section id="faqs" className="section-card" ref={containerRef}>
       <div className="section-label">FAQ</div>
       <h2 className="faq-main-title">
         The stuff recruiters usually ask
@@ -43,12 +43,17 @@ export default function FAQSection() {
             key={i}
             className={`faq-item${active === i ? ' active' : ''}`}
             onClick={() => setActive(active === i ? null : i)}
+            role="button"
+            tabIndex={0}
+            aria-expanded={active === i}
+            aria-controls={'faq-panel-' + faq.id}
+            onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setActive(active === i ? null : i); } }}
           >
             <div className="faq-question">
               <span>{faq.question}</span>
               <span className="faq-toggle">+</span>
             </div>
-            <div className="faq-answer">
+            <div id={'faq-panel-' + faq.id} className="faq-answer" hidden={active !== i}>
               <p>{faq.answer}</p>
             </div>
           </div>

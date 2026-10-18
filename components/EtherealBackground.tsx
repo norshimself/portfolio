@@ -6,6 +6,7 @@ export default function EtherealBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     let animationFrameId: number;
     // Simple custom fluid animation loop for the glowing orbs
     const orbs = document.querySelectorAll('.ethereal-orb');
@@ -21,11 +22,13 @@ export default function EtherealBackground() {
         
         (orb as HTMLElement).style.transform = `translate(${xOffset}vw, ${yOffset}vh) scale(${scale})`;
       });
-      animationFrameId = requestAnimationFrame(animate);
+      if (!document.hidden) animationFrameId = requestAnimationFrame(animate);
     };
 
+    const onVisibility = () => { if (!document.hidden) animate(); };
+    document.addEventListener('visibilitychange', onVisibility);
     animate();
-    return () => cancelAnimationFrame(animationFrameId);
+    return () => { cancelAnimationFrame(animationFrameId); document.removeEventListener('visibilitychange', onVisibility); };
   }, []);
 
   return (

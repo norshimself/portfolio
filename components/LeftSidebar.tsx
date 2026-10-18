@@ -4,9 +4,9 @@ import Image from 'next/image';
 import { socialLinks } from '@/data/portfolio';
 
 
-export default function LeftSidebar({ menuOpen, onMenuOpen }: { menuOpen: boolean; onMenuOpen: () => void }) {
+export default function LeftSidebar() {
   const toggleMenu = () => {
-    onMenuOpen();
+    window.dispatchEvent(new CustomEvent('open-menu'));
   };
 
   return (
@@ -18,7 +18,7 @@ export default function LeftSidebar({ menuOpen, onMenuOpen }: { menuOpen: boolea
             className="tf-btn-menu" 
             style={{ position: 'static', transform: 'none' }}
             onClick={toggleMenu}
-            aria-label="Open menu" aria-controls="portfolio-menu" aria-expanded={menuOpen}
+            aria-label="Open menu"
           >
             <svg width="14" height="14" viewBox="0 0 16 14" fill="none">
               <path d="M1 1h14M1 7h14M1 13h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>

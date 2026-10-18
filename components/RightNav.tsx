@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { rightNavLinks } from '@/data/portfolio';
+import { navLinks } from '@/data/portfolio';
 
 // SVG icons matching the reference right nav
 const NavIcons: Record<string, React.ReactElement> = {
@@ -30,7 +30,7 @@ export default function RightNav() {
   const [active, setActive] = useState('home');
 
   // extract 'id' from href like '#home' → 'home'
-  const links = rightNavLinks.map(n => ({ ...n, id: n.href.replace('#', '') }));
+  const links = navLinks.map(n => ({ ...n, id: n.href.replace('#', '') }));
 
   useEffect(() => {
     const sections = links.map(n => document.getElementById(n.id)).filter(Boolean) as HTMLElement[];
