@@ -61,7 +61,7 @@ export default function AmbientEmbers() {
       canvas.style.height = height + 'px';
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
 
-      const count = width < 769 ? 0 : Math.min(28, Math.max(18, Math.round(width / 34)));
+      const count = Math.min(28, Math.max(18, Math.round(width / 34)));
       sparks = Array.from({ length: count }, (_, index) => ({
         x: Math.random() * width,
         y: Math.random() * height,
