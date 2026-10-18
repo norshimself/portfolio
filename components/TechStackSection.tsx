@@ -83,7 +83,9 @@ export default function TechStackSection() {
               />
             ) : (
               <span className="tech-card-fallback" aria-hidden="true">
-                {tech.name.split(/[\\s./-]+/).map(part => part[0]).join('').slice(0, 2).toUpperCase()}
+                {tech.name.includes(' ')
+                  ? tech.name.split(' ').map(part => part.charAt(0)).join('').slice(0, 2).toUpperCase()
+                  : tech.name.slice(0, 2).toUpperCase()}
               </span>
             )}
             <div className="tech-card-info">

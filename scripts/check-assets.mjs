@@ -4,15 +4,19 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const portfolioData = readFileSync(join(root, 'data/portfolio.ts'), 'utf8');
+const images = [...portfolioData.matchAll(/\bimage:\s*['"]([^'"]+)['"]/g)].map(match => match[1]);
 const paths = [
   ...new Set([
-    ...[...portfolioData.matchAll(/\\bimage:\\s*['"](\\/assets\\/[^'"]+)['"]/g)].map(match => match[1]),
+    ...images.filter(image => image.startsWith('/assets/')),
     '/assets/images/about/profile.webp',
     '/assets/video/hero-bg.mp4',
   ]),
 ];
 
 const problems = [];
+const external = images.filter(image => /^https?:\/\//i.test(image));
+if (external.length) problems.push('External images need review: ' + external.join(', '));
+
 for (const asset of paths) {
   const file = join(root, 'public', asset.slice(1));
   if (!existsSync(file)) {
@@ -33,14 +37,14 @@ const styles = readFileSync(join(root, 'app/globals.css'), 'utf8');
 if (!layout.includes('Geist') || !layout.includes('Rajdhani')) {
   problems.push('Next.js font setup is incomplete');
 }
-if (styles.includes('@import url(\'https://fonts.googleapis.com')) {
+if (styles.includes('fonts.googleapis.com/css2')) {
   problems.push('Google Fonts CSS import duplicates next/font');
 }
 
 if (problems.length) {
-  console.error(problems.join('\\n'));
+  console.error(problems.join('\n'));
   process.exitCode = 1;
 } else {
   console.log('OK: ' + paths.length + ' local image/video references and favicon exist.');
-  console.log('OK: Geist + Rajdhani font setup has no redundant Google Fonts CSS import.');
+  console.log('OK: Geist + Rajdhani fonts configured without redundant CSS imports.');
 }
