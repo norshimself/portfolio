@@ -6,10 +6,6 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     // Cache optimized images for 30 days at the CDN/edge.
     minimumCacheTTL: 60 * 60 * 24 * 30,
-    remotePatterns: [
-      { protocol: "https", hostname: "cdn.jsdelivr.net" },
-      { protocol: "https", hostname: "www.google.com" },
-    ],
   },
 };
 

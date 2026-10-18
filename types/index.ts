@@ -44,7 +44,7 @@ export type TechLevel = 'core' | 'proficient' | 'familiar';
 
 export interface TechItem {
   name: string;
-  image: string;
+  image?: string;
   description: string;
   category: string;
   level: TechLevel;

@@ -31,7 +31,7 @@ export default function StructuredData() {
   // an array of Organizations.
   const organizations = Array.from(
     new Map(
-      experiences.map((exp) => [
+      experiences.filter((exp) => Boolean(exp.website)).map((exp) => [
         exp.company,
         {
           '@type': 'Organization',
@@ -53,7 +53,7 @@ export default function StructuredData() {
         jobTitle: siteConfig.jobTitle,
         email: `mailto:${siteConfig.email}`,
         description: siteConfig.shortDescription,
-        image: `${siteConfig.url}/opengraph-image`,
+        image: `${siteConfig.url}/assets/images/about/profile.webp`,
         address: {
           '@type': 'PostalAddress',
           addressLocality: siteConfig.location.city,
@@ -100,7 +100,7 @@ export default function StructuredData() {
       },
       // Portfolio projects, each linked back to the person as author so crawlers
       // attribute the work and can surface it for technology-specific queries.
-      ...works.map((work) => ({
+      ...works.filter((work) => Boolean(work.href)).map((work) => ({
         '@type': 'CreativeWork',
         name: work.title,
         ...(work.href ? { url: work.href } : {}),

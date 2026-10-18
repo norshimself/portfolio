@@ -71,7 +71,21 @@ export default function TechStackSection() {
               <span className={`tech-dot level-${tech.level}`} aria-hidden="true" />
               {levelLabel[tech.level]}
             </span>
-            <Image src={tech.image} alt={tech.name} width={48} height={48} className="tech-card-logo" />
+            {tech.image ? (
+              <Image
+                src={tech.image}
+                alt=""
+                width={44}
+                height={44}
+                sizes="44px"
+                loading="lazy"
+                className="tech-card-logo"
+              />
+            ) : (
+              <span className="tech-card-fallback" aria-hidden="true">
+                {tech.name.split(/[\\s./-]+/).map(part => part[0]).join('').slice(0, 2).toUpperCase()}
+              </span>
+            )}
             <div className="tech-card-info">
               <div className="tech-card-name">{tech.name}</div>
               <div className="tech-card-desc">{tech.description}</div>
