@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { education } from '@/data/portfolio';
+import CelestialMark from '@/components/CelestialMark';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
@@ -46,6 +47,7 @@ export default function EducationSection() {
 
   return (
     <section id="about" className="section-card" ref={containerRef}>
+      <CelestialMark />
       <div className="about-intro">
         <div className="section-label">About me</div>
         <h2 className="about-intro-title">I like building reliable systems.</h2>

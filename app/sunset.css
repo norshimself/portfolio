@@ -254,3 +254,93 @@ body { color: #f7eee9; }
 @media (prefers-reduced-motion: reduce) {
   .afterglow-orbits, .afterglow-signal, .afterglow-stars { animation: none; }
 }
+
+
+/* Engineering diagrams are original inline SVGs: nothing downloaded at runtime. */
+.expertise-section .accordion-icon-wrap {
+  box-shadow: 0 0 24px rgba(245,121,87,.13);
+}
+.expertise-section .accordion-title { color: #f7e9e2; }
+.expertise-section .accordion-item.active .accordion-title { color: #ffe0c3; }
+.expertise-section .accordion-item.active .accordion-toggle {
+  background: #aa3a42;
+  border-color: #ffab85;
+}
+.expertise-section .accordion-head:focus-visible { outline-color: #ffd2a3; }
+.expertise-section .expertise-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(178px, 230px) minmax(0, 1fr);
+  align-items: center;
+  gap: 28px;
+  padding: 0 0 28px 54px;
+}
+.expertise-section .expertise-visual {
+  min-width: 0;
+  background: linear-gradient(150deg, rgba(255,159,116,.06), rgba(131,70,119,.06));
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,174,127,.14);
+  padding: 12px 12px 10px;
+}
+.engineering-glyph { display: block; width: 100%; height: auto; overflow: visible; }
+.glyph-frame { fill: rgba(31,23,44,.42); stroke: rgba(255,187,148,.18); stroke-width: 1; }
+.glyph-faint { stroke: rgba(249,186,148,.20); stroke-width: 1; }
+.glyph-outline { stroke: #EAA685; stroke-width: 1.8; }
+.glyph-detail { stroke: #FFCB9C; stroke-width: 2; stroke-linecap: round; }
+.glyph-flow { stroke: #ED896D; stroke-width: 2; stroke-dasharray: 6 8; }
+.glyph-node { fill: #FFD4A2; }
+.glyph-star { fill: rgba(255,205,165,.55); }
+.glyph-node-outline { stroke: #FFD4A2; stroke-width: 2; }
+.expertise-visual-caption {
+  display: block;
+  margin-top: 7px;
+  color: #e5b59b;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: .13em;
+  font-weight: 700;
+}
+.expertise-section .accordion-list { padding: 0; }
+.expertise-section .accordion-list-item {
+  padding: 9px 0;
+  font-size: clamp(14px,1.5vw,17px);
+  color: #e9dcd7;
+}
+.expertise-section .accordion-item.active .glyph-flow {
+  animation: sunset-data-flow 7s linear infinite;
+}
+.expertise-section .accordion-item.active .glyph-node {
+  animation: sunset-node-glow 3s ease-in-out infinite alternate;
+}
+@keyframes sunset-data-flow { to { stroke-dashoffset: -140; } }
+@keyframes sunset-node-glow { to { opacity: .45; } }
+
+#about { isolation: isolate; }
+#about .about-intro { position: relative; z-index: 1; padding-right: min(27%, 200px); }
+.about-celestial {
+  position: absolute;
+  width: min(31%, 280px);
+  right: 28px;
+  top: 20px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .73;
+}
+.about-celestial svg { display: block; width: 100%; height: auto; }
+#about .about-intro-title { color: #ffe3ca; }
+
+@media (max-width: 768px) {
+  .expertise-section .expertise-detail-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    padding: 0 0 18px;
+  }
+  .expertise-section .expertise-visual { max-width: 260px; }
+  #about .about-intro { padding-right: 0; }
+  .about-celestial { width: 174px; right: 14px; top: 12px; opacity: .18; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .expertise-section .glyph-flow,
+  .expertise-section .glyph-node { animation: none !important; }
+}

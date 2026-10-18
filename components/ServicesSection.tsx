@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { services } from '@/data/portfolio';
+import EngineeringGlyph from '@/components/EngineeringGlyph';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
@@ -32,13 +33,19 @@ const DevOpsIcon = () => (
 );
 
 const SERVICE_ICONS = [
-  { bg: 'linear-gradient(135deg,#f8a060,#e03800)', Icon: FullStackIcon },
-  { bg: 'linear-gradient(135deg,#a080f8,#4800e0)', Icon: BackendIcon },
-  { bg: 'linear-gradient(135deg,#60d8f8,#0060e0)', Icon: DataIcon },
-  { bg: 'linear-gradient(135deg,#80f880,#00a030)', Icon: DevOpsIcon },
+  { bg: 'linear-gradient(135deg,#ffbd83,#d35356)', Icon: FullStackIcon },
+  { bg: 'linear-gradient(135deg,#f69d74,#b9415d)', Icon: BackendIcon },
+  { bg: 'linear-gradient(135deg,#c77b9c,#624375)', Icon: DataIcon },
+  { bg: 'linear-gradient(135deg,#f0a86f,#915578)', Icon: DevOpsIcon },
 ];
 
 const order = [2, 3, 1, 4];
+const DIAGRAMS: Record<number, { kind: 'backend' | 'data' | 'fullstack' | 'cloud'; caption: string }> = {
+  1: { kind: 'fullstack', caption: 'FRONTEND TO BACKEND' },
+  2: { kind: 'backend', caption: 'SYSTEMS & API DESIGN' },
+  3: { kind: 'data', caption: 'INGEST · TRANSFORM · DELIVER' },
+  4: { kind: 'cloud', caption: 'DEPLOY · MONITOR · IMPROVE' },
+};
 const orderedServices = [...services].sort((a, b) => (
   order.indexOf(a.id) === -1 ? 99 : order.indexOf(a.id)
 ) - (
@@ -112,11 +119,19 @@ export default function ServicesSection() {
                 aria-labelledby={controlId}
                 hidden={!expanded}
               >
-                <ul className="accordion-list">
+                <div className="expertise-detail-layout">
+                  <div className="expertise-visual" aria-hidden="true">
+                    <EngineeringGlyph kind={DIAGRAMS[svc.id]?.kind ?? 'backend'} />
+                    <span className="expertise-visual-caption">
+                      {DIAGRAMS[svc.id]?.caption ?? 'ENGINEERING'}
+                    </span>
+                  </div>
+                  <ul className="accordion-list">
                   {svc.items.map((item) => (
                     <li key={item} className="accordion-list-item">{item}</li>
                   ))}
-                </ul>
+                  </ul>
+                </div>
               </div>
             </div>
           );
