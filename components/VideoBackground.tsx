@@ -1,35 +1,77 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+/**
+ * Nonessential decorative video: only load it on desktop, after the page
+ * finishes loading, and never on reduced-motion or data-saving connections.
+ */
 export default function VideoBackground() {
-  // Defer the heavy background video until the page has finished its initial
-  // load so it never competes with FCP/LCP-critical resources. The dark
-  // EtherealBackground sits behind everything meanwhile, so there's no flash.
   const [ready, setReady] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const start = () => {
-      const idle =
-        (window as Window & {
-          requestIdleCallback?: (cb: () => void) => number;
-        }).requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1));
-      idle(() => setReady(true));
+    const connection = (navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }).connection;
+
+    if (
+      !window.matchMedia('(min-width: 1025px)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      connection?.saveData ||
+      connection?.effectiveType === 'slow-2g' ||
+      connection?.effectiveType === '2g'
+    ) {
+      return;
+    }
+
+    let idleId: number | undefined;
+    let timeoutId: number | undefined;
+    const schedule = () => {
+      if (typeof window.requestIdleCallback === 'function') {
+        idleId = window.requestIdleCallback(() => setReady(true), { timeout: 2000 });
+      } else {
+        timeoutId = window.setTimeout(() => setReady(true), 600);
+      }
     };
 
     if (document.readyState === 'complete') {
-      start();
+      schedule();
     } else {
-      window.addEventListener('load', start, { once: true });
-      return () => window.removeEventListener('load', start);
+      window.addEventListener('load', schedule, { once: true });
     }
+
+    return () => {
+      window.removeEventListener('load', schedule);
+      if (idleId !== undefined) window.cancelIdleCallback(idleId);
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+    };
   }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !ready) return;
+
+    const handleVisibility = () => {
+      if (document.hidden) {
+        video.pause();
+      } else {
+        void video.play().catch(() => {
+          // Autoplay is decorative, so an autoplay block should not affect UX.
+        });
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibility);
+    handleVisibility();
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, [ready]);
 
   if (!ready) return null;
 
   return (
     <video
+      ref={videoRef}
       className="body-overlay"
       muted
       autoPlay
@@ -37,6 +79,7 @@ export default function VideoBackground() {
       playsInline
       preload="none"
       aria-hidden="true"
+      tabIndex={-1}
     >
       <source src="/assets/video/hero-bg.mp4" type="video/mp4" />
     </video>

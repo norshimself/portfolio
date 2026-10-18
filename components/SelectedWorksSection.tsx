@@ -54,10 +54,10 @@ export default function SelectedWorksSection() {
                 <div className="browser-content">
                   <Image
                     src={work.image}
-                    alt={work.href ? work.title + ' preview' : 'Temporary placeholder project screenshot'}
+                    alt={work.href ? work.title + ' project preview' : 'Draft project artwork, replace with a real screenshot'}
                     fill
                     className="work-item-img"
-                    sizes="(max-width: 768px) 100vw, 80vw"
+                    sizes="(max-width: 480px) calc(100vw - 20px), (max-width: 1024px) calc(100vw - 28px), (max-width: 1200px) calc(100vw - 372px), calc(100vw - 432px)"
                   />
                 </div>
               </div>
