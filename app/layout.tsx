@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Geist, Rajdhani } from 'next/font/google';
 import './globals.css';
 import './ux.css';
-import EtherealBackground from '@/components/EtherealBackground';
+import './sunset.css';
 import StructuredData from '@/components/StructuredData';
 import { siteConfig } from '@/data/site';
 import { Analytics } from '@vercel/analytics/next';
@@ -76,7 +76,6 @@ export default function RootLayout({
     <html lang="en-US" className={`${geist.variable} ${rajdhani.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <StructuredData />
-        <EtherealBackground />
         {children}
         <Analytics />
         <SpeedInsights />

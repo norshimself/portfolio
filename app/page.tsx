@@ -1,5 +1,4 @@
 import PortfolioShell from '@/components/PortfolioShell';
-import VideoBackground from '@/components/VideoBackground';
 import HeroSection from '@/components/HeroSection';
 import SelectedWorksSection from '@/components/SelectedWorksSection';
 import ExperienceSection from '@/components/ExperienceSection';
@@ -12,7 +11,6 @@ import Footer from '@/components/Footer';
 export default function Home() {
   return (
     <PortfolioShell>
-      <VideoBackground />
       <main id="main-content" tabIndex={-1} className="main-content">
         <HeroSection />
         <SelectedWorksSection />
