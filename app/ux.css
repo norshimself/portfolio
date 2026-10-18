@@ -269,3 +269,141 @@
   .expertise-section .accordion-title { font-size: clamp(22px, 7vw, 29px) !important; }
   .expertise-section .accordion-num { display: none; }
 }
+
+/* Forms: purposeful hierarchy, readable errors, and honest feedback. */
+.contact-section .contact-title { margin-bottom: 16px; }
+.contact-intro {
+  max-width: 55ch;
+  color: #d2d4da;
+  font-size: clamp(16px, 1.5vw, 18px);
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+.contact-direct-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-size: 16px;
+  font-weight: 650;
+  color: #ffb48d;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  overflow-wrap: anywhere;
+}
+.contact-form { margin-top: 28px; }
+.contact-section .form-group { padding: 12px 0; min-width: 0; }
+.contact-section .form-row { gap: 12px 28px; }
+.contact-section .form-label {
+  font-size: 12px;
+  color: #d4d6dc;
+  margin-bottom: 6px;
+}
+.contact-section .form-input { min-height: 44px; }
+.contact-section .form-input, .contact-section .form-textarea {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 10px 0;
+  border-radius: 2px;
+}
+.contact-section .form-textarea { min-height: 156px; resize: vertical; }
+.contact-section .form-input::placeholder,
+.contact-section .form-textarea::placeholder { color: #a1a4ab; opacity: 1; }
+.contact-section .form-group:focus-within { border-bottom-color: var(--primary); }
+.contact-section .form-group.is-invalid { border-bottom-color: #ff817b; }
+.contact-section .form-error { display: block; color: #ffaaa5; margin-top: 6px; font-size: 13px; }
+.form-optional { color: #a1a4ab; font-weight: 400; text-transform: none; letter-spacing: 0; }
+.contact-section .submit-row { display: grid; gap: 10px; margin-top: 20px; }
+.contact-section .submit-btn {
+  width: auto;
+  min-width: 188px;
+  min-height: 52px;
+  font-family: var(--font-body);
+  font-weight: 650;
+  font-size: 15px;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-radius: 14px;
+}
+.contact-section .submit-btn:disabled { cursor: progress; opacity: .65; }
+.form-help { color: #bec0c9; font-size: 13px; line-height: 1.5; }
+.form-submit-error {
+  padding: 14px 16px;
+  border: 1px solid rgba(255,135,125,.45);
+  border-radius: 12px;
+  background: rgba(255,85,75,.07);
+  color: #ffd1cd;
+  font-size: 14px;
+  margin-top: 20px;
+  line-height: 1.5;
+}
+.form-submit-error a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.submit-spinner {
+  display: inline-block;
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,.36);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: ux-spinner .7s linear infinite;
+}
+@keyframes ux-spinner { to { transform: rotate(360deg); } }
+.contact-success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 30px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.025);
+  padding: 26px;
+  border-radius: 18px;
+}
+.contact-success-icon {
+  display: grid; place-items: center;
+  width: 46px; height: 46px;
+  background: rgba(243,79,17,.15);
+  border-radius: 50%;
+  color: #ffb48d; font-size: 24px;
+}
+.contact-success h3 { font-size: 30px; line-height: 1.2; }
+.contact-success p { color: #d2d4da; line-height: 1.7; max-width: 48ch; }
+.contact-success .contact-reset-btn { margin-top: 12px; gap: 20px; }
+
+.tech-result-count {
+  color: #c8cbd2;
+  font-size: 13px;
+  margin: 4px 0 18px;
+  font-family: var(--font-body);
+}
+.tech-tabs { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.35) transparent; }
+.tech-tab { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
+.tech-tab-count {
+  font-size: 11px;
+  min-width: 22px;
+  text-align: center;
+  padding: 2px 5px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.12);
+}
+.tech-tab.active .tech-tab-count { background: rgba(0,0,0,.22); }
+.tech-show-more { min-height: 44px; padding: 11px 22px; }
+.tech-show-more:hover { background: rgba(255,255,255,.08); color: #fff; }
+.content-draft-note {
+  display: block;
+  max-width: 70ch;
+  color: #cfd0d6;
+  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .contact-section .submit-btn { width: 100%; }
+  .contact-section .form-row { gap: 0; }
+  .contact-success { padding: 22px; }
+  .tech-tabs { padding: 6px; }
+  .tech-tab { padding: 8px 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .submit-spinner { animation-duration: 1.5s; }
+}

@@ -11,6 +11,7 @@ export default function ExperienceSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       // Header reveal
       gsap.from('.exp-section-top', {
@@ -47,13 +48,14 @@ export default function ExperienceSection() {
     <section id="experience" className="section-card" ref={containerRef}>
       {/* Header: label on left, big quote on right */}
       <div className="exp-section-top">
-        <div className="section-label" style={{ marginBottom: 0 }}>Where I&apos;ve worked</div>
+        <div className="section-label" style={{ marginBottom: 0 }}>Professional experience</div>
         <h2 className="exp-section-quote">
-          A few years spent turning vague requirements and messy data into
-          <span> backends teams can actually build on.</span>
+          The systems I&apos;ve worked on,
+          <span> the problems I&apos;ve solved, and the impact I&apos;ve made.</span>
         </h2>
       </div>
 
+      <p className="content-draft-note">Sample entries for now — replace company names, dates, and achievements in <code>data/portfolio.ts</code>.</p>
       {/* Experience list */}
       <div className="exp-list" role="list">
         {experiences.map((exp, i) => (

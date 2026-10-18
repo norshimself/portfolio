@@ -11,6 +11,7 @@ export default function EducationSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       // Header reveal
       gsap.from('.edu-section-top', {
@@ -54,8 +55,8 @@ export default function EducationSection() {
       <div className="exp-section-top edu-section-top">
         <div className="section-label" style={{ marginBottom: 0 }}>Education &amp; background</div>
         <h2 className="exp-section-quote">
-          Trained the hard way — peer-to-peer, project-driven, and
-          <span> built on shipping real code, not sitting in lectures.</span>
+          Project-based learning and collaboration
+          <span> shaped how I approach engineering.</span>
         </h2>
       </div>
 

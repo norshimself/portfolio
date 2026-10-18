@@ -23,6 +23,7 @@ export default function TechStackSection() {
   const visibleTech = activeCategory === 'All' && !showAll ? filteredTech.slice(0, 12) : filteredTech;
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     // Initial entrance animation
     const ctx = gsap.context(() => {
       // Title and Tabs entrance
@@ -51,20 +52,29 @@ export default function TechStackSection() {
           <span className="tech-legend-item"><span className="tech-dot level-proficient" /> Proficient</span>
           <span className="tech-legend-item"><span className="tech-dot level-familiar" /> Familiar</span>
         </div>
-        <div className="tech-tabs">
+        <div className="tech-tabs" role="group" aria-label="Filter technologies by category">
           {categories.map(cat => (
             <button
               key={cat}
               className={`tech-tab ${activeCategory === cat ? 'active' : ''}`}
-              onClick={() => { setActiveCategory(cat); setShowAll(false); }} aria-pressed={activeCategory === cat}
+              type="button"
+              onClick={() => { setActiveCategory(cat); setShowAll(false); }}
+              aria-pressed={activeCategory === cat}
             >
               {cat}
+              <span className="tech-tab-count">
+                {cat === 'All' ? techStack.length : techStack.filter(tech => tech.category === cat).length}
+              </span>
             </button>
           ))}
         </div>
       </div>
 
-      <div className="tech-grid">
+      <p className="tech-result-count" role="status" aria-live="polite">
+        Showing {visibleTech.length} of {filteredTech.length} technologies
+        {activeCategory !== 'All' && <span> in {activeCategory}</span>}
+      </p>
+      <div className="tech-grid" id="technology-list">
         {visibleTech.map((tech) => (
           <div key={`${activeCategory}-${tech.name}`} className={`tech-card glass-card level-${tech.level}`}>
             <span className={`tech-card-level level-${tech.level}`} title={levelLabel[tech.level]}>
@@ -98,7 +108,7 @@ export default function TechStackSection() {
         ))}
       </div>
       {activeCategory === 'All' && filteredTech.length > 12 && (
-        <button type="button" className="tech-show-more" onClick={() => setShowAll(!showAll)} aria-expanded={showAll}>
+        <button type="button" className="tech-show-more" onClick={() => setShowAll(!showAll)} aria-expanded={showAll} aria-controls="technology-list">
           {showAll ? 'Show featured technologies' : 'View all ' + filteredTech.length + ' technologies'}
         </button>
       )}

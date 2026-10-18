@@ -1,163 +1,178 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { siteConfig } from '@/data/site';
 
-gsap.registerPlugin(ScrollTrigger);
+type ContactFields = {
+  email: string;
+  phone: string;
+  message: string;
+  website: string;
+};
 
-type FormData = { email: string; phone: string; message: string; website: string };
+type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export default function ContactSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
-    defaultValues: { email: '', phone: '', message: '', website: '' }
+  const [status, setStatus] = useState<SubmitStatus>('idle');
+  const [submitError, setSubmitError] = useState('');
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFields>({
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
+    defaultValues: { email: '', phone: '', message: '', website: '' },
   });
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.contact-title', {
-        opacity: 0, y: 40, duration: 1, immediateRender: false,
-        scrollTrigger: { trigger: '.contact-title', start: 'top 95%' }
-      });
-      gsap.from('.form-group, .submit-row', {
-        opacity: 0, y: 30, stagger: 0.1, duration: 0.8, immediateRender: false,
-        scrollTrigger: { trigger: 'form', start: 'top 95%' }
-      });
-      ScrollTrigger.refresh();
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
-
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (fields: ContactFields) => {
     setStatus('loading');
+    setSubmitError('');
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fields),
       });
 
-      if (!response.ok) throw new Error('Failed to send message');
-      
+      if (!response.ok) {
+        if (response.status === 429) {
+          throw new Error('Too many requests. Please try again in a minute, or send an email.');
+        }
+        if (response.status === 503) {
+          throw new Error('The form is temporarily unavailable. Please email me directly.');
+        }
+        throw new Error('Your message could not be sent. Please try again or use email.');
+      }
+
+      reset();
       setStatus('success');
-      reset(); // Clear form inputs on success
     } catch (error) {
-      console.error(error);
+      setSubmitError(error instanceof Error ? error.message : 'Something went wrong. Please use email.');
       setStatus('error');
-      setTimeout(() => setStatus('idle'), 4000);
     }
   };
 
   return (
-    <section id="contact" className="section-card" ref={containerRef}>
-      <h2 className="contact-title">
-        Let&apos;s<br /><span>talk.</span>
-      </h2>
+    <section id="contact" className="section-card contact-section">
+      <div className="section-label">Get in touch</div>
+      <h2 className="contact-title">Let&apos;s<br /><span>talk.</span></h2>
+      <p className="contact-intro">
+        Have a role, a project, or an engineering challenge worth discussing?
+        Send a message below or reach out directly.
+      </p>
+      <a className="contact-direct-link" href={'mailto:' + siteConfig.email}>
+        {siteConfig.email}
+        <span aria-hidden="true">↗</span>
+      </a>
 
       {status === 'success' ? (
-        <div role="status" className="success-message" style={{ textAlign: 'center', padding: '60px 20px', minHeight: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', animation: 'fadeIn 0.5s ease-out forwards' }}>
-          <style dangerouslySetInnerHTML={{__html: `
-            @keyframes scaleIn { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
-            @keyframes fadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
-          `}} />
-          <div className="success-icon" style={{ width: '64px', height: '64px', backgroundColor: 'rgba(243, 79, 17, 0.1)', borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0 auto 24px', color: '#F34F11', animation: 'scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' }}>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <h3 style={{ fontSize: '24px', fontWeight: '600', marginBottom: '12px', color: 'var(--text-primary, #fff)', opacity: 0, animation: 'fadeIn 0.5s ease-out 0.2s forwards' }}>Got it — message sent!</h3>
-          <p style={{ color: 'var(--text-secondary, #9ca3af)', fontSize: '16px', lineHeight: '1.5', maxWidth: '400px', margin: '0 auto', opacity: 0, animation: 'fadeIn 0.5s ease-out 0.3s forwards' }}>
-            Thanks for reaching out — I read everything myself and I&apos;ll get back to you within a day or two.
-          </p>
-          <button 
-            onClick={() => setStatus('idle')}
-            className="submit-btn" 
-            style={{ 
-              marginTop: '40px', 
-              display: 'inline-flex', 
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: 'auto', 
-              padding: '16px 40px',
-              fontSize: '16px',
-              fontWeight: '500',
-              opacity: 0, 
-              animation: 'fadeIn 0.5s ease-out 0.4s forwards',
-              gap: '12px'
-            }}
-          >
-            <span>Send Another Message</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+        <div className="contact-success" role="status" aria-live="polite">
+          <span className="contact-success-icon" aria-hidden="true">✓</span>
+          <h3>Message sent successfully.</h3>
+          <p>Thanks for reaching out. I&apos;ll review your message and reply when I can.</p>
+          <button type="button" className="submit-btn contact-reset-btn" onClick={() => setStatus('idle')}>
+            Write another message
+            <span aria-hidden="true">↗</span>
           </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div className="form-honeypot" aria-hidden="true"><input aria-label="Website (leave empty)" tabIndex={-1} autoComplete="off" {...register('website')} /></div>
+        <form className="contact-form" onSubmit={handleSubmit(onSubmit)} noValidate aria-busy={status === 'loading'}>
+          <div className="form-honeypot" aria-hidden="true">
+            <input type="text" tabIndex={-1} autoComplete="off" {...register('website')} />
+          </div>
+
           <div className="form-row">
-            <div className="form-group">
-              <label className="form-label" htmlFor="email">Your Email</label>
+            <div className={errors.email ? 'form-group is-invalid' : 'form-group'}>
+              <label className="form-label" htmlFor="email">Email address <span aria-hidden="true">*</span></label>
               <input
-                id="email" type="email" placeholder="Enter your email" aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined}
+                id="email"
+                type="email"
+                inputMode="email"
+                autoComplete="email"
                 className="form-input"
+                placeholder="you@example.com"
+                maxLength={254}
+                aria-required="true"
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'email-error' : undefined}
                 {...register('email', {
-                  required: 'Email required',
-                  pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' }
+                  required: 'Please enter your email address.',
+                  maxLength: { value: 254, message: 'Email address is too long.' },
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: 'Please enter a valid email address.',
+                  },
                 })}
               />
-              {errors.email && <span id="email-error" className="form-error">{errors.email.message}</span>}
+              {errors.email && <span id="email-error" className="form-error" role="alert">{errors.email.message}</span>}
             </div>
 
-            <div className="form-group phone-group">
-              <label className="form-label" htmlFor="phone">Phone Number (Optional)</label>
+            <div className={errors.phone ? 'form-group phone-group is-invalid' : 'form-group phone-group'}>
+              <label className="form-label" htmlFor="phone">Phone number <span className="form-optional">(optional)</span></label>
               <input
                 id="phone"
                 type="tel"
-                placeholder="Enter your phone number"
+                inputMode="tel"
+                autoComplete="tel"
                 className="form-input"
-                {...register('phone')}
+                placeholder="+212 ..."
+                maxLength={40}
+                aria-invalid={!!errors.phone}
+                aria-describedby={errors.phone ? 'phone-error' : undefined}
+                {...register('phone', {
+                  maxLength: { value: 40, message: 'Phone number is too long.' },
+                })}
               />
+              {errors.phone && <span id="phone-error" className="form-error" role="alert">{errors.phone.message}</span>}
             </div>
           </div>
 
-          <div className="form-group form-group-full" style={{ marginTop: 8 }}>
-            <label className="form-label" htmlFor="message">Message</label>
+          <div className={errors.message ? 'form-group form-group-full is-invalid' : 'form-group form-group-full'}>
+            <label className="form-label" htmlFor="message">Message <span aria-hidden="true">*</span></label>
             <textarea
-              id="message" aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined} placeholder="What's the role, and what would I be working on? A few lines is plenty."
+              id="message"
               className="form-textarea"
-              {...register('message', { required: 'Message required' })}
+              rows={5}
+              minLength={5}
+              maxLength={5000}
+              placeholder="Tell me a little about your role, team, or project..."
+              aria-required="true"
+              aria-invalid={!!errors.message}
+              aria-describedby={errors.message ? 'message-error' : 'message-help'}
+              {...register('message', {
+                required: 'Please enter a message.',
+                minLength: { value: 5, message: 'Please add a little more detail (at least 5 characters).' },
+                maxLength: { value: 5000, message: 'Please keep your message under 5,000 characters.' },
+              })}
             />
-            {errors.message && <span id="message-error" className="form-error">{errors.message.message}</span>}
+            {errors.message ? (
+              <span id="message-error" className="form-error" role="alert">{errors.message.message}</span>
+            ) : (
+              <p id="message-help" className="form-help">A few lines are enough. Please don&apos;t include sensitive information.</p>
+            )}
           </div>
 
-          {status === 'error' && <p role="alert">Could not send. Please email me directly at <a href="mailto:nasroallah.elidrissi@gmail.com">nasroallah.elidrissi@gmail.com</a>.</p>}
-          <div className="submit-row" style={{ marginTop: '32px' }}>
-            <button type="submit" className="submit-btn" id="contact-submit" disabled={status === 'loading'}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                {status === 'loading' ? (
-                  <>
-                    <svg className="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ animation: 'spin 1s linear infinite' }}>
-                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="32" strokeLinecap="round" opacity="0.3"/>
-                      <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-                    </svg>
-                    Sending...
-                  </>
-                ) : status === 'error' ? 'Error. Try Again.' : 'Send Message'}
-              </span>
-              {status !== 'loading' && (
-                <span className="cta-icon">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </span>
+          {status === 'error' && (
+            <p className="form-submit-error" role="alert">
+              {submitError} <a href={'mailto:' + siteConfig.email}>Email directly ↗</a>
+            </p>
+          )}
+
+          <div className="submit-row">
+            <button type="submit" className="submit-btn" disabled={status === 'loading'}>
+              <span>{status === 'loading' ? 'Sending your message…' : 'Send message'}</span>
+              {status === 'loading' ? (
+                <span className="submit-spinner" aria-hidden="true" />
+              ) : (
+                <span className="cta-icon" aria-hidden="true">↗</span>
               )}
             </button>
+            <p className="form-help">Required fields are marked with *.</p>
           </div>
         </form>
       )}
