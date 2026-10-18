@@ -4,10 +4,12 @@ import Image from 'next/image';
 import { socialLinks } from '@/data/portfolio';
 
 
-export default function LeftSidebar() {
-  const toggleMenu = () => {
-    window.dispatchEvent(new CustomEvent('open-menu'));
-  };
+type LeftSidebarProps = {
+  menuOpen: boolean;
+  onMenuOpen: () => void;
+};
+
+export default function LeftSidebar({ menuOpen, onMenuOpen }: LeftSidebarProps) {
 
   return (
     <aside className="left-sidebar" aria-label="Profile sidebar">
@@ -17,8 +19,10 @@ export default function LeftSidebar() {
           <button 
             className="tf-btn-menu" 
             style={{ position: 'static', transform: 'none' }}
-            onClick={toggleMenu}
+            onClick={onMenuOpen}
             aria-label="Open menu"
+            aria-controls="portfolio-menu"
+            aria-expanded={menuOpen}
           >
             <svg width="14" height="14" viewBox="0 0 16 14" fill="none">
               <path d="M1 1h14M1 7h14M1 13h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
@@ -34,24 +38,23 @@ export default function LeftSidebar() {
         <div className="sidebar-avatar">
           <Image
             src="/assets/images/about/profile.webp"
-            alt="Nasroallah Elidrissi avatar"
+            alt="Portrait of Nasroallah Elidrissi"
             width={160}
             height={200}
+            sizes="(max-width: 480px) 36px, (max-width: 1024px) 38px, 160px"
+            priority
             style={{ objectFit: 'cover', width: '100%', height: '100%' }}
           />
         </div>
 
         {/* Signature */}
-        <h2 
-          className="sidebar-signature" 
-          style={{ fontFamily: 'cursive', fontSize: '24px', fontWeight: 400, margin: '20px 0', color: '#fff' }}
-        >
+        <h2 className="sidebar-signature">
           Nasroallah Elidrissi
         </h2>
 
         {/* Contact */}
         <div className="sidebar-meta">
-          <div className="sidebar-email">nasroallah.elidrissi@gmail.com</div>
+          <a className="sidebar-email" href="mailto:nasroallah.elidrissi@gmail.com">nasroallah.elidrissi@gmail.com</a>
           <div className="sidebar-location">Casablanca · Remote-friendly (GMT+1)</div>
         </div>
 
@@ -69,7 +72,7 @@ export default function LeftSidebar() {
         </ul>
 
         {/* CTA button */}
-        <a href="#contact" className="sidebar-cta">
+        <a href="#contact" className="sidebar-cta" aria-label="Get in touch">
           <span>Get in Touch</span>
           <span className="cta-arrow">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { navLinks } from '@/data/portfolio';
+import { rightNavLinks } from '@/data/portfolio';
 
 // SVG icons matching the reference right nav
 const NavIcons: Record<string, React.ReactElement> = {
@@ -20,7 +20,7 @@ const dockLabels: Record<string, string> = {
   home: 'Home',
   experience: 'Career',
   education: 'Studies',
-  services: 'Services',
+  services: 'Expertise',
   works: 'Work',
   faqs: 'FAQs',
   contact: 'Contact',
@@ -30,7 +30,7 @@ export default function RightNav() {
   const [active, setActive] = useState('home');
 
   // extract 'id' from href like '#home' → 'home'
-  const links = navLinks.map(n => ({ ...n, id: n.href.replace('#', '') }));
+  const links = rightNavLinks.map(n => ({ ...n, id: n.href.replace('#', '') }));
 
   useEffect(() => {
     const sections = links.map(n => document.getElementById(n.id)).filter(Boolean) as HTMLElement[];
@@ -52,6 +52,7 @@ export default function RightNav() {
               className={active === link.id ? 'active' : ''}
               onClick={() => setActive(link.id)}
               aria-label={link.label}
+              aria-current={active === link.id ? 'location' : undefined}
             >
               {NavIcons[link.id] ?? NavIcons.home}
               <span className="nav-tooltip">{link.label}</span>
