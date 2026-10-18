@@ -402,3 +402,62 @@
   .editorial-card, .editorial-copy, .editorial-outlined-link { transition: none !important; }
   .editorial-card:hover { transform: none; }
 }
+
+
+/* First-class Projects and Writing destinations in the shared navigation. */
+.editorial-menu-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .15em;
+  color: #b6b1b4;
+  margin: 14px 0 12px;
+}
+.editorial-menu-pages {
+  display: grid;
+  gap: 7px;
+  list-style: none;
+  padding: 0 0 14px;
+  margin: 0 0 16px;
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+.editorial-menu-pages a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 48px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  color: #e6e4e6;
+  background: rgba(255,255,255,.025);
+  font-size: 16px;
+  font-weight: 650;
+}
+.editorial-menu-pages a > span:first-child {
+  font-size: 11px;
+  color: #b9b1b0;
+  letter-spacing: .05em;
+}
+.editorial-menu-pages a > span:last-child { margin-left: auto; font-size: 14px; color: #cfbab4; }
+.editorial-menu-pages a:hover,
+.editorial-menu-pages a.active,
+.editorial-menu-pages a:focus-visible {
+  border-color: rgba(255,160,112,.30);
+  color: #fff;
+  background: rgba(226, 106, 52, .11);
+}
+.editorial-menu-pages a.active > span:last-child { color: #ffb289; }
+
+/* The homepage now points to the complete project archive. */
+.editorial-works-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 18px;
+}
+.editorial-works-toolbar .editorial-outlined-link { font-size: 12px; }
+@media (max-width: 480px) {
+  .editorial-works-toolbar { justify-content: stretch; }
+  .editorial-works-toolbar .editorial-outlined-link { width: 100%; }
+  .editorial-menu-pages a { min-height: 48px; }
+}

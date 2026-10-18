@@ -34,6 +34,7 @@ export default function ListingPage({ kind }: { kind: Collection }) {
                 {isProject ? 'Explore my writing ↗' : 'Explore my projects ↗'}
               </Link>
               <Link href="/#contact" className="editorial-text-link">Get in touch ↗</Link>
+              {!isProject && <a href="/rss.xml" className="editorial-text-link" type="application/rss+xml">RSS feed ↗</a>}
             </div>
           </header>
 
