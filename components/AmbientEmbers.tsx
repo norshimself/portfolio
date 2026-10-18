@@ -14,9 +14,9 @@ type Ember = {
 };
 
 /**
- * Tiny, decorative Canvas 2D particle field.
- * Runs at ~30 fps only on non-data-saving desktop/tablet connections.
- * No React state updates in the animation loop.
+ * Tiny Canvas 2D ember field. No React state updates per frame.
+ * Pauses off-screen, in background tabs, on small screens, and whenever
+ * reduced motion is enabled; respects Save-Data / slow connections.
  */
 export default function AmbientEmbers() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -25,15 +25,11 @@ export default function AmbientEmbers() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const wideScreen = window.matchMedia('(min-width: 769px)');
     const connection = (navigator as Navigator & {
       connection?: { saveData?: boolean; effectiveType?: string };
     }).connection;
 
     if (
-      reduceMotion.matches ||
-      !wideScreen.matches ||
       connection?.saveData ||
       connection?.effectiveType === 'slow-2g' ||
       connection?.effectiveType === '2g'
@@ -42,12 +38,16 @@ export default function AmbientEmbers() {
     const context = canvas.getContext('2d', { alpha: true });
     if (!context) return;
 
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const wideScreen = window.matchMedia('(min-width: 769px)');
     const shades = ['255,178,118', '253,117,85', '255,210,174', '187,152,202'];
+
     let width = 0;
     let height = 0;
     let sparks: Ember[] = [];
-    let animationFrame: number | null = null;
+    let frameId: number | null = null;
     let lastDraw = 0;
+    let onScreen = true;
 
     const resize = () => {
       const bounds = canvas.parentElement?.getBoundingClientRect();
@@ -74,12 +74,15 @@ export default function AmbientEmbers() {
       }));
     };
 
-    const draw = (timestamp: number) => {
-      animationFrame = null;
+    const shouldAnimate = () =>
+      !document.hidden && onScreen && !reduceMotion.matches && wideScreen.matches;
 
-      if (document.hidden) return;
+    const draw = (timestamp: number) => {
+      frameId = null;
+      if (!shouldAnimate()) return;
+
       if (timestamp - lastDraw < 32) {
-        animationFrame = window.requestAnimationFrame(draw);
+        frameId = window.requestAnimationFrame(draw);
         return;
       }
 
@@ -105,28 +108,48 @@ export default function AmbientEmbers() {
         context.fill();
       }
 
-      animationFrame = window.requestAnimationFrame(draw);
+      frameId = window.requestAnimationFrame(draw);
     };
 
-    const onVisibility = () => {
-      if (document.hidden) {
-        if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
-        animationFrame = null;
-      } else if (animationFrame === null) {
+    const synchronize = () => {
+      if (shouldAnimate() && frameId === null) {
         lastDraw = 0;
-        animationFrame = window.requestAnimationFrame(draw);
+        frameId = window.requestAnimationFrame(draw);
+      } else if (!shouldAnimate() && frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+        frameId = null;
+        context.clearRect(0, 0, width, height);
       }
     };
 
+    const onResize = () => {
+      resize();
+      synchronize();
+    };
+
     resize();
-    window.addEventListener('resize', resize, { passive: true });
-    document.addEventListener('visibilitychange', onVisibility);
-    animationFrame = window.requestAnimationFrame(draw);
+    window.addEventListener('resize', onResize, { passive: true });
+    document.addEventListener('visibilitychange', synchronize);
+    reduceMotion.addEventListener('change', synchronize);
+    wideScreen.addEventListener('change', synchronize);
+
+    const observer = 'IntersectionObserver' in window
+      ? new IntersectionObserver((entries) => {
+          onScreen = entries[0]?.isIntersecting ?? true;
+          synchronize();
+        }, { rootMargin: '80px' })
+      : null;
+
+    if (observer) observer.observe(canvas.parentElement || canvas);
+    synchronize();
 
     return () => {
-      if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
-      window.removeEventListener('resize', resize);
-      document.removeEventListener('visibilitychange', onVisibility);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+      observer?.disconnect();
+      window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', synchronize);
+      reduceMotion.removeEventListener('change', synchronize);
+      wideScreen.removeEventListener('change', synchronize);
     };
   }, []);
 
