@@ -20,7 +20,15 @@
   padding: 26px 26px 30px;
   overflow-y: auto;
   overscroll-behavior: contain;
-  box-shadow: 30px 0 80px rgba(0,0,0,.4);
+  /* Opaque dark glass keeps links readable above busy backgrounds. */
+  background-color: #101116;
+  background-image:
+    radial-gradient(circle at 100% 0%, rgba(243,79,17,.10), transparent 54%),
+    linear-gradient(180deg, rgba(20,22,28,.98), rgba(10,11,15,.99));
+  -webkit-backdrop-filter: blur(24px) saturate(120%);
+  backdrop-filter: blur(24px) saturate(120%);
+  border-right: 1px solid rgba(255,255,255,.13);
+  box-shadow: 28px 0 90px rgba(0,0,0,.65);
   visibility: hidden;
   pointer-events: none;
   transition: transform .3s ease, visibility 0s linear .3s;
@@ -29,6 +37,25 @@
   visibility: visible;
   pointer-events: auto;
   transition: transform .3s ease, visibility 0s;
+}
+
+/* Dim and soften the page behind the menu, never the menu text itself. */
+.overlay {
+  background: rgba(3,4,8,.62);
+  -webkit-backdrop-filter: blur(8px) saturate(85%);
+  backdrop-filter: blur(8px) saturate(85%);
+}
+.tf-sidebar-menu .menu-title { color: #f8f9fc; }
+.tf-sidebar-menu .sidebar-nav a { color: #e1e3ea; }
+.tf-sidebar-menu .sidebar-nav a:hover,
+.tf-sidebar-menu .sidebar-nav a:focus-visible,
+.tf-sidebar-menu .sidebar-nav a.active {
+  color: #ffab85;
+}
+.tf-sidebar-menu .menu-contact { color: #c9ccd5; }
+@media (prefers-reduced-transparency: reduce) {
+  .tf-sidebar-menu { background-image: none; background-color: #111217; }
+  .overlay { -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
 .canvas-heading { align-items: flex-start; margin-bottom: 28px; }
 .close-canvas { width: 44px; height: 44px; color: var(--text-soft); }
