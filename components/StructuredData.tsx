@@ -1,5 +1,6 @@
 import { siteConfig } from '@/data/site';
-import { faqs, education, experiences, works, techStack } from '@/data/portfolio';
+import { education, experiences, works, techStack } from '@/data/portfolio';
+import { getPublishedEntries } from '@/lib/content';
 
 /**
  * JSON-LD structured data for rich results in search engines and clean parsing
@@ -9,6 +10,8 @@ import { faqs, education, experiences, works, techStack } from '@/data/portfolio
  */
 export default function StructuredData() {
   const personId = `${siteConfig.url}/#person`;
+  const publishedProjects = getPublishedEntries('projects');
+  const publishedArticles = getPublishedEntries('blog');
 
   // Skills the person is interview-ready or comfortable with, surfaced so search
   // engines can connect the profile to specific technology queries.
@@ -113,25 +116,34 @@ export default function StructuredData() {
         author: { '@id': personId },
         creator: { '@id': personId },
       })),
-      {
-        '@type': 'FAQPage',
-        '@id': `${siteConfig.url}/#faq`,
-        mainEntity: faqs.map((faq) => ({
-          '@type': 'Question',
-          name: faq.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: faq.answer,
-          },
-        })),
-      },
+      // Only factually published case studies and articles enter structured data.
+      ...publishedProjects.map((project) => ({
+        '@type': 'CreativeWork',
+        name: project.title,
+        url: `${siteConfig.url}/projects/${project.slug}`,
+        description: project.description,
+        ...(project.date ? { datePublished: project.date } : {}),
+        ...(project.cover ? { image: `${siteConfig.url}${project.cover}` } : {}),
+        keywords: [...project.tags, ...project.stack].join(', '),
+        author: { '@id': personId },
+      })),
+      ...publishedArticles.map((post) => ({
+        '@type': 'BlogPosting',
+        headline: post.title,
+        mainEntityOfPage: `${siteConfig.url}/blog/${post.slug}`,
+        url: `${siteConfig.url}/blog/${post.slug}`,
+        description: post.description,
+        ...(post.date ? { datePublished: post.date } : {}),
+        keywords: post.tags.join(', '),
+        author: { '@id': personId },
+      })),
     ],
   };
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph).replace(/</g, '\\u003c') }}
     />
   );
 }

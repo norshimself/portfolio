@@ -5,7 +5,7 @@ import { siteConfig } from '@/data/site';
 export const metadata: Metadata = {
   title: 'Engineering Notes',
   description: 'Writing about backend engineering, API integrations, data systems, and software development by ' + siteConfig.name + '.',
-  alternates: { canonical: '/blog' },
+  alternates: { canonical: '/blog', types: { 'application/rss+xml': '/rss.xml' } },
   openGraph: {
     type: 'website',
     title: 'Engineering Notes — ' + siteConfig.name,
