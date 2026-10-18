@@ -6,8 +6,8 @@ import { navLinks } from '@/data/portfolio';
 // Derive id from href e.g. '#home' → 'home'
 const links = navLinks.map(n => ({ ...n, id: n.href.replace('#', '') }));
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
+export default function Navbar({ open, onClose }: { open: boolean; onClose: () => void }) {
+
   const [active, setActive] = useState('home');
 
   useEffect(() => {
@@ -20,11 +20,7 @@ export default function Navbar() {
     return () => obs.disconnect();
   }, []);
 
-  useEffect(() => {
-    const handleOpen = () => setOpen(true);
-    window.addEventListener('open-menu', handleOpen);
-    return () => window.removeEventListener('open-menu', handleOpen);
-  }, []);
+
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -34,9 +30,9 @@ export default function Navbar() {
   return (
     <>
       {/* Sliding navigation panel */}
-      <nav className={`tf-sidebar-menu${open ? ' open' : ''}`} aria-label="Main navigation">
+      <nav id="portfolio-menu" inert={!open} aria-hidden={!open} className={`tf-sidebar-menu${open ? ' open' : ''}`} aria-label="Main navigation">
         <div className="canvas-heading" style={{ justifyContent: 'flex-end' }}>
-          <button className="close-canvas" aria-label="Close menu" onClick={() => setOpen(false)}>✕</button>
+          <button className="close-canvas" aria-label="Close menu" onClick={() => onClose()}>✕</button>
         </div>
         <ul className="sidebar-nav">
           {links.map(link => (

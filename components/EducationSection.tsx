@@ -44,7 +44,7 @@ export default function EducationSection() {
   }, []);
 
   return (
-    <section id="education" className="section-card" ref={containerRef}>
+    <section id="about" className="section-card" ref={containerRef}>
       {/* Header: label on left, big quote on right */}
       <div className="exp-section-top edu-section-top">
         <div className="section-label" style={{ marginBottom: 0 }}>Where I&apos;ve studied</div>
