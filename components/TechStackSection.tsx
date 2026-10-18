@@ -71,6 +71,7 @@ export default function TechStackSection() {
               <span className={`tech-dot level-${tech.level}`} aria-hidden="true" />
               {levelLabel[tech.level]}
             </span>
+            <span className="tech-card-logo-frame" aria-hidden="true">
             {tech.image ? (
               <Image
                 src={tech.image}
@@ -88,6 +89,7 @@ export default function TechStackSection() {
                   : tech.name.slice(0, 2).toUpperCase()}
               </span>
             )}
+            </span>
             <div className="tech-card-info">
               <div className="tech-card-name">{tech.name}</div>
               <div className="tech-card-desc">{tech.description}</div>
