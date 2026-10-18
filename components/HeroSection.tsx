@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import SunsetHeroArt from '@/components/SunsetHeroArt';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -28,7 +29,7 @@ export default function HeroSection() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } });
 
-      tl.from('.hero-grid-bg', { opacity: 0, duration: 2 })
+      tl.from('.sunset-hero-art', { opacity: 0, duration: 1.8 })
         .from('.hero-location', { opacity: 0, y: 20 }, '-=1.5')
         .from('.hero-intro-label', { opacity: 0, x: -20 }, '-=1.2')
         .from('.hero-title span', { opacity: 0, y: 40, stagger: 0.2 }, '-=1')
@@ -45,6 +46,7 @@ export default function HeroSection() {
     <section id="home" className="section-card section-hero" ref={containerRef}>
       {/* Technical Grid Background */}
       <div className="hero-grid-bg" aria-hidden="true" />
+      <SunsetHeroArt />
       
       <div className="hero-content-wrap">
         <div className="hero-location">Casablanca, Morocco · {time}</div>
