@@ -7,7 +7,7 @@ Built with [Next.js](https://nextjs.org) (App Router), React 19, TypeScript, GSA
 ## Features
 
 - **App Router architecture** with server components and route handlers
-- **Animated, single-page experience** — hero, experience, education, services, selected work, process, FAQs, and contact sections (GSAP-driven)
+- **Responsive portfolio homepage** — hero, Featured Work, experience, expertise, technical stack, About/Education and contact sections
 - **Working contact form** — `app/api/contact/route.ts` sends email via Resend
 - **SEO & discoverability** — dynamic `sitemap`, `robots`, `manifest`, Open Graph / Twitter images, JSON-LD structured data, and an `llms.txt` route
 - **Content authored in the repository** — homepage data in `data/portfolio.ts` and `data/site.ts`; projects and writing in `content/`

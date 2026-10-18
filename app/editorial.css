@@ -461,3 +461,35 @@
   .editorial-works-toolbar .editorial-outlined-link { width: 100%; }
   .editorial-menu-pages a { min-height: 48px; }
 }
+
+
+/* A useful 404 rather than a raw framework error, including unpublished URLs. */
+.editorial-not-found {
+  min-height: min(70vh, 620px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background:
+    radial-gradient(ellipse at 90% 10%, rgba(243,79,17,.11), transparent 55%),
+    rgba(17,17,20,.97);
+}
+.editorial-error-code {
+  font-family: var(--font-heading);
+  font-size: clamp(86px, 14vw, 148px);
+  font-weight: 700;
+  letter-spacing: -.06em;
+  line-height: .85;
+  color: rgba(255, 142, 88, .18);
+  margin-bottom: 30px;
+}
+.editorial-not-found h1 {
+  font: 700 clamp(43px, 5vw, 64px)/1.07 var(--font-heading);
+  margin: 0 0 19px;
+  color: #fff;
+}
+.editorial-not-found p {
+  max-width: 54ch;
+  font-size: 15px; line-height: 1.72;
+  color: #d4d0d2;
+}
