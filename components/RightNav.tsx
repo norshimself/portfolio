@@ -58,7 +58,8 @@ export default function RightNav({ active }: { active: string }) {
                 {NavIcons[link.icon] ?? NavIcons.home}
                 <span className="nav-tooltip" aria-hidden="true">{link.label}</span>
                 <span className="nav-dock-label" aria-hidden="true">
-                  {dockLabels[id] ?? link.label}
+                  {isHome ? (dockLabels[id] ?? link.label) :
+                    (link.label === 'Experience' ? 'Career' : link.label)}
                 </span>
               </Link>
             </li>

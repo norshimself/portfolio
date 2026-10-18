@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import type { WorkItem } from '@/types';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { works } from '@/data/portfolio';
@@ -16,8 +18,9 @@ function ArrowIcon() {
   );
 }
 
-export default function SelectedWorksSection() {
+export default function SelectedWorksSection({ featuredProjects = [] }: { featuredProjects?: WorkItem[] }) {
   const containerRef = useRef<HTMLElement>(null);
+  const projects = featuredProjects.length ? featuredProjects : works;
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -44,8 +47,11 @@ export default function SelectedWorksSection() {
       <p className="work-section-intro">
         Project case studies in progress. Replace the sample entries in <code>data/portfolio.ts</code>.
       </p>
+      <div className="editorial-works-toolbar">
+        <Link href="/projects" className="editorial-outlined-link">Browse all projects <span aria-hidden="true">↗</span></Link>
+      </div>
       <div className="works-grid">
-        {works.map((work, index) => (
+        {projects.map((work, index) => (
           <article
             key={work.title + index}
             className="work-item-card"
@@ -77,7 +83,7 @@ export default function SelectedWorksSection() {
                   {work.category}{work.role ? ' · ' + work.role : ''}
                 </span>
                 <span className="work-card-index" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')} / {String(works.length).padStart(2, '0')}
+                  {String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
                 </span>
               </div>
               <h3 className="work-meta-title">{work.title}</h3>
@@ -90,15 +96,18 @@ export default function SelectedWorksSection() {
               <div className="work-card-footer">
                 <span className="work-meta-date">{work.date}</span>
                 {work.href ? (
-                  <a
-                    href={work.href}
-                    className="work-visit-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={'View ' + work.title + ' in a new tab'}
-                  >
-                    View project <ArrowIcon />
-                  </a>
+                  work.href.startsWith('/') ? (
+                    <Link href={work.href} className="work-visit-link"
+                      aria-label={'Read case study for ' + work.title}>
+                      Read case study <ArrowIcon />
+                    </Link>
+                  ) : (
+                    <a href={work.href} className="work-visit-link"
+                      target="_blank" rel="noopener noreferrer"
+                      aria-label={'View ' + work.title + ' in a new tab'}>
+                      View project <ArrowIcon />
+                    </a>
+                  )
                 ) : (
                   <span className="work-draft-label">Draft · Replace content</span>
                 )}

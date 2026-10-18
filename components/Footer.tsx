@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
   const items = Array(8).fill(null);
 
@@ -19,9 +21,11 @@ export default function Footer() {
           © {new Date().getFullYear()} Nasroallah Elidrissi. All Rights Reserved.
         </p>
         <nav className="footer-links" aria-label="Footer links">
-          <a href="#home">Home</a>
-          <a href="#works">Works</a>
-          <a href="#contact">Contact</a>
+          <Link href="/">Home</Link>
+          <Link href="/projects">Projects</Link>
+          <Link href="/blog">Writing</Link>
+          <Link href="/#works">Work</Link>
+          <Link href="/#contact">Contact</Link>
           <a href="mailto:nasroallah.elidrissi@gmail.com">Email</a>
         </nav>
       </div>
