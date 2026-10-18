@@ -24,6 +24,7 @@ export default function HeroSection() {
   }, []);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } });
 
@@ -73,11 +74,11 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll Discovery */}
-      <a href="#experience" className="scroll-discovery" aria-label="Scroll to experience">
+      <a href="#works" className="scroll-discovery" aria-label="Scroll to featured projects">
         <div className="scroll-mouse">
           <div className="scroll-wheel" />
         </div>
-        <span>Start with where I&apos;ve worked</span>
+        <span>See featured projects</span>
       </a>
     </section>
   );

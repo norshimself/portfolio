@@ -38,92 +38,97 @@ const SERVICE_ICONS = [
   { bg: 'linear-gradient(135deg,#80f880,#00a030)', Icon: DevOpsIcon },
 ];
 
+const order = [2, 3, 1, 4];
+const orderedServices = [...services].sort((a, b) => (
+  order.indexOf(a.id) === -1 ? 99 : order.indexOf(a.id)
+) - (
+  order.indexOf(b.id) === -1 ? 99 : order.indexOf(b.id)
+));
+
 export default function ServicesSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState<number | null>(2);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       gsap.from('.accordion-item', {
         opacity: 0,
-        x: -20,
-        stagger: 0.15,
-        duration: 0.8,
+        x: -16,
+        stagger: 0.12,
+        duration: 0.55,
         immediateRender: false,
-        scrollTrigger: {
-          trigger: '#services',
-          start: 'top 90%',
-        }
+        scrollTrigger: { trigger: '#services', start: 'top 90%' },
       });
-
-      gsap.from('.services-footer', {
-        opacity: 0,
-        y: 20,
-        duration: 1,
-        delay: 0.5,
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: '.services-footer',
-          start: 'top 98%',
-        }
-      });
-
       ScrollTrigger.refresh();
     }, containerRef);
-
     return () => ctx.revert();
   }, []);
 
   return (
-    <section id="services" className="section-card" ref={containerRef}>
-      <div className="section-label">Engineering expertise</div>
+    <section id="services" className="section-card expertise-section" ref={containerRef}>
+      <div className="section-label">What I bring to a team</div>
+      <h2 className="expertise-heading">Engineering expertise</h2>
+      <p className="expertise-intro">
+        A closer look at the systems, integrations, and development challenges I enjoy solving.
+      </p>
 
-      <div>
-        {services.map((svc, i) => (
-          <div
-            key={svc.id}
-            className={`accordion-item${active === svc.id ? ' active' : ''}`}
-            onClick={() => setActive(active === svc.id ? 0 : svc.id)}
-            role="button"
-            tabIndex={0}
-            aria-expanded={active === svc.id}
-            aria-controls={'service-panel-' + svc.id}
-            onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setActive(active === svc.id ? 0 : svc.id); } }}
-          >
-            <div className="accordion-head">
+      <div className="expertise-accordions">
+        {orderedServices.map((svc) => {
+          const expanded = active === svc.id;
+          const Icon = SERVICE_ICONS[(svc.id - 1) % SERVICE_ICONS.length].Icon;
+          const panelId = 'service-panel-' + svc.id;
+          const controlId = 'service-toggle-' + svc.id;
+
+          return (
+            <div key={svc.id} className={expanded ? 'accordion-item active' : 'accordion-item'}>
+              <h3 className="accordion-heading">
+                <button
+                  id={controlId}
+                  type="button"
+                  className="accordion-head"
+                  aria-expanded={expanded}
+                  aria-controls={panelId}
+                  onClick={() => setActive(expanded ? null : svc.id)}
+                >
+                  <span
+                    className="accordion-icon-wrap"
+                    style={{ background: SERVICE_ICONS[(svc.id - 1) % SERVICE_ICONS.length].bg }}
+                    aria-hidden="true"
+                  >
+                    <Icon />
+                  </span>
+                  <span className="accordion-title">{svc.title}</span>
+                  <span className="accordion-num" aria-hidden="true">
+                    {String(svc.id).padStart(2, '0')}
+                  </span>
+                  <span className="accordion-toggle" aria-hidden="true">+</span>
+                </button>
+              </h3>
               <div
-                className="accordion-icon-wrap"
-                style={{ background: SERVICE_ICONS[i % SERVICE_ICONS.length].bg }}
-                aria-hidden="true"
+                id={panelId}
+                className="accordion-body"
+                role="region"
+                aria-labelledby={controlId}
+                hidden={!expanded}
               >
-                {(() => {
-                  const IconComponent = SERVICE_ICONS[i % SERVICE_ICONS.length].Icon;
-                  return <IconComponent />;
-                })()}
-              </div>
-              <div className="accordion-title">{svc.title}</div>
-              <sup className="accordion-num">({String(svc.id).padStart(2,'0')})</sup>
-              <div className="accordion-toggle">+</div>
-            </div>
-            <div id={'service-panel-' + svc.id} className="accordion-body" hidden={active !== svc.id}>
-              <div className="accordion-list">
-                {svc.items.map((item, j) => (
-                  <div key={j} className="accordion-list-item">{item}</div>
-                ))}
+                <ul className="accordion-list">
+                  {svc.items.map((item) => (
+                    <li key={item} className="accordion-list-item">{item}</li>
+                  ))}
+                </ul>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="services-footer">
-        <div className="worldwide-tag">
-          Open to teams <strong>anywhere</strong>
-        </div>
+        <div className="worldwide-tag">Open to teams <strong>anywhere</strong></div>
         <a href="#contact" className="contact-link">
-          Let&apos;s talk
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-            <path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+          Have a role in mind?
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </a>
       </div>
