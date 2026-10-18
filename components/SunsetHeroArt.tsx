@@ -1,3 +1,5 @@
+import AmbientEmbers from '@/components/AmbientEmbers';
+
 /**
  * SVG-only sunset composition. No remote image, Three.js, or canvas required.
  * Decorative: the hero headline and CTAs are real, selectable HTML above it.
@@ -71,6 +73,7 @@ export default function SunsetHeroArt() {
         </g>
         <path d="M102 164H167 M112 173H148 M614 545H690" stroke="#F9B991" strokeOpacity=".20" strokeWidth="1" />
       </svg>
+      <AmbientEmbers />
     </div>
   );
 }

@@ -50,8 +50,9 @@ export default function AmbientEmbers() {
     let lastDraw = 0;
 
     const resize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
+      const bounds = canvas.parentElement?.getBoundingClientRect();
+      width = Math.ceil(bounds?.width || window.innerWidth);
+      height = Math.ceil(bounds?.height || window.innerHeight);
 
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
       canvas.width = Math.round(width * pixelRatio);
@@ -60,7 +61,7 @@ export default function AmbientEmbers() {
       canvas.style.height = height + 'px';
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
 
-      const count = width < 769 ? 0 : Math.min(28, Math.max(14, Math.round(width / 55)));
+      const count = width < 769 ? 0 : Math.min(28, Math.max(18, Math.round(width / 34)));
       sparks = Array.from({ length: count }, (_, index) => ({
         x: Math.random() * width,
         y: Math.random() * height,

@@ -344,3 +344,14 @@ body { color: #f7eee9; }
   .expertise-section .glyph-flow,
   .expertise-section .glyph-node { animation: none !important; }
 }
+
+
+/* Embers live inside the hero composition, so they remain visible over its sun
+   rather than disappearing behind opaque content cards. */
+.sunset-hero-art .ambient-embers {
+  z-index: 3;
+  opacity: .85;
+}
+@media (max-width: 768px) {
+  .sunset-hero-art .ambient-embers { display: none; }
+}

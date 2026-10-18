@@ -1,6 +1,5 @@
 'use client';
 
-import AmbientEmbers from '@/components/AmbientEmbers';
 
 type Phase = 'golden' | 'afterglow' | 'twilight';
 
@@ -21,7 +20,6 @@ export default function SunsetAtmosphere({ active }: { active: string }) {
       <div className="sunset-atmosphere-layer atmosphere-twilight" />
       <div className="sunset-atmosphere-vignette" />
       <div className="sunset-atmosphere-grain" />
-      <AmbientEmbers />
     </div>
   );
 }
