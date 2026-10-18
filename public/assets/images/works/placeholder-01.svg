@@ -1,30 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
 <title id="title">Featured project 01 placeholder image</title>
-<desc id="desc">Abstract dark technical interface layout with warm sunset coral and twilight accents and the words Project 01, replace this image.</desc>
+<desc id="desc">Abstract dark technical interface layout with orange accents and the words Project 01, replace this image.</desc>
 <defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#251c31"/><stop offset="1" stop-color="#0b0d16"/></linearGradient>
-  <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ef6b4b"/><stop offset="1" stop-color="#7a4a79"/></linearGradient>
-  <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" fill="none" stroke="#ffd3a4" stroke-opacity=".06"/></pattern>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#191d24"/><stop offset="1" stop-color="#0b0d12"/></linearGradient>
+  <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f34f11"/><stop offset="1" stop-color="#8e2e16"/></linearGradient>
+  <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" fill="none" stroke="#f4f4f4" stroke-opacity=".06"/></pattern>
 </defs>
 <rect width="1200" height="750" fill="url(#bg)"/>
 <rect width="1200" height="750" fill="url(#grid)"/>
-<circle cx="1010" cy="120" r="290" fill="#ef6b4b" opacity=".06"/>
+<circle cx="1010" cy="120" r="290" fill="#f34f11" opacity=".06"/>
 <path d="M0 632H1200" stroke="#ffffff" stroke-opacity=".10"/>
-<rect x="74" y="64" width="10" height="10" rx="5" fill="#ef6b4b"/>
-<text x="98" y="75" fill="#d1beca" font-size="19" font-family="Arial,sans-serif" font-weight="700" letter-spacing="4">CASE STUDY · CONTENT DRAFT</text>
-<text x="74" y="327" fill="#f9f0eb" font-size="92" font-family="Arial,sans-serif" font-weight="700" letter-spacing="-3">PROJECT 01</text>
+<rect x="74" y="64" width="10" height="10" rx="5" fill="#f34f11"/>
+<text x="98" y="75" fill="#aab2c1" font-size="19" font-family="Arial,sans-serif" font-weight="700" letter-spacing="4">CASE STUDY · CONTENT DRAFT</text>
+<text x="74" y="327" fill="#f7f8fa" font-size="92" font-family="Arial,sans-serif" font-weight="700" letter-spacing="-3">PROJECT 01</text>
 <rect x="74" y="366" width="390" height="4" fill="url(#accent)"/>
-<text x="74" y="418" fill="#e3d5d2" font-size="23" font-family="Arial,sans-serif">Replace with your project screenshot</text>
-<text x="74" y="455" fill="#c8b6c1" font-size="19" font-family="Arial,sans-serif">Images, architecture, outcomes and links</text>
+<text x="74" y="418" fill="#b2b9c5" font-size="23" font-family="Arial,sans-serif">Replace with your project screenshot</text>
+<text x="74" y="455" fill="#798393" font-size="19" font-family="Arial,sans-serif">Images, architecture, outcomes and links</text>
 <g opacity=".9" transform="translate(72,0)">
-  <rect x="665" y="182" width="336" height="340" rx="18" fill="#1b182a" stroke="#ffad71" stroke-opacity=".18" stroke-width="2"/>
-  <rect x="665" y="182" width="336" height="54" rx="18" fill="#30203e"/>
-  <rect x="687" y="202" width="12" height="12" rx="6" fill="#ef6b4b"/>
-  <rect x="711" y="202" width="12" height="12" rx="6" fill="#ffad71"/>
-  <rect x="735" y="202" width="12" height="12" rx="6" fill="#bfa6be"/>
-  <path d="M712 284h224M712 324h134M712 364h190M712 404h120" stroke="#e6c7be" stroke-opacity=".28" stroke-width="12" stroke-linecap="round"/>
-  <path d="M712 459h88M822 459h66" stroke="#ef6b4b" stroke-opacity=".75" stroke-width="12" stroke-linecap="round"/>
+  <rect x="665" y="182" width="336" height="340" rx="18" fill="#171c24" stroke="#b3bec9" stroke-opacity=".18" stroke-width="2"/>
+  <rect x="665" y="182" width="336" height="54" rx="18" fill="#252c36"/>
+  <rect x="687" y="202" width="12" height="12" rx="6" fill="#f34f11"/>
+  <rect x="711" y="202" width="12" height="12" rx="6" fill="#db8e63"/>
+  <rect x="735" y="202" width="12" height="12" rx="6" fill="#a5b0ba"/>
+  <path d="M712 284h224M712 324h134M712 364h190M712 404h120" stroke="#b4c0ca" stroke-opacity=".28" stroke-width="12" stroke-linecap="round"/>
+  <path d="M712 459h88M822 459h66" stroke="#f34f11" stroke-opacity=".75" stroke-width="12" stroke-linecap="round"/>
 </g>
-<text x="74" y="696" fill="#beaebb" font-size="19" font-family="Arial,sans-serif" letter-spacing="3">NASROALLAH / SELECTED WORK</text>
-<text x="1126" y="696" fill="#ef6b4b" font-size="24" font-family="Arial,sans-serif" text-anchor="end" font-weight="700">01 / 03</text>
+<text x="74" y="696" fill="#747e8e" font-size="19" font-family="Arial,sans-serif" letter-spacing="3">NASROALLAH / SELECTED WORK</text>
+<text x="1126" y="696" fill="#f34f11" font-size="24" font-family="Arial,sans-serif" text-anchor="end" font-weight="700">01 / 03</text>
 </svg>

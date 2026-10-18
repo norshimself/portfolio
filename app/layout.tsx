@@ -2,8 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Geist, Rajdhani } from 'next/font/google';
 import './globals.css';
 import './ux.css';
-import './sunset.css';
-import './sidebar.css';
+import EtherealBackground from '@/components/EtherealBackground';
 import StructuredData from '@/components/StructuredData';
 import { siteConfig } from '@/data/site';
 import { Analytics } from '@vercel/analytics/next';
@@ -65,7 +64,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#0b0d16',
+  themeColor: '#0a0a0a',
 };
 
 export default function RootLayout({
@@ -77,6 +76,7 @@ export default function RootLayout({
     <html lang="en-US" className={`${geist.variable} ${rajdhani.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <StructuredData />
+        <EtherealBackground />
         {children}
         <Analytics />
         <SpeedInsights />

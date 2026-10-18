@@ -18,8 +18,8 @@ This branch is a **draft**. Experience and Featured Work contain Lorem Ipsum exa
 - `public/assets/images/about/profile.webp` is your existing portrait. Replace it with a professionally cropped WebP if needed and preserve the same path.
 - `public/assets/images/works/placeholder-01.svg` through `placeholder-03.svg` are neutral **draft artwork**, not screenshots. Replace their `works[].image` references with real screenshots later; the previous WebP project screenshots are still in the repository.
 - Tech logos are now bundled in `public/assets/icons/tech`, based on Devicon (MIT; see `public/assets/icons/tech/DEVICON-LICENSE.txt`). Nine tools without a dependable vector logo show a styled letter badge.
-- The old `hero-bg.mp4` and `EtherealBackground` are retained for reference but **no longer rendered**; AFTERGLOW replaces both with lightweight SVG/CSS scenery.
-- `app/icon.svg` is the new sunset favicon (with `app/favicon.ico` as fallback). `app/opengraph-image.tsx` generates a matching sunset social preview.
+- The decorative `hero-bg.mp4` plays only on desktop after load; it is skipped on reduced-motion and data-saving connections.
+- `app/favicon.ico` remains your favicon, and `app/opengraph-image.tsx` generates the social preview.
 
 ## Local validation
 
@@ -47,24 +47,3 @@ The contact form needs `RESEND_API_KEY` and preferably a verified `RESEND_FROM_E
 - Engineering Expertise uses native button accordions; Backend and Data Engineering appear first.
 - Contact validation, form status, direct email, and error feedback are more accessible.
 - See `UX_TEST_CHECKLIST.md` for keyboard, responsive, and contact testing.
-
-## AFTERGLOW visual system
-
-- Theme styles are in `app/sunset.css`, loaded after `globals.css` and `ux.css`.
-- `components/SunsetAtmosphere.tsx` transitions between golden hour, afterglow, and twilight according to the active page section.
-- `components/SunsetHeroArt.tsx` draws a custom SVG sun, orbital rings, and a horizon grid.
-- `components/AmbientEmbers.tsx` draws a small number of visible hero particles with Canvas 2D (up to 30 fps); it pauses offscreen and for reduced motion, mobile screens, hidden tabs, and data-saving connections.
-- `components/EngineeringGlyph.tsx` adds four illustrated Expertise diagrams; `components/CelestialMark.tsx` illustrates About.
-- Experience dots illuminate as entries enter view. Project cards, technology cards, and contact feedback have subtle sunset styling.
-- See `AFTERGLOW_GUIDE.md` for customization and QA.
-
-**Note:** The experiences and works entries remain fictional draft content; this visual update does not verify those claims.
-
-## Unified sunset palette
-
-- Semantic design tokens for backgrounds, text, links, borders, action buttons, and error states are defined in `app/sunset.css`.
-- The older neon-blue and green UI accents have been replaced with coral/amber/violet treatments; native technology-logo colors and browser-window traffic-light indicators remain intentional exceptions.
-- `app/globals.css` contains safe baseline fallbacks, while `app/ux.css` references the semantic sunset tokens for shared components.
-- Three draft project cover SVGs, `app/icon.svg`, and `app/opengraph-image.tsx` were recolored to match AFTERGLOW.
-- Main buttons use `--sunset-action` (`#BD4939`) so white labels meet normal-text AA contrast. Readable prose uses `--sunset-ink*` colors.
-- For the complete palette and customization details, see `AFTERGLOW_GUIDE.md`.

@@ -44,22 +44,6 @@ export default function ExperienceSection() {
     return () => ctx.revert();
   }, []);
 
-  // Illuminate a timeline milestone when it enters the reading area.
-  // This doesn't hide content, so reduced-motion and no-JS remain readable.
-  useEffect(() => {
-    const list = containerRef.current;
-    if (!list || !('IntersectionObserver' in window)) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('is-in-view');
-      }),
-      { rootMargin: '0px 0px -27% 0px', threshold: 0.12 },
-    );
-    list.querySelectorAll('.exp-item').forEach((item) => observer.observe(item));
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section id="experience" className="section-card" ref={containerRef}>
       {/* Header: label on left, big quote on right */}

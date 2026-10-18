@@ -5,7 +5,6 @@ import LeftSidebar from '@/components/LeftSidebar';
 import Navbar from '@/components/Navbar';
 import RightNav from '@/components/RightNav';
 import useActiveSection from '@/hooks/useActiveSection';
-import SunsetAtmosphere from '@/components/SunsetAtmosphere';
 
 export default function PortfolioShell({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,7 +14,6 @@ export default function PortfolioShell({ children }: { children: React.ReactNode
 
   return (
     <div id="wrapper">
-      <SunsetAtmosphere active={active} />
       <a href="#main-content" className="skip-link">Skip to content</a>
       <LeftSidebar menuOpen={menuOpen} onMenuOpen={openMenu} />
       <Navbar open={menuOpen} onClose={closeMenu} active={active} />

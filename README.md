@@ -7,7 +7,7 @@ Built with [Next.js](https://nextjs.org) (App Router), React 19, TypeScript, GSA
 ## Features
 
 - **App Router architecture** with server components and route handlers
-- **Afterglow visual system** — SVG sunset hero, gentle embers, engineering diagrams, glowing experience timeline and sunset-to-twilight section transitions
+- **Animated, single-page experience** — hero, experience, education, services, selected work, process, FAQs, and contact sections (GSAP-driven)
 - **Working contact form** — `app/api/contact/route.ts` sends email via Resend
 - **SEO & discoverability** — dynamic `sitemap`, `robots`, `manifest`, Open Graph / Twitter images, JSON-LD structured data, and an `llms.txt` route
 - **Single source of truth for content** — all copy lives in `data/portfolio.ts` and `data/site.ts`
@@ -81,15 +81,3 @@ The `chore/portfolio-content-refresh-audit-fixes` branch intentionally contains 
 - The decorative background video does not load on mobile, reduced-motion, or data-saving connections.
 
 Run `npm run check:assets` to validate local image and video references, or run `npm run lint`, `npx tsc --noEmit`, and `npm run build` for additional checks.
-
-## AFTERGLOW visual direction
-
-This feature branch experiments with a cinematic, engineering-oriented sunset. The experience uses CSS gradients, original inline SVG, and a tiny Canvas 2D ember field. The old video/orb components are disconnected to avoid stacked effects.
-
-- **Golden hour:** illustrated sun, orbital rings, and perspective grid in the hero
-- **Afterglow:** project cards, illuminated timeline, and engineering diagrams
-- **Twilight:** technical stack, About ornament, and contact star field
-- **Brand assets:** `app/icon.svg` and `app/opengraph-image.tsx`
-- **Theme styles and tuning:** `app/sunset.css` and `AFTERGLOW_GUIDE.md`
-
-Motion is decorative and respects reduced-motion preferences. Particles stop when the hero is offscreen, the tab is hidden, or a connection requests data savings. Portfolio content is intentionally still in draft.
