@@ -78,3 +78,14 @@ npm run dev
 Review at 320px, 390px, 768px, 1024px, and 1440px, including reduced-motion, keyboard controls, and screenshot comparisons. The detailed manual checklist is in `UX_TEST_CHECKLIST.md`.
 
 Do not merge into main before replacing fictional experience and project content with verified facts.
+
+## Left profile section — AFTERGLOW identity
+
+The left sidebar is now a profile and navigation anchor rather than a second hero: framed portrait with custom sunset orbit linework, name and software-engineering role from `data/site.ts`, backend/data specialties, availability, and two meaningful CTAs.
+
+- **Component:** `components/LeftSidebar.tsx` (one rendering for all breakpoints).
+- **Styles:** `app/sidebar.css`, imported after `app/sunset.css`.
+- **Desktop:** independent scrolling on short viewports keeps contact and social links reachable.
+- **≤1024px:** avatar, name/role, contact button, and burger button become a single compact sticky header; decorative elements and lower-priority actions are hidden.
+- **Motion:** orbit and glow animation turn off with reduced-motion preferences.
+- **No fabricated links:** socials come from `data/portfolio.ts`, and the secondary CTA points to the real Featured Work anchor. A CV button can be added once a verified CV file exists.

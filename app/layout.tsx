@@ -3,6 +3,7 @@ import { Geist, Rajdhani } from 'next/font/google';
 import './globals.css';
 import './ux.css';
 import './sunset.css';
+import './sidebar.css';
 import StructuredData from '@/components/StructuredData';
 import { siteConfig } from '@/data/site';
 import { Analytics } from '@vercel/analytics/next';

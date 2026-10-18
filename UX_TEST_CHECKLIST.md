@@ -78,3 +78,14 @@ Report any failed checks with a screenshot, viewport size, browser, and console 
 - [ ] Technology logos remain recognizable on their pale neutral tiles; proficiency indicators use amber, rose, and lavender.
 - [ ] The three temporary project cover SVGs and browser favicon match the palette.
 - [ ] Error feedback remains distinguishable from success without relying on color alone.
+
+### Left profile card
+
+- [ ] Portrait is sharp and framed by subtle sunset orbital lines on desktop.
+- [ ] Name, role, specialties, and existing full-time availability statement remain readable.
+- [ ] At 1280×680 the left sidebar can scroll independently to its actions/social links.
+- [ ] Main CTA scrolls to Contact, secondary CTA scrolls to Featured Work, and social links match the existing data.
+- [ ] At 320, 390, 768, and 1024px the sidebar reduces to one sticky header row.
+- [ ] At 320px the menu and contact buttons remain visible and keyboard-accessible.
+- [ ] Hamburger dialog still opens above the sidebar, traps focus, and restores focus when closed.
+- [ ] Reduced-motion mode disables sidebar orbit/glow movement but preserves artwork.

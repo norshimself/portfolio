@@ -1,135 +1,198 @@
 'use client';
 
 import Image from 'next/image';
+import { siteConfig } from '@/data/site';
 import { socialLinks } from '@/data/portfolio';
-
 
 type LeftSidebarProps = {
   menuOpen: boolean;
   onMenuOpen: () => void;
 };
 
-export default function LeftSidebar({ menuOpen, onMenuOpen }: LeftSidebarProps) {
-
+function OrbitMark() {
   return (
-    <aside className="left-sidebar" aria-label="Profile sidebar">
-      <div className="sidebar-card">
-        {/* Top row: menu button + status */}
-        <div className="sidebar-top" style={{ width: '100%' }}>
-          <button 
-            className="tf-btn-menu" 
-            style={{ position: 'static', transform: 'none' }}
+    <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <circle cx="21" cy="21" r="8" fill="#EF6B4B" fillOpacity=".18" stroke="#FFAD71" strokeWidth="1.5" />
+      <ellipse cx="21" cy="21" rx="19" ry="8" transform="rotate(-27 21 21)" stroke="#FFD3A4" strokeWidth="1.35" />
+      <circle cx="37" cy="13" r="2.2" fill="#FFD3A4" />
+      <path d="M21 10V6M21 36V32" stroke="#FFAD71" strokeOpacity=".65" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ProfileOrbit() {
+  return (
+    <svg viewBox="0 0 300 255" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="profile-orbit-stroke" x1="22" y1="25" x2="270" y2="214" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FFD3A4" stopOpacity=".45" />
+          <stop offset=".55" stopColor="#EF6B4B" stopOpacity=".28" />
+          <stop offset="1" stopColor="#7A4A79" stopOpacity=".16" />
+        </linearGradient>
+      </defs>
+      <ellipse cx="149" cy="127" rx="128" ry="58" transform="rotate(-25 149 127)" stroke="url(#profile-orbit-stroke)" strokeWidth="1.25" />
+      <ellipse cx="149" cy="127" rx="109" ry="103" stroke="#F7C9AB" strokeOpacity=".15" strokeDasharray="3 9" />
+      <circle cx="260" cy="76" r="5" fill="#FFD3A4" />
+      <circle cx="260" cy="76" r="13" stroke="#FFD3A4" strokeOpacity=".22" />
+      <circle cx="29" cy="178" r="3" fill="#ECA3A9" />
+      <path d="M30 32V49M22 40H39M267 206V224M258 215H276" stroke="#FFD3A4" strokeOpacity=".38" strokeLinecap="round" />
+      <path d="M29 235H96M201 26H261" stroke="#FFAD71" strokeOpacity=".18" />
+    </svg>
+  );
+}
+
+function ArrowIcon({ diagonal = false }: { diagonal?: boolean }) {
+  return diagonal ? (
+    <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+      <path d="M3 15L15 3M15 3H6M15 3V12" />
+    </svg>
+  ) : (
+    <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+      <path d="M3 9H15M10 4L15 9L10 14" />
+    </svg>
+  );
+}
+
+function SocialIcon({ name }: { name: string }) {
+  if (name === 'LinkedIn') {
+    return (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false">
+        <path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5V5c0-2.761-2.239-5-5-5zM8 19H5V9h3v10zM6.5 7.6a1.75 1.75 0 110-3.5 1.75 1.75 0 010 3.5zM20 19h-3v-5.4c0-3.1-4-3.3-4 0V19h-3V9h3v1.6c1.2-2.2 7-2.3 7 2.7V19z" />
+      </svg>
+    );
+  }
+  if (name === 'GitHub') {
+    return (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false">
+        <path d="M12 .5A11.5 11.5 0 008.36 23c.58.1.79-.25.79-.56v-2.04c-3.22.7-3.9-1.36-3.9-1.36-.53-1.34-1.3-1.69-1.3-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.37.96.1-.74.4-1.25.74-1.54-2.58-.29-5.29-1.29-5.29-5.73 0-1.27.45-2.3 1.2-3.11-.12-.29-.52-1.47.11-3.07 0 0 .97-.31 3.19 1.19a11.1 11.1 0 015.81 0c2.22-1.5 3.19-1.19 3.19-1.19.63 1.6.23 2.78.11 3.07.75.81 1.2 1.84 1.2 3.11 0 4.45-2.72 5.43-5.31 5.72.42.36.8 1.06.8 2.14v3.18c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z" />
+      </svg>
+    );
+  }
+  if (name === 'Email') {
+    return (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+        <rect x="2" y="5" width="20" height="14" rx="2" />
+        <path d="M3 7L12 13.5L21 7" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12H21M12 3a15 15 0 010 18M12 3a15 15 0 000 18" />
+    </svg>
+  );
+}
+
+export default function LeftSidebar({ menuOpen, onMenuOpen }: LeftSidebarProps) {
+  return (
+    <aside className="left-sidebar" aria-label="Profile and contact">
+      <div className="sidebar-card sidebar-profile">
+        <div className="sidebar-top">
+          <div className="sidebar-brand" aria-label="Afterglow portfolio">
+            <span className="sidebar-brand-symbol"><OrbitMark /></span>
+            <span className="sidebar-brand-copy">
+              <strong>AFTERGLOW</strong>
+              <small>PERSONAL PORTFOLIO</small>
+            </span>
+          </div>
+          <button
+            className="tf-btn-menu sidebar-menu-control"
+            type="button"
             onClick={onMenuOpen}
             aria-label="Open navigation menu"
             aria-controls="portfolio-menu"
             aria-haspopup="dialog"
             aria-expanded={menuOpen}
           >
-            <svg width="14" height="14" viewBox="0 0 16 14" fill="none">
-              <path d="M1 1h14M1 7h14M1 13h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+            <svg width="19" height="19" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true" focusable="false">
+              <path d="M3 5H17M6 10H17M3 15H17" />
             </svg>
           </button>
-          <div className="status-badge">
-            <span className="status-dot" />
-            Open to <strong>full-time roles</strong>
+        </div>
+
+        <div className="sidebar-portrait-stage">
+          <span className="sidebar-portrait-glow" aria-hidden="true" />
+          <span className="sidebar-orbit-field" aria-hidden="true"><ProfileOrbit /></span>
+          <div className="sidebar-avatar">
+            <Image
+              src="/assets/images/about/profile.webp"
+              alt={'Portrait of ' + siteConfig.name}
+              width={190}
+              height={238}
+              sizes="(max-width: 480px) 40px, (max-width: 1024px) 44px, 190px"
+              priority
+              className="sidebar-profile-image"
+            />
           </div>
+          <span className="sidebar-portrait-status" aria-hidden="true" />
+          <span className="sidebar-photo-note" aria-hidden="true">CASABLANCA · MA</span>
         </div>
 
-        {/* Avatar */}
-        <div className="sidebar-avatar">
-          <Image
-            src="/assets/images/about/profile.webp"
-            alt="Portrait of Nasroallah Elidrissi"
-            width={160}
-            height={200}
-            sizes="(max-width: 480px) 36px, (max-width: 1024px) 38px, 160px"
-            priority
-            style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-          />
+        <div className="sidebar-identity">
+          <span className="sidebar-identity-kicker">BACKEND / DATA / APIs</span>
+          <h2 className="sidebar-signature">{siteConfig.name}</h2>
+          <p className="sidebar-role">{siteConfig.jobTitle}</p>
         </div>
 
-        {/* Signature */}
-        <h2 className="sidebar-signature">
-          Nasroallah Elidrissi
-        </h2>
+        <p className="sidebar-intro">
+          Building dependable APIs, data integrations, and the systems behind them.
+        </p>
 
-        {/* Contact */}
-        <div className="sidebar-meta">
-          <a className="sidebar-email" href="mailto:nasroallah.elidrissi@gmail.com">nasroallah.elidrissi@gmail.com</a>
-          <div className="sidebar-location">Casablanca · Remote-friendly (GMT+1)</div>
+        <div className="sidebar-availability">
+          <span className="sidebar-availability-dot" aria-hidden="true" />
+          <span>Open to <strong>full-time roles</strong></span>
         </div>
 
-        <div className="sidebar-divider" />
-
-        {/* Social icons */}
-        <ul className="sidebar-social" aria-label="Social links">
-          {socialLinks.map((s) => (
-            <li key={s.label}>
-              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={s.label}>
-                <SocialIconSVG name={s.label} />
-              </a>
-            </li>
-          ))}
+        <ul className="sidebar-specialties" aria-label="Engineering focus areas">
+          <li>Backend systems</li>
+          <li>Data integration</li>
+          <li>API architecture</li>
         </ul>
 
-        {/* CTA button */}
-        <a href="#contact" className="sidebar-cta" aria-label="Get in touch">
-          <span>Get in Touch</span>
-          <span className="cta-arrow">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </span>
-        </a>
+        <div className="sidebar-footer">
+          <div className="sidebar-actions">
+            <a className="sidebar-cta sidebar-primary-action" href="#contact" aria-label="Go to contact section">
+              <span>Let&apos;s connect</span>
+              <span className="cta-arrow"><ArrowIcon diagonal /></span>
+            </a>
+            <a className="sidebar-secondary-action" href="#works">
+              <span>Explore selected work</span>
+              <ArrowIcon />
+            </a>
+          </div>
+
+          <div className="sidebar-social-wrap">
+            <div className="sidebar-social-heading">
+              <span>ELSEWHERE</span>
+              <span className="sidebar-social-rule" aria-hidden="true" />
+            </div>
+            <ul className="sidebar-social" aria-label="Social and contact links">
+              {socialLinks.map((social) => {
+                const external = social.href.startsWith('https://');
+                return (
+                  <li key={social.label}>
+                    <a
+                      href={social.href}
+                      target={external ? '_blank' : undefined}
+                      rel={external ? 'noopener noreferrer' : undefined}
+                      aria-label={external ? 'Visit ' + social.label + ' in a new tab' : 'Send an email'}
+                      title={social.label}
+                    >
+                      <SocialIcon name={social.label} />
+                      <span>{social.label}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="sidebar-footer-note">
+            <span className="sidebar-footer-indicator" aria-hidden="true" />
+            {siteConfig.location.city}, {siteConfig.location.country} · Remote-friendly
+          </div>
+        </div>
       </div>
     </aside>
-  );
-}
-
-function SocialIconSVG({ name }: { name: string }) {
-  const map: Record<string, React.ReactElement> = {
-    'LinkedIn': (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-      </svg>
-    ),
-    'GitHub': (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-      </svg>
-    ),
-    'Email': (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-        <polyline points="22,6 12,13 2,6"/>
-      </svg>
-    ),
-    'Twitter/X': (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/>
-      </svg>
-    ),
-    'Dribbble': (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.424 25.424 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.814 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.686 8.686 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"/>
-      </svg>
-    ),
-    'Instagram': (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-      </svg>
-    ),
-    'Facebook': (
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-      </svg>
-    ),
-  };
-  return map[name] || (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10"/>
-      <line x1="2" y1="12" x2="22" y2="12"/>
-      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-    </svg>
   );
 }
