@@ -17,8 +17,8 @@ export default function OpengraphImage() {
           position: 'relative',
           overflow: 'hidden',
           padding: '74px 78px',
-          color: '#fff4ed',
-          background: 'linear-gradient(120deg, #0b0d16 0%, #21162d 58%, #301e38 100%)',
+          color: '#f9f0eb',
+          background: 'linear-gradient(120deg, #0b0d16 0%, #211727 58%, #30203e 100%)',
           fontFamily: 'sans-serif',
         }}
       >
@@ -41,7 +41,7 @@ export default function OpengraphImage() {
             width: 290,
             height: 290,
             borderRadius: '50%',
-            background: 'linear-gradient(180deg, #ffdaa0 0%, #ffa16d 52%, #dc5370 100%)',
+            background: 'linear-gradient(180deg, #ffd3a4 0%, #ffad71 52%, #ef6b4b 100%)',
           }}
         />
         <div
@@ -73,24 +73,24 @@ export default function OpengraphImage() {
             top: 424,
             width: 515,
             height: 2,
-            background: '#fbb081',
+            background: '#ffad71',
             opacity: .65,
           }}
         />
         <div style={{ display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1, width: 880 }}>
-          <div style={{ display: 'flex', color: '#ffbd91', fontSize: 22, letterSpacing: 5, fontWeight: 700, marginBottom: 28 }}>
+          <div style={{ display: 'flex', color: '#ffad71', fontSize: 22, letterSpacing: 5, fontWeight: 700, marginBottom: 28 }}>
             BACKEND · DATA · INTEGRATIONS
           </div>
           <div style={{ display: 'flex', fontSize: 80, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2, maxWidth: 930 }}>
             {siteConfig.name}
           </div>
-          <div style={{ display: 'flex', fontSize: 43, fontWeight: 700, color: '#ffbf9d', marginTop: 18 }}>
+          <div style={{ display: 'flex', fontSize: 43, fontWeight: 700, color: '#ffd3a4', marginTop: 18 }}>
             {siteConfig.jobTitle}
           </div>
-          <div style={{ display: 'flex', fontSize: 26, color: '#f0dcdb', marginTop: 42 }}>
+          <div style={{ display: 'flex', fontSize: 26, color: '#e3d5d2', marginTop: 42 }}>
             Reliable systems for complex engineering challenges.
           </div>
-          <div style={{ display: 'flex', marginTop: 40, width: 190, height: 3, background: '#f99570' }} />
+          <div style={{ display: 'flex', marginTop: 40, width: 190, height: 3, background: '#ef6b4b' }} />
         </div>
       </div>
     ),
