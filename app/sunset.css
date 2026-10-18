@@ -3,22 +3,41 @@
  * Keep purely decorative effects behind content and honor reduced-motion.
  */
 :root {
+  /* Canonical AFTERGLOW palette — change colors here, not per component. */
   --sunset-midnight: #0b0d16;
+  --sunset-night: #131321;
+  --sunset-surface: #1b182a;
+  --sunset-surface-raised: #292037;
+  --sunset-surface-hover: #392841;
   --sunset-twilight: #30203e;
+  --sunset-violet: #7a4a79;
   --sunset-coral: #ef6b4b;
   --sunset-amber: #ffad71;
   --sunset-gold: #ffd3a4;
-  --sunset-violet: #7a4a79;
+  --sunset-ink: #f9f0eb;
+  --sunset-ink-soft: #e3d5d2;
+  --sunset-ink-muted: #c8b6c1;
+  --sunset-action: #bd4939; /* 5:1+ contrast with white text */
+  --sunset-action-hover: #99372f;
+  --sunset-error: #ffb1a9;
+  --sunset-focus: #ffd3a4;
   --sunset-line: rgba(255, 172, 118, .20);
-  --card: rgba(18, 18, 29, .85);
-  --card-2: rgba(25, 20, 34, .93);
-  --border: rgba(252, 194, 153, .13);
-  --border-2: rgba(252, 194, 153, .19);
-  --text-muted: rgba(255, 247, 239, .73);
-  --text-soft: rgba(255, 247, 239, .87);
+  --sunset-border: rgba(255, 190, 150, .17);
+  --sunset-border-strong: rgba(255, 190, 150, .30);
+
+  /* Existing components use these semantic compatibility tokens. */
+  --primary: var(--sunset-coral);
+  --bg: var(--sunset-midnight);
+  --text: var(--sunset-ink);
+  --text-muted: var(--sunset-ink-muted);
+  --text-soft: var(--sunset-ink-soft);
+  --card: rgba(22, 21, 35, .94);
+  --card-2: rgba(32, 24, 42, .96);
+  --border: var(--sunset-border);
+  --border-2: var(--sunset-border-strong);
 }
 html, body { background-color: var(--sunset-midnight); }
-body { color: #f7eee9; }
+body { color: var(--sunset-ink); }
 
 #wrapper {
   isolation: isolate;
@@ -97,12 +116,12 @@ body { color: #f7eee9; }
 }
 .sidebar-avatar { box-shadow: 0 0 0 1px rgba(255,178,125,.22), 0 12px 32px rgba(248,92,58,.09); }
 .sidebar-nav li { border-color: rgba(255, 186, 139, .12); }
-.section-label { color: #ffc49e; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; font-weight: 700; }
+.section-label { color: var(--sunset-gold); letter-spacing: .08em; text-transform: uppercase; font-size: 12px; font-weight: 700; }
 .section-label::before { background: var(--sunset-coral); box-shadow: 0 0 14px rgba(255,136,91,.5); }
 .status-dot { background: var(--sunset-coral); }
 .status-badge strong { color: #ffb790; }
-.right-nav li a.active { color: #ffb48d; background: rgba(250,125,78,.10); }
-.right-nav li a:hover { color: #ffb48d; }
+.right-nav li a.active { color: var(--sunset-amber); background: rgba(250,125,78,.10); }
+.right-nav li a:hover { color: var(--sunset-amber); }
 .work-meta-stack li,
 .exp-period-badge { border-color: rgba(255,194,151,.16); }
 
@@ -263,10 +282,10 @@ body { color: #f7eee9; }
 .expertise-section .accordion-title { color: #f7e9e2; }
 .expertise-section .accordion-item.active .accordion-title { color: #ffe0c3; }
 .expertise-section .accordion-item.active .accordion-toggle {
-  background: #aa3a42;
+  background: var(--sunset-action);
   border-color: #ffab85;
 }
-.expertise-section .accordion-head:focus-visible { outline-color: #ffd2a3; }
+.expertise-section .accordion-head:focus-visible { outline-color: var(--sunset-focus); }
 .expertise-section .expertise-detail-layout {
   display: grid;
   grid-template-columns: minmax(178px, 230px) minmax(0, 1fr);
@@ -328,7 +347,7 @@ body { color: #f7eee9; }
   opacity: .73;
 }
 .about-celestial svg { display: block; width: 100%; height: auto; }
-#about .about-intro-title { color: #ffe3ca; }
+#about .about-intro-title { color: var(--sunset-gold); }
 
 @media (max-width: 768px) {
   .expertise-section .expertise-detail-layout {
@@ -480,7 +499,7 @@ body { color: #f7eee9; }
   box-shadow: 0 0 0 2px rgba(255, 180, 135, .13), 0 0 24px rgba(249,118,79,.19);
 }
 .tech-stack-section .tech-tab.active {
-  background: #a74349;
+  background: var(--sunset-action);
   color: #fff;
   box-shadow: 0 0 24px rgba(239,111,80,.16);
 }
@@ -519,7 +538,7 @@ body { color: #f7eee9; }
   color: #ffd2af;
   text-shadow: 0 0 36px rgba(255,129,88,.20);
 }
-#contact .contact-direct-link { color: #ffd2b4; }
+#contact .contact-direct-link { color: var(--sunset-gold); }
 #contact .form-input:focus-visible,
 #contact .form-textarea:focus-visible { outline-color: #ffbb96; }
 #contact .contact-success-icon { position: relative; }
@@ -544,7 +563,7 @@ body { color: #f7eee9; }
 }
 .footer-marquee .marquee-star { color: #ffb481; }
 .footer-bottom-bar { border-top-color: rgba(255,180,132,.16); }
-.footer-links a:hover { color: #ffc199; }
+.footer-links a:hover { color: var(--sunset-amber); }
 
 @media (max-width: 768px) {
   #experience .exp-list { padding-left: 23px; margin-left: 1px; }
@@ -583,4 +602,180 @@ body { color: #f7eee9; }
 .sunset-atmosphere-layer { will-change: auto; }
 @media (max-width: 768px) {
   .sunset-atmosphere-layer { transition-duration: .75s; }
+}
+
+
+/* -------------------------------------------------------------
+   Shared interactive palette — all active UI follows the same
+   coral / amber / violet hierarchy, with readable contrast.
+-------------------------------------------------------------- */
+.tf-sidebar-menu {
+  background-color: var(--sunset-night);
+  border-right-color: var(--sunset-border-strong);
+}
+.tf-sidebar-menu .menu-title { color: var(--sunset-ink); }
+.tf-sidebar-menu .sidebar-nav a { color: var(--sunset-ink-soft); }
+.tf-sidebar-menu .sidebar-nav a.active,
+.tf-sidebar-menu .sidebar-nav a:hover,
+.tf-sidebar-menu .sidebar-nav a:focus-visible { color: var(--sunset-gold); }
+.tf-sidebar-menu .menu-link-index,
+.tf-sidebar-menu .menu-link-arrow { color: var(--sunset-ink-muted); }
+.tf-sidebar-menu .menu-contact { color: var(--sunset-ink-muted); }
+.tf-sidebar-menu .menu-contact a { color: var(--sunset-gold); }
+.tf-sidebar-menu .close-canvas {
+  border-color: var(--sunset-border-strong);
+  color: var(--sunset-ink-soft);
+}
+.overlay { background-color: rgba(9, 7, 18, .68); }
+
+.sidebar-card .sidebar-email,
+.sidebar-card .sidebar-cv,
+.sidebar-card .sidebar-location { color: var(--sunset-ink-soft); }
+.sidebar-card .sidebar-email:hover,
+.sidebar-card .sidebar-cv:hover { color: var(--sunset-gold); }
+.sidebar-card .status-badge {
+  border-color: var(--sunset-border-strong);
+  color: var(--sunset-ink-soft);
+}
+.sidebar-card .status-badge strong { color: var(--sunset-amber); }
+.sidebar-card .sidebar-divider { background: var(--sunset-border); }
+.right-nav .nav-tooltip {
+  color: var(--sunset-ink);
+  background: var(--sunset-surface-raised);
+  border-color: var(--sunset-border-strong);
+  box-shadow: 0 12px 30px rgba(6, 5, 12, .35);
+}
+.right-nav li a:focus-visible,
+.right-nav li a.active { outline-offset: 3px; }
+.right-nav li a.active svg { filter: drop-shadow(0 0 6px rgba(255, 174, 110, .33)); }
+
+.section-card .section-label { color: var(--sunset-gold); }
+.section-card :where(h1, h2, h3) { color: var(--sunset-ink); }
+.section-card :where(p, li) { text-wrap: pretty; }
+.hero-secondary-link:hover { border-color: var(--sunset-border-strong); color: var(--sunset-gold); }
+.section-hero .hero-primary-link,
+.featured-work .work-visit-link,
+.sidebar-card .sidebar-cta {
+  background: var(--sunset-action);
+  border-color: rgba(255, 202, 167, .25);
+  color: white;
+}
+.section-hero .hero-primary-link:hover,
+.featured-work .work-visit-link:hover,
+.sidebar-card .sidebar-cta:hover {
+  background: var(--sunset-action-hover);
+  border-color: rgba(255, 202, 167, .35);
+  color: white;
+}
+.featured-work .work-visit-link:focus-visible,
+.section-hero .hero-primary-link:focus-visible,
+.sidebar-card .sidebar-cta:focus-visible {
+  outline-color: var(--sunset-focus);
+}
+.featured-work .work-card-index { color: var(--sunset-ink-muted); }
+.featured-work .work-meta-date { color: var(--sunset-ink-muted); }
+.featured-work .work-meta-desc { color: var(--sunset-ink-soft); }
+.featured-work .work-draft-label { color: var(--sunset-gold); }
+.featured-work .work-item-card { background: var(--sunset-surface); }
+
+.expertise-section .expertise-heading { color: var(--sunset-ink); }
+.expertise-section .expertise-intro { color: var(--sunset-ink-soft); }
+.expertise-section .accordion-item { border-color: var(--sunset-border); }
+.expertise-section .accordion-title { color: var(--sunset-ink); }
+.expertise-section .accordion-item.active .accordion-title { color: var(--sunset-gold); }
+.expertise-section .accordion-item:not(.active) .accordion-title { color: var(--sunset-ink-muted); }
+.expertise-section .accordion-num,
+.expertise-section .accordion-toggle { color: var(--sunset-ink-muted); }
+.expertise-section .accordion-item.active .accordion-toggle { color: white; }
+.expertise-section .contact-link:hover,
+#experience .exp-website:hover,
+#about .exp-website:hover { color: var(--sunset-amber); }
+
+.tech-stack-section .tech-tabs {
+  background: rgba(35, 26, 46, .75);
+  border-color: var(--sunset-border);
+}
+.tech-stack-section .tech-tab { color: var(--sunset-ink-muted); }
+.tech-stack-section .tech-tab.active { color: white; }
+.tech-stack-section .tech-tab-count {
+  background: rgba(255, 191, 142, .13);
+  color: var(--sunset-ink-soft);
+}
+.tech-stack-section .tech-tab.active .tech-tab-count {
+  background: rgba(15, 10, 23, .20);
+  color: white;
+}
+.tech-stack-section .tech-card-name { color: var(--sunset-ink); }
+.tech-stack-section .tech-card-desc { color: var(--sunset-ink-muted); }
+.tech-stack-section .tech-legend-item,
+.tech-stack-section .tech-result-count { color: var(--sunset-ink-muted); }
+.tech-stack-section .tech-show-more {
+  color: var(--sunset-gold);
+  border-color: var(--sunset-border-strong);
+  background: rgba(255, 170, 113, .055);
+}
+.tech-stack-section .tech-show-more:hover {
+  color: var(--sunset-ink);
+  border-color: var(--sunset-amber);
+  background: rgba(255, 170, 113, .12);
+}
+.tech-stack-section .tech-card-logo-frame {
+  border-color: rgba(255, 192, 147, .36);
+  background: #f5eae6; /* Neutral light surface preserves monochrome logo visibility. */
+}
+
+#experience .content-draft-note,
+#experience .exp-resp-item,
+#about .exp-resp-item { color: var(--sunset-ink-soft); }
+#experience .exp-location-text,
+#about .exp-location-text { color: var(--sunset-ink-muted); }
+#experience .exp-period-badge,
+#about .exp-period-badge { background: rgba(255, 177, 124, .07); }
+#about .about-intro p { color: var(--sunset-ink-soft); }
+
+#contact.contact-section .contact-intro,
+#contact.contact-section .contact-success p { color: var(--sunset-ink-soft); }
+#contact.contact-section .form-label { color: var(--sunset-ink-soft); }
+#contact.contact-section .form-help,
+#contact.contact-section .form-optional { color: var(--sunset-ink-muted); }
+#contact.contact-section :where(.form-input, .form-textarea) { color: var(--sunset-ink); }
+#contact.contact-section :where(.form-input, .form-textarea)::placeholder {
+  color: var(--sunset-ink-muted);
+}
+#contact.contact-section .form-group { border-bottom-color: var(--sunset-border); }
+#contact.contact-section .form-group:focus-within { border-bottom-color: var(--sunset-amber); }
+#contact.contact-section .form-group.is-invalid { border-bottom-color: var(--sunset-error); }
+#contact.contact-section .form-error { color: var(--sunset-error); }
+#contact.contact-section .submit-btn {
+  background: var(--sunset-action);
+  border-color: var(--sunset-action);
+  color: white;
+  box-shadow: 0 8px 28px rgba(189, 73, 57, .17);
+}
+#contact.contact-section .submit-btn:hover:not(:disabled) {
+  background: var(--sunset-action-hover);
+  border-color: var(--sunset-action-hover);
+  box-shadow: 0 12px 28px rgba(189, 73, 57, .22);
+}
+#contact.contact-section .submit-btn:disabled { opacity: .7; }
+#contact.contact-section .contact-success,
+#contact.contact-section .form-submit-error { border-color: var(--sunset-border-strong); }
+#contact.contact-section .contact-success h3 { color: var(--sunset-gold); }
+#contact.contact-section .form-submit-error { color: #ffddd8; }
+#contact.contact-section .form-submit-error a { color: var(--sunset-gold); }
+
+.footer-section {
+  background: linear-gradient(155deg, rgba(32, 23, 44, .97), rgba(16, 17, 30, .97));
+  border-color: var(--sunset-border);
+}
+.footer-section .footer-bottom-bar { border-top-color: var(--sunset-border); }
+.footer-section .footer-links a { color: var(--sunset-ink-soft); }
+.footer-section .footer-links a:hover { color: var(--sunset-gold); }
+.footer-section .marquee-star { color: var(--sunset-amber); }
+
+/* Glows should decorate, never flash or become the only focus indicator. */
+@media (prefers-reduced-motion: reduce) {
+  .tech-stack-section .tech-card,
+  .featured-work .work-item-card,
+  .sidebar-card .sidebar-social a { transition: none; }
 }
