@@ -1,9 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { ContentEntry } from '@/lib/content';
+
+export type EditorialCardData = Pick<ContentEntry,
+  'kind' | 'slug' | 'title' | 'description' | 'cover' | 'published' |
+  'date' | 'readingMinutes' | 'tags' | 'featured'
+>;
 import { formatDate } from '@/lib/content-format';
 
-export default function EditorialCard({ entry }: { entry: ContentEntry }) {
+export default function EditorialCard({ entry }: { entry: EditorialCardData }) {
   const url = '/' + entry.kind + '/' + entry.slug;
   const date = formatDate(entry.date);
   return (
@@ -30,8 +35,11 @@ export default function EditorialCard({ entry }: { entry: ContentEntry }) {
         </div>
         <div className="editorial-card-copy">
           <div className="editorial-card-meta">
-            {date ? <time dateTime={entry.date}>{date}</time> : <span>Work in progress</span>}
-            {entry.kind === 'blog' && <span>{entry.readingMinutes} min read</span>}
+            {entry.kind === 'projects'
+              ? <span>{entry.tags[0] ?? 'Project'}</span>
+              : date ? <time dateTime={entry.date}>{date}</time> : <span>Work in progress</span>}
+            {entry.kind === 'blog' ? <span>{entry.readingMinutes} min read</span> :
+              entry.featured ? <span>Featured project</span> : null}
           </div>
           <h2>{entry.title}</h2>
           <p>{entry.description}</p>

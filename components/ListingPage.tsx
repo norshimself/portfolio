@@ -1,15 +1,14 @@
 import Link from 'next/link';
 import PortfolioShell from '@/components/PortfolioShell';
 import EditorialCard from '@/components/EditorialCard';
+import ProjectBrowser from '@/components/ProjectBrowser';
 import Footer from '@/components/Footer';
 import { getVisibleEntries } from '@/lib/content';
 import type { Collection } from '@/lib/content';
 
 export default function ListingPage({ kind }: { kind: Collection }) {
   const isProject = kind === 'projects';
-  const items = getVisibleEntries(kind).sort(
-    (a, b) => Number(b.featured) - Number(a.featured) || (b.date ?? '').localeCompare(a.date ?? '')
-  );
+  const items = getVisibleEntries(kind);
   const drafts = items.filter(item => !item.published).length;
 
   return (
@@ -54,9 +53,25 @@ export default function ListingPage({ kind }: { kind: Collection }) {
               </p>
             )}
             {items.length > 0 ? (
-              <div className="editorial-grid">
-                {items.map(entry => <EditorialCard key={entry.slug} entry={entry}/>)}
-              </div>
+              isProject ? (
+                <ProjectBrowser projects={items.map(entry => ({
+                  kind: entry.kind,
+                  slug: entry.slug,
+                  title: entry.title,
+                  description: entry.description,
+                  cover: entry.cover,
+                  published: entry.published,
+                  featured: entry.featured,
+                  date: entry.date,
+                  readingMinutes: entry.readingMinutes,
+                  tags: entry.tags,
+                  stack: entry.stack,
+                }))} />
+              ) : (
+                <div className="editorial-grid">
+                  {items.map(entry => <EditorialCard key={entry.slug} entry={entry}/>)}
+                </div>
+              )
             ) : (
               <div className="editorial-empty">
                 <span className="editorial-empty-icon" aria-hidden="true">{isProject ? '⌘' : '✎'}</span>

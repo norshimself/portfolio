@@ -12,6 +12,8 @@ export interface ContentEntry {
   tags: string[];
   published: boolean;
   featured: boolean;
+  /** Curated order for the Projects directory; unrelated to publication date. */
+  order?: number;
   cover?: string;
   role?: string;
   period?: string;
@@ -97,6 +99,12 @@ function load(kind: Collection, slug: string): ContentEntry | null {
     throw new Error('Published content requires a verified date in ' + filepath);
   }
 
+  const orderValue = optionalString(fields, 'order');
+  const order = orderValue ? Number(orderValue) : undefined;
+  if (order !== undefined && (!Number.isSafeInteger(order) || order <= 0)) {
+    throw new Error('Order must be a positive integer in ' + filepath);
+  }
+
   const cover = optionalString(fields, 'cover');
   if (cover && !/^\/assets\/[a-zA-Z0-9_./-]+$/.test(cover)) {
     throw new Error('Cover must reference an existing /assets/ file in ' + filepath);
@@ -110,6 +118,7 @@ function load(kind: Collection, slug: string): ContentEntry | null {
     tags: stringList(fields, 'tags', filepath),
     published,
     featured: fields.featured === true,
+    order,
     cover,
     role: optionalString(fields, 'role'),
     period: optionalString(fields, 'period'),
@@ -128,7 +137,9 @@ export function getAllEntries(kind: Collection): ContentEntry[] {
     .filter(file => file.endsWith('.md') && SLUG.test(file.slice(0, -3)))
     .map(file => load(kind, file.slice(0, -3)))
     .filter((entry): entry is ContentEntry => entry !== null)
-    .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '') || a.title.localeCompare(b.title));
+    .sort((a, b) => kind === 'projects'
+      ? (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.title.localeCompare(b.title)
+      : (b.date ?? '').localeCompare(a.date ?? '') || a.title.localeCompare(b.title));
 }
 
 /** Production only serves published content. Local development can preview drafts. */
