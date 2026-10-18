@@ -32,6 +32,10 @@ for (const asset of paths) {
 if (!existsSync(join(root, 'app/favicon.ico'))) {
   problems.push('Missing app/favicon.ico');
 }
+const sunsetIcon = join(root, 'app/icon.svg');
+if (!existsSync(sunsetIcon) || !readFileSync(sunsetIcon, 'utf8').includes('<svg')) {
+  problems.push('Missing or invalid sunset app/icon.svg');
+}
 const layout = readFileSync(join(root, 'app/layout.tsx'), 'utf8');
 const styles = readFileSync(join(root, 'app/globals.css'), 'utf8');
 if (!layout.includes('Geist') || !layout.includes('Rajdhani')) {

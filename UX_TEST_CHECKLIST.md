@@ -54,3 +54,17 @@ Visit `http://localhost:3000`.
 - [ ] In DevTools Network, tech logos load locally from `/assets/icons/tech`.
 
 Report any failed checks with a screenshot, viewport size, browser, and console messages.
+
+### AFTERGLOW visual and motion review
+
+- [ ] Hero sunset SVG, sun stripes, orbit rings, and horizon grid appear behind the headline without obstructing it.
+- [ ] Tiny amber particles drift over the hero on desktop/tablet widths above 768px and are absent on small screens.
+- [ ] Scrolling past the hero stops particle work; returning restarts it.
+- [ ] Background changes from golden hour through afterglow to twilight as you scroll.
+- [ ] Engineering Expertise SVG diagrams are readable on mobile and desktop.
+- [ ] Experience milestone dots illuminate as entries come into view.
+- [ ] The contact section shows a subtle star field and success confirmation briefly emits a light ring.
+- [ ] All text and controls remain legible, including the open hamburger drawer.
+- [ ] Setting `prefers-reduced-motion: reduce` disables particle, orbit, and diagram animations without removing the imagery.
+- [ ] SVG favicon and Open Graph social preview render correctly.
+- [ ] Check at 320px, 390px, 768px, 1024px and 1440px before merging.
