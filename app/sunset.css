@@ -557,3 +557,30 @@ body { color: #f7eee9; }
   .contact-success-icon::after { animation: none !important; display: none; }
   .featured-work .browser-content::after { transition: none; }
 }
+
+
+/* Technical proficiency uses a sunset spectrum instead of old neon blue/green. */
+.tech-stack-section .tech-dot.level-core {
+  background: #ffc17e;
+  box-shadow: 0 0 9px rgba(255,186,126,.44);
+}
+.tech-stack-section .tech-dot.level-proficient {
+  background: #e58fa0;
+  box-shadow: 0 0 9px rgba(229,143,160,.36);
+}
+.tech-stack-section .tech-dot.level-familiar {
+  background: #aea1c6;
+  box-shadow: 0 0 9px rgba(174,161,198,.26);
+}
+.tech-stack-section .tech-card.level-core {
+  border-color: rgba(255,188,130,.26);
+}
+.tech-stack-section .tech-card.level-familiar { opacity: .94; }
+.tech-stack-section .tech-card-level { color: #e7d7d8; }
+.tech-stack-section .tech-card-logo-frame { transition: box-shadow .25s ease; }
+
+/* Avoid permanently allocating separate compositor layers for large gradients. */
+.sunset-atmosphere-layer { will-change: auto; }
+@media (max-width: 768px) {
+  .sunset-atmosphere-layer { transition-duration: .75s; }
+}
